@@ -1,0 +1,6 @@
+micronaut:
+  application:
+    name: shareholdergame-account
+
+  server:
+    port: 8091

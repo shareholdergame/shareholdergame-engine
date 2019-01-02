@@ -1,0 +1,41 @@
+micronaut:
+  application:
+    name: shareholdergame-facade
+
+  server:
+    port: 8081
+    cors:
+      enabled: true
+      configurations:
+        web:
+          allowedOrigins:
+            - http://dev.stockholdergame.com
+
+  security:
+    enabled: true
+    endpoints:
+      login:
+        enabled: true
+      logout:
+        enabled: true
+    token:
+      jwt:
+        enabled: true
+
+  router:
+    static-resources:
+      swagger:
+        enabled: true
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+
+#datasources:
+#  default:
+#    url: jdbc:mysql://localhost:3306/stockholdergame?characterEncoding=UTF-8
+#    username: root
+#    password: 123
+#    driverClassName: com.mysql.jdbc.Driver
+
+service:
+  account:
+    url: http://localhost:8091

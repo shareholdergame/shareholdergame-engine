@@ -1,0 +1,853 @@
+openapi: 3.0.1
+info:
+  title: Shareholdergame.com Game Server REST API
+  version: "1.0"
+servers:
+- url: http://stockholdergame.com:8081
+  description: Development Environment
+- url: http://localhost:8081
+  description: Local Environment
+paths:
+  /login:
+    post:
+      tags:
+      - Authentication
+      description: Authenticates user in application
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        default:
+          description: List of user roles, access and refresh tokens
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Token"
+  /logout:
+    post:
+      tags:
+      - Authentication
+      description: Log out
+      operationId: logout
+      responses:
+        default:
+          description: Empty response
+      security:
+      - bearerAuth: []
+  /profile:
+    get:
+      tags:
+      - Profile
+      description: Returns user's profile details.
+      operationId: getProfile
+      parameters: []
+      responses:
+        default:
+          description: user's profile details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<ProfileDetails>'
+      security:
+      - bearerAuth: []
+  /profile/update:
+    post:
+      tags:
+      - Profile
+      description: Updates profile.
+      operationId: updateProfile
+      parameters: []
+      requestBody:
+        description: updated profile.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdate'
+        required: true
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+      security:
+      - bearerAuth: []
+  /profile/friends:
+    get:
+      tags:
+      - Profile
+      description: Returns list of friends.
+      operationId: getFriends
+      parameters:
+      - name: request
+        in: query
+        description: if true method returns list of friend requests.
+        required: true
+        schema:
+          type: boolean
+          nullable: false
+      - name: offset
+        in: query
+        description: pagination parameter offset (not required).
+        required: true
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      - name: ipp
+        in: query
+        description: pagination parameter number of items per page (not required).
+        required: true
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      responses:
+        default:
+          description: list of friends.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<FriendsResponse>'
+      security:
+      - bearerAuth: []
+  /profile/friends/{playerName}:
+    put:
+      tags:
+      - Profile
+      description: Sends request to player to add him as friend.
+      operationId: addFriend
+      parameters:
+      - name: playerName
+        in: path
+        description: player name.
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          nullable: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                principal:
+                  $ref: '#/components/schemas/Principal'
+        required: true
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Profile
+      description: Perform specified action on friend request.
+      operationId: performRequestAction
+      parameters:
+      - name: playerName
+        in: path
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          nullable: false
+      - name: action
+        in: query
+        description: friend request action.
+        required: true
+        schema:
+          $ref: '#/components/schemas/FriendRequest'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  $ref: '#/components/schemas/FriendRequest'
+                principal:
+                  $ref: '#/components/schemas/Principal'
+        required: true
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+      security:
+      - bearerAuth: []
+  /players/achievements/{gameOption}:
+    get:
+      tags:
+      - Players
+      description: Returns list of players with their achievements for specified game
+        option.
+      operationId: allPlayersAchievements
+      parameters:
+      - name: gameOption
+        in: path
+        description: 'game option. Possible values: game_3x5, game_4x6, custom (required).'
+        required: true
+        schema:
+          $ref: '#/components/schemas/GameOptionFilter'
+      - name: offset
+        in: query
+        description: pagination parameter offset (not required).
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      - name: ipp
+        in: query
+        description: pagination parameter number of items per page (not required).
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      responses:
+        default:
+          description: list of players with their achievements.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<PlayerAchievementsResponse>'
+  /players/player/{playerName}:
+    get:
+      tags:
+      - Players
+      description: Returns player profile.
+      operationId: playerProfile
+      parameters:
+      - name: playerName
+        in: path
+        description: name of player.
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          nullable: false
+      responses:
+        default:
+          description: player profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<PlayerProfile>'
+  /players/player/{playerName}/achievements/{gameOption}:
+    get:
+      tags:
+      - Players
+      description: Returns achievements of player [playerName].
+      operationId: singlePlayerAchievements
+      parameters:
+      - name: playerName
+        in: path
+        description: player name.
+        required: true
+        schema:
+          minLength: 1
+          type: string
+          nullable: false
+      - name: gameOption
+        in: path
+        description: 'game option. Possible values: game_3x5, game_4x6, custom (required).'
+        required: true
+        schema:
+          $ref: '#/components/schemas/GameOptionFilter'
+      - name: offset
+        in: query
+        description: pagination parameter offset (not required).
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      - name: ipp
+        in: query
+        description: pagination parameter number of items per page (not required).
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      responses:
+        default:
+          description: achievements of player.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<PlayerAchievementsResponse>'
+  /players:
+    get:
+      tags:
+      - Players
+      description: Lists players filtered by specified parameters.
+      operationId: searchPlayer
+      parameters:
+      - name: playerNamePrefix
+        in: query
+        description: player name prefix (at least first 3 letters or full name).
+        schema:
+          type: string
+          nullable: false
+      - name: online
+        in: query
+        schema:
+          type: boolean
+          nullable: false
+      - name: friend
+        in: query
+        schema:
+          type: boolean
+          nullable: false
+      - name: offset
+        in: query
+        description: pagination parameter offset (not required).
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      - name: ipp
+        in: query
+        description: pagination parameter number of items per page (not required).
+        schema:
+          type: integer
+          format: int32
+          nullable: false
+      responses:
+        default:
+          description: players list filtered by specified parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<List<PlayerWithLocation>>'
+  /account/exist/{userNameOrEmail}:
+    get:
+      tags:
+      - Account
+      description: Check user existence.
+      operationId: checkUserExistence
+      parameters:
+      - name: userNameOrEmail
+        in: path
+        description: user name or email
+        required: true
+        schema:
+          type: string
+          nullable: false
+      responses:
+        default:
+          description: true if user exists or false if no.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper<Boolean>'
+  /account/signup:
+    put:
+      tags:
+      - Account
+      description: Sign user up.
+      operationId: signup
+      parameters: []
+      requestBody:
+        description: contains user name, email and password
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUp'
+        required: true
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+  /account/verify/{verificationCode}:
+    get:
+      tags:
+      - Account
+      description: Verify user account.
+      operationId: verify
+      parameters:
+      - name: verificationCode
+        in: path
+        description: verification code.
+        required: true
+        schema:
+          type: string
+          nullable: false
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+  /account/resetpassword:
+    post:
+      tags:
+      - Account
+      operationId: resetPassword
+      description: Resets user password.
+      parameters: []
+      requestBody:
+        description: user email.
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+  /account:
+      get:
+        tags:
+        - Account
+        description: Returns account details.
+        operationId: getAccount
+        parameters: []
+        responses:
+          default:
+            description: account details.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseWrapper<AccountDetails>'
+        security:
+        - bearerAuth: []
+  /account/remove:
+    delete:
+      tags:
+      - Account
+      description: Starts account removing workflow.
+      operationId: removeAccount
+      parameters: []
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+      security:
+      - bearerAuth: []
+  /account/restore:
+    post:
+      tags:
+      - Account
+      description: Starts account restoring workflow.
+      operationId: restoreAccount
+      parameters: []
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+      security:
+      - bearerAuth: []
+  /account/edit/email:
+    post:
+      tags:
+      - Account
+      description: Updates user email.
+      operationId: updateEmail
+      parameters: []
+      requestBody:
+        description: new email.
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        default:
+          description: empty response if ok.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWrapper'
+      security:
+      - bearerAuth: []
+components:
+  schemas:
+    ResponseStatus:
+      type: string
+      enum:
+      - OK
+      - ERROR
+    Location:
+      type: object
+      properties:
+        country:
+          type: string
+          nullable: false
+        stateProvince:
+          type: string
+          nullable: false
+        city:
+          type: string
+          nullable: false
+    LinkType:
+      type: string
+      enum:
+      - FACEBOOK
+      - TWITTER
+      - GOOGLE
+      - SITE
+    Link:
+      type: object
+      properties:
+        linkType:
+          $ref: '#/components/schemas/LinkType'
+        url:
+          type: string
+          nullable: false
+    PlayerPersonalInfo:
+      type: object
+      properties:
+        birthday:
+          type: string
+          nullable: false
+        about:
+          type: string
+          nullable: false
+        links:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/Link'
+    ProfileDetails:
+      type: object
+      properties:
+        avatarUrl:
+          type: string
+          nullable: false
+        location:
+          $ref: '#/components/schemas/Location'
+        personalInfo:
+          $ref: '#/components/schemas/PlayerPersonalInfo'
+    ResponseWrapper<ProfileDetails>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          $ref: '#/components/schemas/ProfileDetails'
+    Object:
+      type: object
+    ResponseWrapper:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          $ref: '#/components/schemas/Object'
+    ProfileUpdate:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        personalInfo:
+          $ref: '#/components/schemas/PlayerPersonalInfo'
+    Pagination:
+      type: object
+      properties:
+        itemsCount:
+          type: integer
+          format: int32
+          nullable: false
+        offset:
+          type: integer
+          format: int32
+          nullable: false
+        itemsPerPage:
+          type: integer
+          format: int32
+          nullable: false
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: false
+        name:
+          type: string
+          nullable: false
+        avatarUrl:
+          type: string
+          nullable: false
+        online:
+          type: boolean
+          nullable: false
+        removed:
+          type: boolean
+          nullable: false
+        friend:
+          type: boolean
+          nullable: false
+    FriendsResponse:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        players:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/Player'
+    ResponseWrapper<FriendsResponse>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          $ref: '#/components/schemas/FriendsResponse'
+    GameOptionFilter:
+      type: string
+      enum:
+      - all
+      - game_3x5
+      - game_4x6
+      - custom
+    Filter:
+      type: object
+      properties:
+        gameOption:
+          $ref: '#/components/schemas/GameOptionFilter'
+        playerName:
+          type: string
+          nullable: false
+    PlayerSession:
+      type: object
+      properties:
+        lastVisit:
+          type: integer
+          format: int64
+          nullable: false
+        lastPlay:
+          type: integer
+          format: int64
+          nullable: false
+    Achievements:
+      type: object
+      properties:
+        totalPlayed:
+          type: integer
+          format: int64
+          nullable: false
+        win:
+          type: integer
+          format: int64
+          nullable: false
+        firstTurnWin:
+          type: integer
+          format: int64
+          nullable: false
+        lastTurnWin:
+          type: integer
+          format: int64
+          nullable: false
+        positiveDraw:
+          type: integer
+          format: int64
+          nullable: false
+        negativeDraw:
+          type: integer
+          format: int64
+          nullable: false
+        loss:
+          type: integer
+          format: int64
+          nullable: false
+        bankrupt:
+          type: integer
+          format: int64
+          nullable: false
+        winPercent:
+          type: number
+          format: double
+          nullable: false
+        maxTotalSum:
+          type: integer
+          format: int64
+          nullable: false
+        maxWonSum:
+          type: integer
+          format: int64
+          nullable: false
+        totalWonSum:
+          type: integer
+          format: int64
+          nullable: false
+    PlayerAchievements:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/Player'
+        location:
+          $ref: '#/components/schemas/Location'
+        playerSession:
+          $ref: '#/components/schemas/PlayerSession'
+        achievements:
+          $ref: '#/components/schemas/Achievements'
+    PlayerAchievementsResponse:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        items:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/PlayerAchievements'
+    ResponseWrapper<PlayerAchievementsResponse>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          $ref: '#/components/schemas/PlayerAchievementsResponse'
+    PlayerProfile:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/Player'
+        location:
+          $ref: '#/components/schemas/Location'
+        personalInfo:
+          $ref: '#/components/schemas/PlayerPersonalInfo'
+    ResponseWrapper<PlayerProfile>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          $ref: '#/components/schemas/PlayerProfile'
+    PlayerWithLocation:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/Player'
+        location:
+          $ref: '#/components/schemas/Location'
+    ResponseWrapper<List<PlayerWithLocation>>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/PlayerWithLocation'
+    ResponseWrapper<Boolean>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          type: boolean
+          nullable: false
+    SignUp:
+      type: object
+      properties:
+        userName:
+          type: string
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+    AccountDetails:
+      type: object
+      properties:
+        userName:
+          type: string
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        status:
+          type: string
+          nullable: false
+        creationDate:
+          type: string
+          nullable: false
+        language:
+          type: string
+          nullable: false
+    ResponseWrapper<AccountDetails>:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ResponseStatus'
+        body:
+          $ref: '#/components/schemas/AccountDetails'
+    FriendRequest:
+      type: string
+      enum:
+      - accept
+      - reject
+      - cancel
+    Principal:
+      type: object
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+    Token:
+      type: object
+      properties:
+        username:
+          type: string
+          nullable: false
+        roles:
+          type: array
+          nullable: false
+          items:
+            $ref: string
+        access_token:
+          type: string
+          nullable: false
+        refresh_token:
+          type: string
+          nullable: false
+        expires_in:
+          type: integer
+          format: int32
+          nullable: false
+        token_type:
+          type: string
+          nullable: false
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: 'Authorization'
+      in: header
