@@ -13,6 +13,9 @@ public final class AccountWithPassword {
 
     private String password;
 
+    private AccountWithPassword() {
+    }
+
     private AccountWithPassword(AccountWithPasswordBuilder builder) {
         this.password = builder.password;
         this.account = builder.account;

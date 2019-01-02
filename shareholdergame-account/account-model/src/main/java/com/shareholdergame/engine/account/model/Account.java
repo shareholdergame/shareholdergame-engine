@@ -1,8 +1,8 @@
 package com.shareholdergame.engine.account.model;
 
-import org.apache.commons.lang3.builder.Builder;
-
 import java.time.LocalDate;
+
+import org.apache.commons.lang3.builder.Builder;
 
 public final class Account {
 
@@ -17,6 +17,9 @@ public final class Account {
     private LocalDate creationDate;
 
     private String language;
+
+    private Account() {
+    }
 
     private Account(AccountBuilder builder) {
         this.id = builder.id;
