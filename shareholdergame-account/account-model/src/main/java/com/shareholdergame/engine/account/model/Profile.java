@@ -16,6 +16,9 @@ public final class Profile {
 
     private String about;
 
+    private Profile() {
+    }
+
     private Profile(ProfileBuilder builder) {
         this.country = builder.country;
         this.stateProvince = builder.stateProvince;

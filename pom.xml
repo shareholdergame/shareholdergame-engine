@@ -28,7 +28,8 @@
         <commons.collections.version>4.2</commons.collections.version>
         <commons.io.version>1.4</commons.io.version>
         <qos.logback.version>1.2.3</qos.logback.version>
-
+        <mariadb.version>2.3.0</mariadb.version>
+        <mybatis.version>3.4.6</mybatis.version>
         <micronaut.version>1.0.2</micronaut.version>
     </properties>
 
@@ -57,6 +58,16 @@
                 <version>${micronaut.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mariadb.jdbc</groupId>
+                <artifactId>mariadb-java-client</artifactId>
+                <version>${mariadb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

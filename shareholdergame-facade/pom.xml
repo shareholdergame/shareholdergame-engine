@@ -46,11 +46,6 @@
             <artifactId>micronaut-hibernate-validator</artifactId>
             <scope>compile</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>io.micronaut.configuration</groupId>
-            <artifactId>jdbc-hikari</artifactId>
-            <scope>compile</scope>
-        </dependency>-->
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-security</artifactId>

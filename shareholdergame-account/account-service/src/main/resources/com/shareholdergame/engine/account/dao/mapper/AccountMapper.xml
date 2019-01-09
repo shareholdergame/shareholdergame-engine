@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shareholdergame.engine.account.dao.mapper.AccountMapper">
+
+    <resultMap id="AccountResultMap" type="Account">
+        <id column="gamer_id" property="id"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+
+    <resultMap id="AccountWithPasswordResultMap" type="AccountWithPassword">
+        <result column="password" property="password"/>
+        <association property="account" resultMap="AccountResultMap"/>
+    </resultMap>
+
+    <select id="findByUserNameOrEmail" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
+        select gamer_id, user_name, password from a_gamer_account
+          where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
+    </select>
+</mapper>

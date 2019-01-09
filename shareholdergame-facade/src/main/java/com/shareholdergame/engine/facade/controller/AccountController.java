@@ -6,14 +6,15 @@ import com.shareholdergame.engine.facade.client.AccountClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.SignUp;
-import com.shareholdergame.engine.facade.mock.MockDataProvider;
 import io.micronaut.http.HttpStatus;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
@@ -43,13 +44,6 @@ public class AccountController {
     @Get("/exist/{userNameOrEmail}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<Boolean> checkUserExistence(@NotBlank String userNameOrEmail) {
-       /* AccountWithPassword accountWithPassword = MockDataProvider.getAccountWithPasswordList().stream()
-                .filter(accountWithPassword1 -> accountWithPassword1.getAccount().getUserName().equalsIgnoreCase(userNameOrEmail)
-                    || accountWithPassword1.getAccount().getEmail().equalsIgnoreCase(userNameOrEmail))
-                .findFirst().orElse(null);
-
-
-        return ResponseWrapper.ok(accountWithPassword != null);*/
         boolean existence = accountClient.checkUserExistence(userNameOrEmail);
         return ResponseWrapper.ok(existence);
     }
@@ -81,9 +75,9 @@ public class AccountController {
      * @param email user email.
      * @return empty response if ok.
      */
-    @Post("/resetpassword")
+    @Post(value = "/resetpassword", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> resetPassword(@Body String email) {
+    public ResponseWrapper<?> resetPassword(@QueryValue String email) {
         return ResponseWrapper.ok();
     }
 
@@ -95,9 +89,7 @@ public class AccountController {
      */
     @Get
     public ResponseWrapper<AccountDetails> getAccount(Principal principal) {
-        AccountWithPassword accountWithPassword = MockDataProvider.getAccountWithPasswordList().stream()
-                .filter(accountWithPassword1 -> accountWithPassword1.getAccount().getUserName().equalsIgnoreCase(principal.getName()))
-                .findFirst().orElse(null);
+        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(principal.getName());
         if (null == accountWithPassword) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, principal.getName());
         }
@@ -134,8 +126,8 @@ public class AccountController {
      * @param principal user principal.
      * @return empty response if ok.
      */
-    @Post("/edit/email")
-    public ResponseWrapper<?> updateEmail(@Body String email, Principal principal) {
+    @Post(value = "/edit/email", consumes = {MediaType.APPLICATION_FORM_URLENCODED})
+    public ResponseWrapper<?> updateEmail(@QueryValue String email, Principal principal) {
         return ResponseWrapper.ok();
     }
 }

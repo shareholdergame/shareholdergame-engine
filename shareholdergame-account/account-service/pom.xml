@@ -51,6 +51,19 @@
             <artifactId>micronaut-inject-java</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.micronaut.configuration</groupId>
+            <artifactId>micronaut-jdbc-hikari</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>

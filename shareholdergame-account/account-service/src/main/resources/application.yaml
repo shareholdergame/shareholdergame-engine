@@ -4,3 +4,10 @@ micronaut:
 
   server:
     port: 8091
+
+datasources:
+  default:
+    url: jdbc:mariadb://localhost:3306/shareholdergame
+    username: root
+    password: 123
+    driverClassName: org.mariadb.jdbc.Driver
