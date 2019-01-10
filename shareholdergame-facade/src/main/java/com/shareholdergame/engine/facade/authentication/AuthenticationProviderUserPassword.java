@@ -1,7 +1,11 @@
 package com.shareholdergame.engine.facade.authentication;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import com.google.common.collect.Lists;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.common.util.MD5Helper;
 import com.shareholdergame.engine.facade.client.AccountClient;
 import io.micronaut.security.authentication.AuthenticationFailed;
 import io.micronaut.security.authentication.AuthenticationFailureReason;
@@ -11,9 +15,6 @@ import io.micronaut.security.authentication.AuthenticationResponse;
 import io.micronaut.security.authentication.UserDetails;
 import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Date: 10/19/2018
@@ -39,6 +40,6 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
     }
 
     private boolean isPasswordIdentical(String secret, String password) {
-        return secret.equals(password);
+        return MD5Helper.checkMD5hash(secret, password);
     }
 }
