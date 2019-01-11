@@ -12,4 +12,7 @@ public interface AccountClient extends AccountOperations {
 
     @Override
     AccountWithPassword findUserByNameOrEmail(String userNameOrEmail);
+
+    @Override
+    void createAccount(String userName, String email, String password);
 }

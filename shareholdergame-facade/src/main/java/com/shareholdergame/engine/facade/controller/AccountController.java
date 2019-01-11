@@ -1,5 +1,9 @@
 package com.shareholdergame.engine.facade.controller;
 
+import java.security.Principal;
+import javax.inject.Inject;
+import javax.validation.constraints.NotBlank;
+
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
 import com.shareholdergame.engine.facade.client.AccountClient;
@@ -21,10 +25,6 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-import java.security.Principal;
 
 @Controller("/account")
 @Validated

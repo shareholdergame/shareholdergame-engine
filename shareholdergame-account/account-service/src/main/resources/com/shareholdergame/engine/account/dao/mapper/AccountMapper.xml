@@ -15,7 +15,24 @@
     </resultMap>
 
     <select id="findByUserNameOrEmail" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
-        select gamer_id, user_name, password from a_gamer_account
-          where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
+        select
+            gamer_id,
+            user_name,
+            user_password
+        from a_gamer_account
+        where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
+                                                       and account_status != 'REMOVED_COMPLETELY'
     </select>
+
+    <select id="checkUserExistence" parameterType="string" resultType="long">
+        select gamer_id
+        from a_gamer_account
+        where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
+                                                       and account_status != 'REMOVED_COMPLETELY'
+    </select>
+
+    <insert id="insertAccount" parameterType="AccountWithPassword">
+        insert into a_gamer_account (gamer_id, email, user_name, user_password, account_status, registration_date, locale)
+        values (#{account.id}, #{account.email}, #{account.userName}, #{password}, #{account.status}, 'en')
+    </insert>
 </mapper>
