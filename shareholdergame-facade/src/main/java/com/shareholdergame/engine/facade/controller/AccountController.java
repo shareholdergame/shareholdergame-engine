@@ -4,18 +4,19 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 
+import com.shareholdergame.engine.account.api.SignUpData;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
 import com.shareholdergame.engine.facade.client.AccountClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
-import com.shareholdergame.engine.facade.dto.SignUp;
+import com.shareholdergame.engine.facade.dto.Language;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Delete;
 import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Header;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
@@ -50,12 +51,21 @@ public class AccountController {
 
     /**
      * Sign user up.
-     * @param signUp contains user name, email and password
+     *
+     * @param userName user name
+     * @param email email
+     * @param password password
+     * @param language language
      * @return empty response if ok.
      */
-    @Put("/signup")
+    @Put(value = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> signup(@Body SignUp signUp) {
+    public ResponseWrapper<?> signup(@QueryValue String userName,
+                                     @QueryValue String email,
+                                     @QueryValue String password,
+                                     @Header Language language) {
+        accountClient.createAccount(SignUpData.builder()
+            .withUserName(userName).withEmail(email).withPassword(password).withLanguage(language.name()).build());
         return ResponseWrapper.ok();
     }
 
@@ -75,7 +85,7 @@ public class AccountController {
      * @param email user email.
      * @return empty response if ok.
      */
-    @Post(value = "/resetpassword", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    @Post(value = "/resetpassword")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<?> resetPassword(@QueryValue String email) {
         return ResponseWrapper.ok();
@@ -122,12 +132,12 @@ public class AccountController {
     /**
      * Updates user's email.
      * User must be authenticated to invoke this call.
-     * @param email new email.
+     * @param newEmail new email.
      * @param principal user principal.
      * @return empty response if ok.
      */
-    @Post(value = "/edit/email", consumes = {MediaType.APPLICATION_FORM_URLENCODED})
-    public ResponseWrapper<?> updateEmail(@QueryValue String email, Principal principal) {
+    @Post(value = "/edit/email", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public ResponseWrapper<?> updateEmail(@QueryValue String newEmail, Principal principal) {
         return ResponseWrapper.ok();
     }
 }

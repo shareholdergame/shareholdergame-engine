@@ -4,10 +4,13 @@ import java.time.LocalDate;
 import javax.inject.Inject;
 
 import com.shareholdergame.engine.account.api.AccountOperations;
+import com.shareholdergame.engine.account.api.SignUpData;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.model.Account;
 import com.shareholdergame.engine.account.model.AccountStatus;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.common.util.IdentifierHelper;
+import com.shareholdergame.engine.common.util.MD5Helper;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.exceptions.HttpStatusException;
@@ -33,14 +36,16 @@ public class AccountService implements AccountOperations {
     }
 
     @Override
-    public void createAccount(String userName, String email, String password) {
+    public void createAccount(SignUpData signUpData) {
         accountDao.insertAccount(AccountWithPassword.builder()
             .withAccount(Account.builder()
-                .withUserName(userName)
-                .withEmail(email)
+                .withId(IdentifierHelper.generateLongId())
+                .withUserName(signUpData.getUserName())
+                .withEmail(signUpData.getEmail())
                 .withStatus(AccountStatus.NEW)
                 .withCreationDate(LocalDate.now())
+                .withLanguage(signUpData.getLanguage())
                 .build())
-            .withPassword(password).build());
+            .withPassword(MD5Helper.generateMD5hashWithSalt(signUpData.getPassword())).build());
     }
 }

@@ -38,6 +38,9 @@ public final class AccountWithPassword {
         private Account account;
         private String password;
 
+        private AccountWithPasswordBuilder() {
+        }
+
         public AccountWithPasswordBuilder withAccount(Account account) {
             this.account = account;
             return this;
