@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 
+import com.shareholdergame.engine.account.api.ChangePassword;
 import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
