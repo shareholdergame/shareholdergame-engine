@@ -1,6 +1,11 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.account.api.SignUpData;
+import java.security.Principal;
+import java.util.Optional;
+import javax.inject.Inject;
+import javax.validation.constraints.NotBlank;
+
+import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
 import com.shareholdergame.engine.facade.client.AccountClient;
@@ -22,11 +27,7 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-import java.security.Principal;
-import java.util.Optional;
+import org.hibernate.validator.constraints.Length;
 
 @Controller("/account")
 @Validated
@@ -43,7 +44,7 @@ public class AccountController {
      * @param userNameOrEmail user name or email
      * @return true if user exists or false if no.
      */
-    @Get("/exist/{userNameOrEmail}")
+    @Get("/exists/{userNameOrEmail}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<Boolean> checkUserExistence(@NotBlank String userNameOrEmail) {
         boolean existence = accountClient.checkUserExistence(userNameOrEmail);
@@ -63,9 +64,9 @@ public class AccountController {
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<?> signup(@QueryValue @NotBlank String userName,
                                      @QueryValue @NotBlank String email,
-                                     @QueryValue @NotBlank String password,
+                                     @QueryValue @NotBlank @Length(min = 6) String password,
                                      @Header Language language) {
-        accountClient.createAccount(SignUpData.builder()
+        accountClient.createAccount(SignUp.builder()
                 .withUserName(userName).withEmail(email).withPassword(password)
                 .withLanguage(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
@@ -87,9 +88,9 @@ public class AccountController {
      * @param email user email.
      * @return empty response if ok.
      */
-    @Post(value = "/resetpassword")
+    @Post("/resetpassword/{email}")
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> resetPassword(@QueryValue String email) {
+    public ResponseWrapper<?> resetPassword(@NotBlank String email) {
         return ResponseWrapper.ok();
     }
 
@@ -138,8 +139,34 @@ public class AccountController {
      * @param principal user principal.
      * @return empty response if ok.
      */
-    @Post(value = "/edit/email", consumes = MediaType.APPLICATION_FORM_URLENCODED)
-    public ResponseWrapper<?> updateEmail(@QueryValue String newEmail, Principal principal) {
+    @Post(value = "/change/email/{newEmail}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public ResponseWrapper<?> changeEmail(@NotBlank String newEmail, Principal principal) {
+        return ResponseWrapper.ok();
+    }
+
+    /**
+     * Updates user name.
+     * @param newUserName new user name.
+     * @param principal user principal.
+     * @return empty response if ok.
+     */
+    @Post(value = "/change/username/{newUserName}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public ResponseWrapper<?> changeUserName(@NotBlank String newUserName, Principal principal) {
+        return ResponseWrapper.ok();
+    }
+
+    /**
+     * Changes password.
+     * @param oldPassword old password.
+     * @param newPassword new password.
+     * @param principal user principal.
+     * @return empty response if ok.
+     */
+    @Post(value = "/change/password", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public ResponseWrapper<?> changePassword(@QueryValue @NotBlank String oldPassword,
+                                             @QueryValue @NotBlank @Length(min = 6) String newPassword,
+                                             Principal principal) {
+        accountClient.changePassword(new ChangePassword(oldPassword, newPassword, principal.getName()));
         return ResponseWrapper.ok();
     }
 }

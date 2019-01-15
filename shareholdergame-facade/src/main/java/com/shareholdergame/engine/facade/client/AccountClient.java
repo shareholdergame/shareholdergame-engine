@@ -1,7 +1,7 @@
 package com.shareholdergame.engine.facade.client;
 
 import com.shareholdergame.engine.account.api.AccountOperations;
-import com.shareholdergame.engine.account.api.SignUpData;
+import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import io.micronaut.http.client.annotation.Client;
 
@@ -15,5 +15,5 @@ public interface AccountClient extends AccountOperations {
     AccountWithPassword findUserByNameOrEmail(String userNameOrEmail);
 
     @Override
-    void createAccount(SignUpData signUpData);
+    void createAccount(SignUp signUp);
 }
