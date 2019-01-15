@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import com.shareholdergame.engine.account.model.Account;
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.account.model.AccountStatus;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.account.model.Profile;
@@ -33,7 +33,7 @@ public final class MockDataProvider {
     private static final ArrayList<AccountWithPassword> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
             AccountWithPassword.builder()
                     .withAccount(
-                            Account.builder().withId(1L)
+                            GamerAccount.builder().withId(1L)
                                     .withUserName("sergeychernyshev")
                                     .withEmail("player1@shareholdergame.com")
                                     .withStatus(AccountStatus.ACTIVE)
@@ -53,7 +53,7 @@ public final class MockDataProvider {
                     .withPassword("123456").build(),*/
             AccountWithPassword.builder()
                     .withAccount(
-                            Account.builder().withId(1L)
+                            GamerAccount.builder().withId(1L)
                                     .withUserName("Зырянов")
                                     .withEmail("player3@shareholdergame.com")
                                     .withStatus(AccountStatus.ACTIVE)

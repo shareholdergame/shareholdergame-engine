@@ -1,10 +1,5 @@
 package com.shareholdergame.engine.facade.controller;
 
-import java.security.Principal;
-import java.util.Optional;
-import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-
 import com.shareholdergame.engine.account.api.ChangePassword;
 import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
@@ -24,11 +19,17 @@ import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.hibernate.validator.constraints.Length;
+
+import javax.inject.Inject;
+import javax.validation.constraints.NotBlank;
+import java.security.Principal;
+import java.util.Optional;
 
 @Controller("/account")
 @Validated
@@ -108,7 +109,7 @@ public class AccountController {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, principal.getName());
         }
 
-        return ResponseWrapper.ok(Converters.convert(accountWithPassword.getAccount()));
+        return ResponseWrapper.ok(Converters.convert(accountWithPassword.getGamerAccount()));
     }
 
     /**
@@ -160,14 +161,14 @@ public class AccountController {
      * Changes password.
      * @param oldPassword old password.
      * @param newPassword new password.
-     * @param principal user principal.
+     * @param authentication user principal.
      * @return empty response if ok.
      */
     @Post(value = "/change/password", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public ResponseWrapper<?> changePassword(@QueryValue @NotBlank String oldPassword,
                                              @QueryValue @NotBlank @Length(min = 6) String newPassword,
-                                             Principal principal) {
-        accountClient.changePassword(new ChangePassword(oldPassword, newPassword, principal.getName()));
+                                             Authentication authentication) {
+        accountClient.changePassword(new ChangePassword(oldPassword, newPassword, authentication.getName()));
         return ResponseWrapper.ok();
     }
 }

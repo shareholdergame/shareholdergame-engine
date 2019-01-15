@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.shareholdergame.engine.account.model.Account" alias="Account"/>
+        <typeAlias type="com.shareholdergame.engine.account.model.GamerAccount" alias="Account"/>
         <typeAlias type="com.shareholdergame.engine.account.model.AccountWithPassword" alias="AccountWithPassword"/>
     </typeAliases>
 

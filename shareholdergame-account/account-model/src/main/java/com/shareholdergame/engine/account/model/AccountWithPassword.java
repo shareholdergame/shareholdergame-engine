@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.Builder;
  */
 public final class AccountWithPassword {
 
-    private Account account;
+    private GamerAccount gamerAccount;
 
     private String password;
 
@@ -18,11 +18,11 @@ public final class AccountWithPassword {
 
     private AccountWithPassword(AccountWithPasswordBuilder builder) {
         this.password = builder.password;
-        this.account = builder.account;
+        this.gamerAccount = builder.gamerAccount;
     }
 
-    public Account getAccount() {
-        return account;
+    public GamerAccount getGamerAccount() {
+        return gamerAccount;
     }
 
     public String getPassword() {
@@ -35,14 +35,14 @@ public final class AccountWithPassword {
 
     public static class AccountWithPasswordBuilder implements Builder<AccountWithPassword> {
 
-        private Account account;
+        private GamerAccount gamerAccount;
         private String password;
 
         private AccountWithPasswordBuilder() {
         }
 
-        public AccountWithPasswordBuilder withAccount(Account account) {
-            this.account = account;
+        public AccountWithPasswordBuilder withAccount(GamerAccount gamerAccount) {
+            this.gamerAccount = gamerAccount;
             return this;
         }
 

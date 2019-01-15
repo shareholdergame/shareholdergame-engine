@@ -13,6 +13,9 @@ public final class ChangePassword {
 
     private String currentUser;
 
+    private ChangePassword() {
+    }
+
     public ChangePassword(String oldPassword, String newPassword, String currentUser) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;

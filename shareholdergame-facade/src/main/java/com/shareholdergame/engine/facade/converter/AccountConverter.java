@@ -1,18 +1,18 @@
 package com.shareholdergame.engine.facade.converter;
 
-import com.shareholdergame.engine.account.model.Account;
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 
-public class AccountConverter implements Converter<Account, AccountDetails> {
+public class AccountConverter implements Converter<GamerAccount, AccountDetails> {
 
     @Override
-    public AccountDetails convert(Account account) {
+    public AccountDetails convert(GamerAccount gamerAccount) {
         AccountDetails ad = new AccountDetails();
-        ad.setUserName(account.getUserName());
-        ad.setEmail(account.getEmail());
-        ad.setStatus(account.getStatus().name());
-        ad.setCreationDate(account.getCreationDate().toString());
-        ad.setLanguage(account.getLanguage());
+        ad.setUserName(gamerAccount.getUserName());
+        ad.setEmail(gamerAccount.getEmail());
+        ad.setStatus(gamerAccount.getStatus().name());
+        ad.setCreationDate(gamerAccount.getCreationDate().toString());
+        ad.setLanguage(gamerAccount.getLanguage());
         return ad;
     }
 }

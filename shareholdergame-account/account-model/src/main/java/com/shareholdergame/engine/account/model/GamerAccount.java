@@ -1,10 +1,10 @@
 package com.shareholdergame.engine.account.model;
 
-import java.time.LocalDate;
-
 import org.apache.commons.lang3.builder.Builder;
 
-public final class Account {
+import java.time.LocalDate;
+
+public final class GamerAccount {
 
     private Long id;
 
@@ -18,10 +18,10 @@ public final class Account {
 
     private String language;
 
-    private Account() {
+    private GamerAccount() {
     }
 
-    private Account(AccountBuilder builder) {
+    private GamerAccount(AccountBuilder builder) {
         this.id = builder.id;
         this.userName = builder.userName;
         this.email = builder.email;
@@ -58,7 +58,7 @@ public final class Account {
         return new AccountBuilder();
     }
 
-    public static class AccountBuilder implements Builder<Account> {
+    public static class AccountBuilder implements Builder<GamerAccount> {
 
         private String email;
         private String userName;
@@ -101,8 +101,8 @@ public final class Account {
         }
 
         @Override
-        public Account build() {
-            return new Account(this);
+        public GamerAccount build() {
+            return new GamerAccount(this);
         }
     }
 }

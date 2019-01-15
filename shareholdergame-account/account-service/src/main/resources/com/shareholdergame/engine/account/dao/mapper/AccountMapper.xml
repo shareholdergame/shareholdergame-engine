@@ -10,8 +10,8 @@
     </resultMap>
 
     <resultMap id="AccountWithPasswordResultMap" type="AccountWithPassword">
-        <result column="password" property="password"/>
-        <association property="account" resultMap="AccountResultMap"/>
+        <result column="user_password" property="password"/>
+        <association property="gamerAccount" resultMap="AccountResultMap"/>
     </resultMap>
 
     <select id="findByUserNameOrEmail" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
