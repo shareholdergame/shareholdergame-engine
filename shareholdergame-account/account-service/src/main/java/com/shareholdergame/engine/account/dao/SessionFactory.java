@@ -33,7 +33,10 @@ public class SessionFactory {
             Reader configReader = Resources.getResourceAsReader(resource);
 
             TransactionFactory transactionFactory = new JdbcTransactionFactory();
-            Environment environment  = new Environment("default", transactionFactory, dataSource);
+            Environment environment = new Environment.Builder("default")
+                    .dataSource(dataSource)
+                    .transactionFactory(transactionFactory)
+                    .build();
 
             XMLConfigBuilder xmlConfigBuilder = new XMLConfigBuilder(configReader);
 

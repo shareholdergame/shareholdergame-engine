@@ -1,8 +1,5 @@
 package com.shareholdergame.engine.account.service;
 
-import java.time.LocalDate;
-import javax.inject.Inject;
-
 import com.shareholdergame.engine.account.api.AccountOperations;
 import com.shareholdergame.engine.account.api.SignUpData;
 import com.shareholdergame.engine.account.dao.AccountDao;
@@ -14,6 +11,9 @@ import com.shareholdergame.engine.common.util.MD5Helper;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.exceptions.HttpStatusException;
+
+import javax.inject.Inject;
+import java.time.LocalDate;
 
 @Controller("/account")
 public class AccountService implements AccountOperations {
@@ -37,6 +37,8 @@ public class AccountService implements AccountOperations {
 
     @Override
     public void createAccount(SignUpData signUpData) {
+
+
         accountDao.insertAccount(AccountWithPassword.builder()
             .withAccount(Account.builder()
                 .withId(IdentifierHelper.generateLongId())

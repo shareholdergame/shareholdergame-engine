@@ -30,6 +30,7 @@
         <qos.logback.version>1.2.3</qos.logback.version>
         <mariadb.version>2.3.0</mariadb.version>
         <mybatis.version>3.4.6</mybatis.version>
+        <spring.jdbc.version>4.3.22.RELEASE</spring.jdbc.version>
         <micronaut.version>1.0.2</micronaut.version>
     </properties>
 

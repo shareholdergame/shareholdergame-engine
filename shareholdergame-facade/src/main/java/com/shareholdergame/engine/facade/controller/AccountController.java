@@ -1,9 +1,5 @@
 package com.shareholdergame.engine.facade.controller;
 
-import java.security.Principal;
-import javax.inject.Inject;
-import javax.validation.constraints.NotBlank;
-
 import com.shareholdergame.engine.account.api.SignUpData;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
@@ -26,6 +22,11 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import javax.inject.Inject;
+import javax.validation.constraints.NotBlank;
+import java.security.Principal;
+import java.util.Optional;
 
 @Controller("/account")
 @Validated
@@ -60,12 +61,13 @@ public class AccountController {
      */
     @Put(value = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> signup(@QueryValue String userName,
-                                     @QueryValue String email,
-                                     @QueryValue String password,
+    public ResponseWrapper<?> signup(@QueryValue @NotBlank String userName,
+                                     @QueryValue @NotBlank String email,
+                                     @QueryValue @NotBlank String password,
                                      @Header Language language) {
         accountClient.createAccount(SignUpData.builder()
-            .withUserName(userName).withEmail(email).withPassword(password).withLanguage(language.name()).build());
+                .withUserName(userName).withEmail(email).withPassword(password)
+                .withLanguage(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
     }
 
