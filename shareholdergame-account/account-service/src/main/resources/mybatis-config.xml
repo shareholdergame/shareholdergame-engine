@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.shareholdergame.engine.account.model.GamerAccount" alias="Account"/>
+        <typeAlias type="com.shareholdergame.engine.account.model.AccountWithPassword" alias="AccountWithPassword"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="com/shareholdergame/engine/account/dao/mapper/AccountMapper.xml"/>
+    </mappers>
+</configuration>
