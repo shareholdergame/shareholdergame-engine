@@ -1,5 +1,10 @@
 package com.shareholdergame.engine.facade.handler;
 
+import java.util.Map;
+import java.util.function.Function;
+import javax.inject.Singleton;
+import javax.validation.ConstraintViolationException;
+
 import com.google.common.collect.ImmutableMap;
 import com.shareholdergame.engine.common.exception.ApplicationException;
 import com.shareholdergame.engine.common.exception.BusinessException;
@@ -11,10 +16,6 @@ import io.micronaut.http.server.exceptions.ExceptionHandler;
 import io.micronaut.security.authentication.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.inject.Singleton;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * Facade exception handler.
@@ -29,6 +30,7 @@ public class FacadeExceptionHandler implements ExceptionHandler<Exception, HttpR
             .put(ApplicationException.class, e -> "Internal server error")
             .put(BusinessException.class, Throwable::getMessage)
             .put(AuthenticationException.class, Throwable::getMessage)
+            .put(ConstraintViolationException.class, e -> String.format("Validation failed: %s", e.getMessage()))
             .put(Exception.class, e -> String.format("Unhadled exception %s. %s", e.getClass().getName(), e.getMessage()))
             .build();
 
