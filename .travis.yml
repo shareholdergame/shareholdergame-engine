@@ -1,0 +1,13 @@
+# This is configuration file for Travis CI
+
+language: java
+
+addons:
+  artifacts:
+    paths:
+     - shareholdergame-facade/swagger/
+     - $(ls shareholdergame-facade/target/shareholdergame-facade*.jar | tr "\n" ":")
+     - $(ls shareholdergame-account/account-service/target/shareholdergame-account*.jar | tr "\n" ":")
+    target_paths:
+     - /com.shareholdergame/engine/$TRAVIS_BUILD_NUMBER/$TRAVIS_JOB_NUMBER
+    debug: true
