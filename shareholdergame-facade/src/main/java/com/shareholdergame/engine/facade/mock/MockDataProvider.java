@@ -32,7 +32,7 @@ public final class MockDataProvider {
 
     private static final ArrayList<AccountWithPassword> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
             AccountWithPassword.builder()
-                    .withAccount(
+                    .account(
                             GamerAccount.builder().withId(1L)
                                     .withUserName("sergeychernyshev")
                                     .withEmail("player1@shareholdergame.com")
@@ -40,9 +40,9 @@ public final class MockDataProvider {
                                     .withCreationDate(LocalDate.of(2015, 8, 1))
                                     .withLanguage("EN")
                                     .build())
-                    .withPassword("123456").build(),
+                    .password("123456").build(),
             /*AccountWithPassword.builder()
-                    .withAccount(
+                    .account(
                             Account.builder().withId(1L)
                                     .withUserName("Admin")
                                     .withEmail("player2@shareholdergame.com")
@@ -50,9 +50,9 @@ public final class MockDataProvider {
                                     .withCreationDate(LocalDate.of(2015, 8, 1))
                                     .withLanguage("EN")
                                     .build())
-                    .withPassword("123456").build(),*/
+                    .password("123456").build(),*/
             AccountWithPassword.builder()
-                    .withAccount(
+                    .account(
                             GamerAccount.builder().withId(1L)
                                     .withUserName("Зырянов")
                                     .withEmail("player3@shareholdergame.com")
@@ -60,7 +60,7 @@ public final class MockDataProvider {
                                     .withCreationDate(LocalDate.of(2015, 8, 1))
                                     .withLanguage("RU")
                                     .build())
-                    .withPassword("123456").build()
+                    .password("123456").build()
     );
 
     private static ObjectMapper mapper = new ObjectMapper();

@@ -34,6 +34,6 @@
     <insert id="insertAccount" parameterType="AccountWithPassword">
         insert into a_gamer_account
         (gamer_id, email, user_name, user_password, account_status, registration_date, locale)
-        values (#{account.id}, #{account.email}, #{account.userName}, #{password}, #{account.status}, #{account.creationDate}, #{account.language})
+        values (#{gamerAccount.id}, #{gamerAccount.email}, #{gamerAccount.userName}, #{password}, #{gamerAccount.status}, #{gamerAccount.creationDate}, #{gamerAccount.language})
     </insert>
 </mapper>

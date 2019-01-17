@@ -41,12 +41,12 @@ public final class AccountWithPassword {
         private AccountWithPasswordBuilder() {
         }
 
-        public AccountWithPasswordBuilder withAccount(GamerAccount gamerAccount) {
+        public AccountWithPasswordBuilder account(GamerAccount gamerAccount) {
             this.gamerAccount = gamerAccount;
             return this;
         }
 
-        public AccountWithPasswordBuilder withPassword(String password) {
+        public AccountWithPasswordBuilder password(String password) {
             this.password = password;
             return this;
         }

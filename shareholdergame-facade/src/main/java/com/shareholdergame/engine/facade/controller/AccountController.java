@@ -3,6 +3,8 @@ package com.shareholdergame.engine.facade.controller;
 import com.shareholdergame.engine.account.api.ChangePassword;
 import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.common.exception.BusinessException;
+import com.shareholdergame.engine.common.exception.Errors;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
 import com.shareholdergame.engine.facade.client.AccountClient;
 import com.shareholdergame.engine.facade.converter.Converters;
@@ -68,6 +70,10 @@ public class AccountController {
                                      @QueryValue @NotBlank String email,
                                      @QueryValue @NotBlank @Length(min = 6) String password,
                                      @Header Language language) {
+        if (accountClient.checkUserExistence(userName) || accountClient.checkUserExistence(email)) {
+            throw new BusinessException(Errors.USER_ALREADY_EXISTS.name());
+        }
+
         accountClient.createAccount(SignUp.builder()
                 .withUserName(userName).withEmail(email).withPassword(password)
                 .withLanguage(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
