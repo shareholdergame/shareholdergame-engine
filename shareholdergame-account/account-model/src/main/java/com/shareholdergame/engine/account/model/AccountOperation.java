@@ -9,6 +9,17 @@ import org.apache.commons.lang3.builder.Builder;
  */
 public  final class AccountOperation {
 
+    /*
+    operation_type char(16) not null check (operation_type in ('CHANGE_STATUS', 'CHANGE_USERNAME', 'CHANGE_EMAIL', 'CHANGE_PASSWORD')),
+  old_value char(255),
+  new_value char(255),
+  verification_code char(64),
+  initiation_date datetime not null,
+  completion_date datetime,
+  operation_status char(16) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
+  expiration_date datetime,
+     */
+
     private Long operationId;
 
     private Long gamerId;

@@ -51,8 +51,8 @@ public class PlayerController {
      */
     @Get("/achievements/{gameOptionFilter}")
     public ResponseWrapper<PlayerAchievementsResponse> allPlayersAchievements(GameOptionFilter gameOptionFilter,
-                                                                              @QueryValue(value = "offset", defaultValue = "0") @Parameter int offset,
-                                                                              @QueryValue(value = "ipp", defaultValue = "10") @Parameter int itemsPerPage) {
+                                                                              @QueryValue(value = "offset", defaultValue = "0") @Parameter(required = false) int offset,
+                                                                              @QueryValue(value = "ipp", defaultValue = "10") @Parameter(required = false) int itemsPerPage) {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
         if (playerAchievementsList.size() == 0) {
             return ResponseWrapper.ok(new PlayerAchievementsResponse(new Filter(gameOptionFilter, null), new Pagination(playerAchievementsList.size(), 0, itemsPerPage),
@@ -103,8 +103,8 @@ public class PlayerController {
     @Get("/player/{playerName}/achievements/{gameOptionFilter}")
     public ResponseWrapper<PlayerAchievementsResponse> singlePlayerAchievements(@NotBlank String playerName,
                                                                                 GameOptionFilter gameOptionFilter,
-                                                                                @QueryValue(value = "offset", defaultValue = "0") @Parameter int offset,
-                                                                                @QueryValue(value = "ipp", defaultValue = "10") @Parameter int itemsPerPage) {
+                                                                                @QueryValue(value = "offset", defaultValue = "0") @Parameter(required = false) int offset,
+                                                                                @QueryValue(value = "ipp", defaultValue = "10") @Parameter(required = false) int itemsPerPage) {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
         if (playerAchievementsList.size() == 0) {
             return ResponseWrapper.ok(new PlayerAchievementsResponse(new Filter(gameOptionFilter, playerName),
@@ -134,8 +134,8 @@ public class PlayerController {
     public ResponseWrapper<PlayerListResponse> searchPlayer(@QueryValue(value = "playerNamePrefix") @Nullable String playerNamePrefix,
                                                             @QueryValue("online") @Nullable Boolean online,
                                                             @QueryValue("friend") @Nullable Boolean friend,
-                                                            @QueryValue(value = "offset", defaultValue = "0") @Parameter int offset,
-                                                            @QueryValue(value = "ipp", defaultValue = "10") @Parameter int itemsPerPage) {
+                                                            @QueryValue(value = "offset", defaultValue = "0") @Parameter(required = false) int offset,
+                                                            @QueryValue(value = "ipp", defaultValue = "10") @Parameter(required = false) int itemsPerPage) {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
 
         List<PlayerAchievements> filteredList = playerAchievementsList.stream()
@@ -156,29 +156,4 @@ public class PlayerController {
 
         return ResponseWrapper.ok(playerListResponse);
     }
-
-    /*@Get("/testamf/{user}/{password}")
-    public ResponseWrapper<?> testAmf(String user, String password) {
-        AMFConnection connection = new AMFConnection();
-        try {
-            connection.connect("http://localhost:8080/stockholdergame/messagebroker/amf");
-
-            CommandMessage commandMessage = new CommandMessage();
-            commandMessage.setOperation(CommandMessage.LOGIN_OPERATION);
-            commandMessage.setDestination("authentication-service");
-            commandMessage.setBody(Base64.getEncoder().encodeToString((user + ":" + password).getBytes()));
-            commandMessage.setMessageId(UUID.randomUUID().toString());
-            commandMessage.setHeader(Message.FLEX_CLIENT_ID_HEADER, "facadeID");
-            commandMessage.setHeader(Message.ENDPOINT_HEADER, "game-amf");
-            AcknowledgeMessage ack = (AcknowledgeMessage) connection.call(null, commandMessage);
-
-            System.out.println(ack);
-        } catch (ClientStatusException | ServerStatusException e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-
-        return ResponseWrapper.ok();
-    }*/
 }
