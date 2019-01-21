@@ -82,14 +82,14 @@ public final class MockDataProvider {
 
                     String userName = userNode.get("userName").asText();
                     Player p = new Player();
-                    p.setId(userName);
-                    p.setName(userName);
-                    p.setOnline(userNode.get("online").asBoolean());
-                    p.setRemoved(userNode.get("removed").asBoolean());
+                    p.id = userName;
+                    p.name = userName;
+                    p.online = userNode.get("online").asBoolean();
+                    p.removed = userNode.get("removed").asBoolean();
 
                     PlayerSession ps = new PlayerSession();
-                    ps.setLastPlay(item.get("daysAfterLastPlay").asLong());
-                    ps.setLastVisit(item.get("daysAfterLastVisit").asLong());
+                    ps.lastPlay = item.get("daysAfterLastPlay").asLong();
+                    ps.lastVisit = item.get("daysAfterLastVisit").asLong();
 
                     JsonNode profileNode = userNode.get("profile");
                     Location pp = new Location();

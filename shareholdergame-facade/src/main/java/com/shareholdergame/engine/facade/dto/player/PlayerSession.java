@@ -7,23 +7,7 @@ package com.shareholdergame.engine.facade.dto.player;
  */
 public class PlayerSession {
 
-    private Long lastVisit;
+    public Long lastVisit;
 
-    private Long lastPlay;
-
-    public Long getLastVisit() {
-        return lastVisit;
-    }
-
-    public void setLastVisit(Long lastVisit) {
-        this.lastVisit = lastVisit;
-    }
-
-    public Long getLastPlay() {
-        return lastPlay;
-    }
-
-    public void setLastPlay(Long lastPlay) {
-        this.lastPlay = lastPlay;
-    }
+    public Long lastPlay;
 }

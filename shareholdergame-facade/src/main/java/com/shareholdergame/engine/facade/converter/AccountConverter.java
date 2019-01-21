@@ -8,11 +8,11 @@ public class AccountConverter implements Converter<GamerAccount, AccountDetails>
     @Override
     public AccountDetails convert(GamerAccount gamerAccount) {
         AccountDetails ad = new AccountDetails();
-        ad.setUserName(gamerAccount.getUserName());
-        ad.setEmail(gamerAccount.getEmail());
-        ad.setStatus(gamerAccount.getStatus().name());
-        ad.setCreationDate(gamerAccount.getCreationDate().toString());
-        ad.setLanguage(gamerAccount.getLanguage());
+        ad.userName = gamerAccount.getUserName();
+        ad.email = gamerAccount.getEmail();
+        ad.status = gamerAccount.getStatus().name();
+        ad.creationDate = gamerAccount.getCreationDate().toString();
+        ad.language = gamerAccount.getLanguage();
         return ad;
     }
 }

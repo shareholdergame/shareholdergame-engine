@@ -6,33 +6,9 @@ import java.util.Set;
 
 public class PlayerPersonalInfo {
 
-    private String birthday;
+    public String birthday;
 
-    private String about;
+    public String about;
 
-    private Set<Link> links;
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
-
-    public Set<Link> getLinks() {
-        return links;
-    }
-
-    public void setLinks(Set<Link> links) {
-        this.links = links;
-    }
+    public Set<Link> links;
 }

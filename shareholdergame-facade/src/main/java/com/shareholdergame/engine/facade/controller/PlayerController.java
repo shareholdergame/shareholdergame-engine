@@ -76,7 +76,7 @@ public class PlayerController {
     @Get("/player/{playerName}")
     public ResponseWrapper<PlayerProfile> playerProfile(@NotBlank String playerName) {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
-        PlayerAchievements playerAchievements = playerAchievementsList.stream().filter(pa -> pa.getPlayer().getName().equalsIgnoreCase(playerName))
+        PlayerAchievements playerAchievements = playerAchievementsList.stream().filter(pa -> pa.getPlayer().name.equalsIgnoreCase(playerName))
                 .findFirst().orElse(null);
 
         if (null == playerAchievements) {
@@ -84,9 +84,9 @@ public class PlayerController {
         }
 
         PlayerProfile playerProfile = new PlayerProfile();
-        playerProfile.setPlayer(playerAchievements.getPlayer());
-        playerProfile.setLocation(playerAchievements.getLocation());
-        playerProfile.setPersonalInfo(MockDataProvider.getPersonalInfo());
+        playerProfile.player = playerAchievements.getPlayer();
+        playerProfile.location = playerAchievements.getLocation();
+        playerProfile.personalInfo = MockDataProvider.getPersonalInfo();
 
         return ResponseWrapper.ok(playerProfile);
     }
@@ -112,7 +112,7 @@ public class PlayerController {
                     Collections.emptyList()));
         }
         List<PlayerAchievements> filteredList = playerAchievementsList.stream()
-                .filter(playerAchievements -> !playerAchievements.getPlayer().getName().equalsIgnoreCase(playerName)).collect(Collectors.toList());
+                .filter(playerAchievements -> !playerAchievements.getPlayer().name.equalsIgnoreCase(playerName)).collect(Collectors.toList());
 
         int itemsCount = filteredList.size();
         int fromIndex = offset < 0 || offset >= itemsCount ? 0 : offset;
@@ -139,7 +139,7 @@ public class PlayerController {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
 
         List<PlayerAchievements> filteredList = playerAchievementsList.stream()
-            .filter(playerAchievements -> playerNamePrefix == null || StringUtils.startsWithIgnoreCase(playerAchievements.getPlayer().getName(), playerNamePrefix))
+            .filter(playerAchievements -> playerNamePrefix == null || StringUtils.startsWithIgnoreCase(playerAchievements.getPlayer().name, playerNamePrefix))
             .collect(Collectors.toList());
 
         int itemsCount = filteredList.size();
@@ -147,7 +147,12 @@ public class PlayerController {
         int toIndex = offset + itemsPerPage >= itemsCount ? itemsCount : offset + itemsPerPage;
 
         List<PlayerWithLocation> playerWithLocations = filteredList.stream()
-            .map(playerAchievements -> new PlayerWithLocation(playerAchievements.getPlayer(), playerAchievements.getLocation()))
+            .map(playerAchievements -> {
+                PlayerWithLocation pl = new PlayerWithLocation();
+                pl.player = playerAchievements.getPlayer();
+                pl.location = playerAchievements.getLocation();
+                return pl;
+            })
             .collect(Collectors.toList()).subList(fromIndex, toIndex);
 
         PlayerListResponse playerListResponse = new PlayerListResponse();
