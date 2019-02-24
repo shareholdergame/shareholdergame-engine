@@ -12,43 +12,11 @@ import java.io.Serializable;
  */
 public class PlayerAchievements implements Serializable {
 
-    private Player player;
+    public Player player;
 
-    private Location location;
+    public Location location;
 
-    private PlayerSession playerSession;
+    public PlayerSession playerSession;
 
-    private Achievements achievements;
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public PlayerSession getPlayerSession() {
-        return playerSession;
-    }
-
-    public void setPlayerSession(PlayerSession playerSession) {
-        this.playerSession = playerSession;
-    }
-
-    public Achievements getAchievements() {
-        return achievements;
-    }
-
-    public void setAchievements(Achievements achievements) {
-        this.achievements = achievements;
-    }
+    public Achievements achievements;
 }

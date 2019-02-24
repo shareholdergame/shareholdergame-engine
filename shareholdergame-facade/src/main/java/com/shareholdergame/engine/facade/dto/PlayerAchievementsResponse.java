@@ -2,9 +2,6 @@ package com.shareholdergame.engine.facade.dto;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Date: 10/11/2018
  *
@@ -18,13 +15,15 @@ public class PlayerAchievementsResponse {
 
     private List<PlayerAchievements> items;
 
-    @JsonCreator
-    public PlayerAchievementsResponse(@JsonProperty("filter") Filter filter,
-                                      @JsonProperty("pagination") Pagination pagination,
-                                      @JsonProperty("items") List<PlayerAchievements> items) {
-        this.filter = filter;
-        this.pagination = pagination;
-        this.items = items;
+    private PlayerAchievementsResponse() {
+    }
+
+    public static PlayerAchievementsResponse of(Filter filter, Pagination pagination, List<PlayerAchievements> items) {
+        PlayerAchievementsResponse par = new PlayerAchievementsResponse();
+        par.filter = filter;
+        par.pagination = pagination;
+        par.items = items;
+        return par;
     }
 
     public Filter getFilter() {

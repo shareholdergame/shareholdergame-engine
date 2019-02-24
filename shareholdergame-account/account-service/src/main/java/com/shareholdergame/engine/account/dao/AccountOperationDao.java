@@ -1,10 +1,10 @@
 package com.shareholdergame.engine.account.dao;
 
-import javax.inject.Singleton;
-
 import com.shareholdergame.engine.account.dao.mapper.AccountOperationMapper;
 import com.shareholdergame.engine.account.model.AccountOperation;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionManager;
+
+import javax.inject.Singleton;
 
 /**
  * Date: 01/16/2019
@@ -14,10 +14,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 @Singleton
 public class AccountOperationDao implements AccountOperationMapper {
 
-    private final SqlSessionFactory sqlSessionFactory;
+    private final SqlSessionManager sqlSessionManager;
 
-    public AccountOperationDao(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+    public AccountOperationDao(SqlSessionManager sqlSessionManager) {
+        this.sqlSessionManager = sqlSessionManager;
     }
 
     @Override

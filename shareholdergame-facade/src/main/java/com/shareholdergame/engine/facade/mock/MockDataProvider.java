@@ -32,7 +32,7 @@ public final class MockDataProvider {
 
     private static final ArrayList<AccountWithPassword> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
             AccountWithPassword.builder()
-                    .withAccount(
+                    .account(
                             GamerAccount.builder().withId(1L)
                                     .withUserName("sergeychernyshev")
                                     .withEmail("player1@shareholdergame.com")
@@ -40,9 +40,9 @@ public final class MockDataProvider {
                                     .withCreationDate(LocalDate.of(2015, 8, 1))
                                     .withLanguage("EN")
                                     .build())
-                    .withPassword("123456").build(),
+                    .password("123456").build(),
             /*AccountWithPassword.builder()
-                    .withAccount(
+                    .account(
                             Account.builder().withId(1L)
                                     .withUserName("Admin")
                                     .withEmail("player2@shareholdergame.com")
@@ -50,9 +50,9 @@ public final class MockDataProvider {
                                     .withCreationDate(LocalDate.of(2015, 8, 1))
                                     .withLanguage("EN")
                                     .build())
-                    .withPassword("123456").build(),*/
+                    .password("123456").build(),*/
             AccountWithPassword.builder()
-                    .withAccount(
+                    .account(
                             GamerAccount.builder().withId(1L)
                                     .withUserName("Зырянов")
                                     .withEmail("player3@shareholdergame.com")
@@ -60,7 +60,7 @@ public final class MockDataProvider {
                                     .withCreationDate(LocalDate.of(2015, 8, 1))
                                     .withLanguage("RU")
                                     .build())
-                    .withPassword("123456").build()
+                    .password("123456").build()
     );
 
     private static ObjectMapper mapper = new ObjectMapper();
@@ -82,14 +82,14 @@ public final class MockDataProvider {
 
                     String userName = userNode.get("userName").asText();
                     Player p = new Player();
-                    p.setId(userName);
-                    p.setName(userName);
-                    p.setOnline(userNode.get("online").asBoolean());
-                    p.setRemoved(userNode.get("removed").asBoolean());
+                    p.id = userName;
+                    p.name = userName;
+                    p.online = userNode.get("online").asBoolean();
+                    p.removed = userNode.get("removed").asBoolean();
 
                     PlayerSession ps = new PlayerSession();
-                    ps.setLastPlay(item.get("daysAfterLastPlay").asLong());
-                    ps.setLastVisit(item.get("daysAfterLastVisit").asLong());
+                    ps.lastPlay = item.get("daysAfterLastPlay").asLong();
+                    ps.lastVisit = item.get("daysAfterLastVisit").asLong();
 
                     JsonNode profileNode = userNode.get("profile");
                     Location pp = new Location();
@@ -112,10 +112,10 @@ public final class MockDataProvider {
                     );
 
                     PlayerAchievements pa = new PlayerAchievements();
-                    pa.setPlayer(p);
-                    pa.setLocation(pp);
-                    pa.setPlayerSession(ps);
-                    pa.setAchievements(a);
+                    pa.player = p;
+                    pa.location = pp;
+                    pa.playerSession = ps;
+                    pa.achievements = a;
 
                     playerAchievementsList.add(pa);
                 }

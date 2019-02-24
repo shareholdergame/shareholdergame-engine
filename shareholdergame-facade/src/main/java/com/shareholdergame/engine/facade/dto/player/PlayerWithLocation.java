@@ -9,28 +9,7 @@ import com.shareholdergame.engine.facade.dto.Location;
  */
 public class PlayerWithLocation {
 
-    private Player player;
+    public Player player;
 
-    private Location location;
-
-    public PlayerWithLocation(Player player, Location location) {
-        this.player = player;
-        this.location = location;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+    public Location location;
 }

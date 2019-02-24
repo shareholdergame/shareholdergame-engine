@@ -13,21 +13,23 @@ public class GameListResponse {
 
     private Pagination pagination;
 
-    private List<Game> games;
+    private List<Game> items;
+
+    private GameListResponse() {
+    }
+
+    public static GameListResponse of(List<Game> items, Pagination pagination) {
+        GameListResponse glr = new GameListResponse();
+        glr.items = items;
+        glr.pagination = pagination;
+        return glr;
+    }
 
     public Pagination getPagination() {
         return pagination;
     }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
-    public List<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Game> games) {
-        this.games = games;
+    public List<Game> getItems() {
+        return items;
     }
 }

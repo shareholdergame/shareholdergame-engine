@@ -5,19 +5,21 @@ import java.util.Set;
 
 public class GameSet {
 
-    private Long id;
+    public Long id;
 
-    private LocalDateTime createdTime;
+    public Set<GameOption> options;
 
-    private LocalDateTime startedTime;
+    public LocalDateTime createdTime;
 
-    private LocalDateTime finishedTime;
+    public LocalDateTime startedTime;
 
-    private GameStatus status;
+    public LocalDateTime finishedTime;
 
-    private boolean published;
+    public GameStatus status;
 
-    private Set<GamePlayer> players;
+    public Set<GamePlayer> players;
 
-    private Set<PlayerResult> result;
+    public Set<PlayerResult> result;
+
+    public Set<Game> games;
 }

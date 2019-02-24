@@ -17,11 +17,11 @@ public class ProfileConverter implements Converter<Profile, PlayerProfile> {
         pl.setCountry(profile.getCountry());
         pl.setStateProvince(profile.getStateProvince());
 
-        ppi.setAbout(profile.getAbout());
-        ppi.setBirthday(profile.getBirthday().toString());
+        ppi.about = profile.getAbout();
+        ppi.birthday = profile.getBirthday().toString();
 
-        pp.setLocation(pl);
-        pp.setPersonalInfo(ppi);
+        pp.location = pl;
+        pp.personalInfo = ppi;
         return pp;
     }
 }

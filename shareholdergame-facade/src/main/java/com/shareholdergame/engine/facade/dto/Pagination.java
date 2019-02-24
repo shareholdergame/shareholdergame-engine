@@ -1,8 +1,5 @@
 package com.shareholdergame.engine.facade.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Date: 10/11/2018
  *
@@ -16,13 +13,15 @@ public class Pagination {
 
     private int itemsPerPage = 10;
 
-    @JsonCreator
-    public Pagination(@JsonProperty("itemsCount") int itemsCount,
-                      @JsonProperty("offset") int offset,
-                      @JsonProperty("itemsPerPage") int itemsPerPage) {
-        this.itemsCount = itemsCount;
-        this.offset = offset;
-        this.itemsPerPage = itemsPerPage;
+    private Pagination() {
+    }
+
+    public static Pagination of(int itemsCount, int offset, int itemsPerPage) {
+        Pagination p = new Pagination();
+        p.itemsCount = itemsCount;
+        p.offset = offset;
+        p.itemsPerPage = itemsPerPage;
+        return p;
     }
 
     public int getItemsCount() {
