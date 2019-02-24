@@ -2,9 +2,9 @@ package com.shareholdergame.engine.facade.dto.game;
 
 public enum GameStatus {
 
-    created,
+    CREATED,
 
-    running,
+    RUNNING,
 
-    finished
+    FINISHED
 }

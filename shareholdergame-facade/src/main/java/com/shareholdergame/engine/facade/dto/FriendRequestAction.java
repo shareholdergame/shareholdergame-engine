@@ -5,7 +5,7 @@ package com.shareholdergame.engine.facade.dto;
  *
  * @author Aliaksandr Savin
  */
-public enum FriendRequest {
+public enum FriendRequestAction {
 
     accept,
 

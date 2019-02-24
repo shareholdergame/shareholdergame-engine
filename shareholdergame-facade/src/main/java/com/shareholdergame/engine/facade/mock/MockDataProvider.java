@@ -112,10 +112,10 @@ public final class MockDataProvider {
                     );
 
                     PlayerAchievements pa = new PlayerAchievements();
-                    pa.setPlayer(p);
-                    pa.setLocation(pp);
-                    pa.setPlayerSession(ps);
-                    pa.setAchievements(a);
+                    pa.player = p;
+                    pa.location = pp;
+                    pa.playerSession = ps;
+                    pa.achievements = a;
 
                     playerAchievementsList.add(pa);
                 }

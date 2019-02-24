@@ -17,9 +17,9 @@ public class GameSet {
 
     public GameStatus status;
 
-    public boolean published;
-
     public Set<GamePlayer> players;
 
     public Set<PlayerResult> result;
+
+    public Set<Game> games;
 }

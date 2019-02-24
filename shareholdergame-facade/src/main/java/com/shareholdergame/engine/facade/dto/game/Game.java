@@ -8,7 +8,9 @@ public class Game {
 
     public GameLetter letter;
 
-    public Set<TurnOrderResult> result;
+    public GameStatus status;
 
-    public GameReport report;
+    public PlayPosition position;
+
+    public Set<TurnOrderResult> result;
 }

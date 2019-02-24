@@ -34,12 +34,36 @@ import java.util.stream.Collectors;
  *
  * @author Aliaksandr Savin
  */
-@Controller("/players")
+@Controller("/player")
 @Secured(SecurityRule.IS_ANONYMOUS)
 @Validated
 @SecurityRequirement(name = "bearerAuth")
-@Tag(name = "Players")
+@Tag(name = "Player")
 public class PlayerController {
+
+    /**
+     * Returns player profile.
+     *
+     * @param playerName name of player.
+     * @return player profile.
+     */
+    @Get("/profile/{playerName}")
+    public ResponseWrapper<PlayerProfile> playerProfile(@NotBlank String playerName) {
+        List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
+        PlayerAchievements playerAchievements = playerAchievementsList.stream().filter(pa -> pa.player.name.equalsIgnoreCase(playerName))
+                .findFirst().orElse(null);
+
+        if (null == playerAchievements) {
+            throw new HttpStatusException(HttpStatus.NOT_FOUND, playerName);
+        }
+
+        PlayerProfile playerProfile = new PlayerProfile();
+        playerProfile.player = playerAchievements.player;
+        playerProfile.location = playerAchievements.location;
+        playerProfile.personalInfo = MockDataProvider.getPersonalInfo();
+
+        return ResponseWrapper.ok(playerProfile);
+    }
 
     /**
      * Returns list of players with their achievements for specified game option.
@@ -54,41 +78,18 @@ public class PlayerController {
                                                                               @QueryValue(value = "offset", defaultValue = "0") @Parameter(required = false) int offset,
                                                                               @QueryValue(value = "ipp", defaultValue = "10") @Parameter(required = false) int itemsPerPage) {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
+
         if (playerAchievementsList.size() == 0) {
-            return ResponseWrapper.ok(new PlayerAchievementsResponse(new Filter(gameOptionFilter, null), new Pagination(playerAchievementsList.size(), 0, itemsPerPage),
-                    Collections.emptyList()));
+            return ResponseWrapper.ok(PlayerAchievementsResponse.of(Filter.of(gameOptionFilter, null),
+                    Pagination.of(playerAchievementsList.size(), 0, itemsPerPage), Collections.emptyList()));
         }
 
         int itemsCount = playerAchievementsList.size();
         int fromIndex = offset < 0 || offset >= itemsCount ? 0 : offset;
         int toIndex = offset + itemsPerPage >= itemsCount ? itemsCount : offset + itemsPerPage;
-        return ResponseWrapper.ok(new PlayerAchievementsResponse(new Filter(gameOptionFilter, null),
-            new Pagination(playerAchievementsList.size(), fromIndex, itemsPerPage),
-                playerAchievementsList.subList(fromIndex, toIndex)));
-    }
 
-    /**
-     * Returns player profile.
-     *
-     * @param playerName name of player.
-     * @return player profile.
-     */
-    @Get("/player/{playerName}")
-    public ResponseWrapper<PlayerProfile> playerProfile(@NotBlank String playerName) {
-        List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
-        PlayerAchievements playerAchievements = playerAchievementsList.stream().filter(pa -> pa.getPlayer().name.equalsIgnoreCase(playerName))
-                .findFirst().orElse(null);
-
-        if (null == playerAchievements) {
-            throw new HttpStatusException(HttpStatus.NOT_FOUND, playerName);
-        }
-
-        PlayerProfile playerProfile = new PlayerProfile();
-        playerProfile.player = playerAchievements.getPlayer();
-        playerProfile.location = playerAchievements.getLocation();
-        playerProfile.personalInfo = MockDataProvider.getPersonalInfo();
-
-        return ResponseWrapper.ok(playerProfile);
+        return ResponseWrapper.ok(PlayerAchievementsResponse.of(Filter.of(gameOptionFilter, null),
+                Pagination.of(playerAchievementsList.size(), fromIndex, itemsPerPage), playerAchievementsList.subList(fromIndex, toIndex)));
     }
 
     /**
@@ -100,25 +101,26 @@ public class PlayerController {
      * @param itemsPerPage pagination parameter number of items per page (not required).
      * @return achievements of player.
      */
-    @Get("/player/{playerName}/achievements/{gameOptionFilter}")
+    @Get("/achievements/{gameOptionFilter}/{playerName}")
     public ResponseWrapper<PlayerAchievementsResponse> singlePlayerAchievements(@NotBlank String playerName,
                                                                                 GameOptionFilter gameOptionFilter,
                                                                                 @QueryValue(value = "offset", defaultValue = "0") @Parameter(required = false) int offset,
                                                                                 @QueryValue(value = "ipp", defaultValue = "10") @Parameter(required = false) int itemsPerPage) {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
+
         if (playerAchievementsList.size() == 0) {
-            return ResponseWrapper.ok(new PlayerAchievementsResponse(new Filter(gameOptionFilter, playerName),
-                new Pagination(playerAchievementsList.size(), 0, itemsPerPage),
+            return ResponseWrapper.ok(PlayerAchievementsResponse.of(Filter.of(gameOptionFilter, playerName),
+                Pagination.of(playerAchievementsList.size(), 0, itemsPerPage),
                     Collections.emptyList()));
         }
         List<PlayerAchievements> filteredList = playerAchievementsList.stream()
-                .filter(playerAchievements -> !playerAchievements.getPlayer().name.equalsIgnoreCase(playerName)).collect(Collectors.toList());
+                .filter(playerAchievements -> !playerAchievements.player.name.equalsIgnoreCase(playerName)).collect(Collectors.toList());
 
         int itemsCount = filteredList.size();
         int fromIndex = offset < 0 || offset >= itemsCount ? 0 : offset;
         int toIndex = offset + itemsPerPage >= itemsCount ? itemsCount : offset + itemsPerPage;
-        return ResponseWrapper.ok(new PlayerAchievementsResponse(new Filter(gameOptionFilter, playerName),
-            new Pagination(playerAchievementsList.size(), fromIndex, itemsPerPage),
+        return ResponseWrapper.ok(PlayerAchievementsResponse.of(Filter.of(gameOptionFilter, playerName),
+            Pagination.of(playerAchievementsList.size(), fromIndex, itemsPerPage),
                 playerAchievementsList.subList(fromIndex, toIndex)));
     }
 
@@ -139,7 +141,7 @@ public class PlayerController {
         List<PlayerAchievements> playerAchievementsList = MockDataProvider.playerAchievements();
 
         List<PlayerAchievements> filteredList = playerAchievementsList.stream()
-            .filter(playerAchievements -> playerNamePrefix == null || StringUtils.startsWithIgnoreCase(playerAchievements.getPlayer().name, playerNamePrefix))
+            .filter(playerAchievements -> playerNamePrefix == null || StringUtils.startsWithIgnoreCase(playerAchievements.player.name, playerNamePrefix))
             .collect(Collectors.toList());
 
         int itemsCount = filteredList.size();
@@ -149,15 +151,15 @@ public class PlayerController {
         List<PlayerWithLocation> playerWithLocations = filteredList.stream()
             .map(playerAchievements -> {
                 PlayerWithLocation pl = new PlayerWithLocation();
-                pl.player = playerAchievements.getPlayer();
-                pl.location = playerAchievements.getLocation();
+                pl.player = playerAchievements.player;
+                pl.location = playerAchievements.location;
                 return pl;
             })
             .collect(Collectors.toList()).subList(fromIndex, toIndex);
 
         PlayerListResponse playerListResponse = new PlayerListResponse();
-        playerListResponse.setPagination(new Pagination(playerWithLocations.size(), offset, itemsPerPage));
-        playerListResponse.setPlayers(playerWithLocations);
+        playerListResponse.pagination = Pagination.of(playerWithLocations.size(), offset, itemsPerPage);
+        playerListResponse.players = playerWithLocations;
 
         return ResponseWrapper.ok(playerListResponse);
     }

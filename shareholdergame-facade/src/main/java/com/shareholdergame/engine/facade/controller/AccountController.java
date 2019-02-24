@@ -86,8 +86,7 @@ public class AccountController {
      * @return empty response if ok.
      */
     @Get("/verify/{verificationCode}")
-    @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> verify(@NotBlank String verificationCode) {
+    public ResponseWrapper<?> verify(@NotBlank String verificationCode, Principal principal) {
         return ResponseWrapper.ok();
     }
 

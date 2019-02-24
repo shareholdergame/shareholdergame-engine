@@ -3,7 +3,7 @@ package com.shareholdergame.engine.facade.controller;
 import com.shareholdergame.engine.common.support.ErrorBody;
 import com.shareholdergame.engine.common.support.ResponseWrapper;
 import com.shareholdergame.engine.facade.converter.Converters;
-import com.shareholdergame.engine.facade.dto.FriendRequest;
+import com.shareholdergame.engine.facade.dto.FriendRequestAction;
 import com.shareholdergame.engine.facade.dto.FriendsResponse;
 import com.shareholdergame.engine.facade.dto.Pagination;
 import com.shareholdergame.engine.facade.dto.PlayerAchievements;
@@ -98,9 +98,8 @@ public class ProfileController {
         int toIndex = offset + itemsPerPage >= itemsCount ? itemsCount : offset + itemsPerPage;
 
         FriendsResponse friendsResponse = new FriendsResponse();
-        friendsResponse.setPagination(new Pagination(itemsCount, offset, itemsPerPage));
-        friendsResponse.setPlayers(playerAchievements.subList(fromIndex, toIndex).stream()
-            .map(PlayerAchievements::getPlayer).collect(Collectors.toList()));
+        friendsResponse.setPagination(Pagination.of(itemsCount, offset, itemsPerPage));
+        friendsResponse.setPlayers(playerAchievements.subList(fromIndex, toIndex).stream().map(pa -> pa.player).collect(Collectors.toList()));
 
         return ResponseWrapper.ok(friendsResponse);
     }
@@ -113,7 +112,7 @@ public class ProfileController {
      */
     @Post("/friends/{playerName}")
     public ResponseWrapper<?> performRequestAction(@NotBlank String playerName,
-                                                   @QueryValue("action") FriendRequest action, Principal principal) {
+                                                   @QueryValue("action") FriendRequestAction action, Principal principal) {
         return ResponseWrapper.ok();
     }
 

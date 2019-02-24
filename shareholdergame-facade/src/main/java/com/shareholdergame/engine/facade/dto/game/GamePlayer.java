@@ -11,4 +11,6 @@ public class GamePlayer {
     public boolean initiator;
 
     public Player player;
+
+    public PlayerInvitation invitation;
 }

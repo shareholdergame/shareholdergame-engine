@@ -11,23 +11,7 @@ import java.util.List;
  */
 public class PlayerListResponse {
 
-    private Pagination pagination;
+    public Pagination pagination;
 
-    private List<PlayerWithLocation> players;
-
-    public Pagination getPagination() {
-        return pagination;
-    }
-
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
-    }
-
-    public List<PlayerWithLocation> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<PlayerWithLocation> players) {
-        this.players = players;
-    }
+    public List<PlayerWithLocation> players;
 }
