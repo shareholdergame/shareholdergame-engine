@@ -2,7 +2,7 @@ package com.shareholdergame.engine.facade.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.shareholdergame.engine.common.support.ResponseWrapper;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.dto.GameEvent;
 import com.shareholdergame.engine.facade.dto.GameListResponse;
 import com.shareholdergame.engine.facade.dto.GameOptionFilter;

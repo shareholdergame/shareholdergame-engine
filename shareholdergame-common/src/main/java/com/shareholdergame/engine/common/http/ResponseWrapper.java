@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.common.support;
+package com.shareholdergame.engine.common.http;
 
 public class ResponseWrapper<T> {
 

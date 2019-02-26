@@ -5,7 +5,7 @@ import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.exception.BusinessException;
 import com.shareholdergame.engine.common.exception.Errors;
-import com.shareholdergame.engine.common.support.ResponseWrapper;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.client.AccountClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;

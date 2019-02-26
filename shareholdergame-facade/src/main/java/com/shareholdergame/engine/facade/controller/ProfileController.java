@@ -1,7 +1,7 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.common.support.ErrorBody;
-import com.shareholdergame.engine.common.support.ResponseWrapper;
+import com.shareholdergame.engine.common.http.ErrorBody;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.FriendRequestAction;
 import com.shareholdergame.engine.facade.dto.FriendsResponse;

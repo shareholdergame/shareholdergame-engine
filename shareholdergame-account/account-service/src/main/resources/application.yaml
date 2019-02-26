@@ -5,6 +5,11 @@ micronaut:
   server:
     port: 8091
 
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 10
+
 datasources:
   default:
     url: jdbc:mariadb://localhost:3306/shareholdergame
