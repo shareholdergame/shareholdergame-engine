@@ -2,27 +2,34 @@ package com.shareholdergame.engine.account.model;
 
 import org.apache.commons.lang3.builder.Builder;
 
+import java.time.LocalDateTime;
+
 /**
  * Date: 01/16/2019
  *
  * @author Aliaksandr Savin
  */
-public  final class AccountOperation {
-
-    /*
-    operation_type char(16) not null check (operation_type in ('CHANGE_STATUS', 'CHANGE_USERNAME', 'CHANGE_EMAIL', 'CHANGE_PASSWORD')),
-  old_value char(255),
-  new_value char(255),
-  verification_code char(64),
-  initiation_date datetime not null,
-  completion_date datetime,
-  operation_status char(16) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
-  expiration_date datetime,
-     */
+public final class AccountOperation {
 
     private Long operationId;
 
     private Long gamerId;
+
+    private AccountOperationType operationType;
+
+    private String oldValue;
+
+    private String newValue;
+
+    private String verificationCode;
+
+    private LocalDateTime initiationDate;
+
+    private LocalDateTime completionDate;
+
+    private AccountOperationStatus operationStatus;
+
+    private LocalDateTime expirationDate;
 
     private AccountOperation() {
     }
@@ -30,6 +37,14 @@ public  final class AccountOperation {
     public AccountOperation(AccountOperationBuilder builder) {
         this.operationId = builder.operationId;
         this.gamerId = builder.gamerId;
+        this.operationType = builder.operationType;
+        this.oldValue = builder.oldValue;
+        this.newValue = builder.newValue;
+        this.verificationCode = builder.verificationCode;
+        this.initiationDate = builder.initiationDate;
+        this.completionDate = builder.completionDate;
+        this.operationStatus = builder.operationStatus;
+        this.expirationDate = builder.expirationDate;
     }
 
     public Long getOperationId() {
@@ -40,6 +55,38 @@ public  final class AccountOperation {
         return gamerId;
     }
 
+    public AccountOperationType getOperationType() {
+        return operationType;
+    }
+
+    public String getOldValue() {
+        return oldValue;
+    }
+
+    public String getNewValue() {
+        return newValue;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public LocalDateTime getInitiationDate() {
+        return initiationDate;
+    }
+
+    public LocalDateTime getCompletionDate() {
+        return completionDate;
+    }
+
+    public AccountOperationStatus getOperationStatus() {
+        return operationStatus;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
     public static AccountOperationBuilder builder() {
         return new AccountOperationBuilder();
     }
@@ -48,17 +95,65 @@ public  final class AccountOperation {
 
         private Long operationId;
         private Long gamerId;
+        private AccountOperationType operationType;
+        private String oldValue;
+        private String newValue;
+        private String verificationCode;
+        private LocalDateTime initiationDate;
+        private LocalDateTime completionDate;
+        private AccountOperationStatus operationStatus;
+        private LocalDateTime expirationDate;
 
         private AccountOperationBuilder() {
         }
 
-        public AccountOperationBuilder withOperationId(Long operationId) {
+        public AccountOperationBuilder operationId(Long operationId) {
             this.operationId = operationId;
             return this;
         }
 
-        public AccountOperationBuilder withGamerId(Long gamerId) {
+        public AccountOperationBuilder gamerId(Long gamerId) {
             this.gamerId = gamerId;
+            return this;
+        }
+
+        public AccountOperationBuilder operationType(AccountOperationType operationType) {
+            this.operationType = operationType;
+            return this;
+        }
+
+        public AccountOperationBuilder oldValue(String oldValue) {
+            this.oldValue = oldValue;
+            return this;
+        }
+
+        public AccountOperationBuilder newValue(String newValue) {
+            this.newValue = newValue;
+            return this;
+        }
+
+        public AccountOperationBuilder verificationCode(String verificationCode) {
+            this.verificationCode = verificationCode;
+            return this;
+        }
+
+        public AccountOperationBuilder initiationDate(LocalDateTime initiationDate) {
+            this.initiationDate = initiationDate;
+            return this;
+        }
+
+        public AccountOperationBuilder completionDate(LocalDateTime completionDate) {
+            this.completionDate = completionDate;
+            return this;
+        }
+
+        public AccountOperationBuilder operationStatus(AccountOperationStatus operationStatus) {
+            this.operationStatus = operationStatus;
+            return this;
+        }
+
+        public AccountOperationBuilder expirationDate(LocalDateTime expirationDate) {
+            this.expirationDate = expirationDate;
             return this;
         }
 

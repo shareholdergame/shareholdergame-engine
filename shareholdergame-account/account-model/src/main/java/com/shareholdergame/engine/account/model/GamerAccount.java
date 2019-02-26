@@ -70,32 +70,32 @@ public final class GamerAccount {
         private AccountBuilder() {
         }
 
-        public AccountBuilder withEmail(String email) {
+        public AccountBuilder email(String email) {
             this.email = email;
             return this;
         }
 
-        public AccountBuilder withUserName(String userName) {
+        public AccountBuilder userName(String userName) {
             this.userName = userName;
             return this;
         }
 
-        public AccountBuilder withId(Long id) {
+        public AccountBuilder id(Long id) {
             this.id = id;
             return this;
         }
 
-        public AccountBuilder withStatus(AccountStatus status) {
+        public AccountBuilder status(AccountStatus status) {
             this.status = status;
             return this;
         }
 
-        public AccountBuilder withCreationDate(LocalDate creationDate) {
+        public AccountBuilder creationDate(LocalDate creationDate) {
             this.creationDate = creationDate;
             return this;
         }
 
-        public AccountBuilder withLanguage(String language) {
+        public AccountBuilder language(String language) {
             this.language = language;
             return this;
         }

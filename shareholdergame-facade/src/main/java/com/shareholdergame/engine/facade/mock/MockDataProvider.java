@@ -33,12 +33,12 @@ public final class MockDataProvider {
     private static final ArrayList<AccountWithPassword> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
             AccountWithPassword.builder()
                     .account(
-                            GamerAccount.builder().withId(1L)
-                                    .withUserName("sergeychernyshev")
-                                    .withEmail("player1@shareholdergame.com")
-                                    .withStatus(AccountStatus.ACTIVE)
-                                    .withCreationDate(LocalDate.of(2015, 8, 1))
-                                    .withLanguage("EN")
+                            GamerAccount.builder().id(1L)
+                                    .userName("sergeychernyshev")
+                                    .email("player1@shareholdergame.com")
+                                    .status(AccountStatus.ACTIVE)
+                                    .creationDate(LocalDate.of(2015, 8, 1))
+                                    .language("EN")
                                     .build())
                     .password("123456").build(),
             /*AccountWithPassword.builder()
@@ -53,12 +53,12 @@ public final class MockDataProvider {
                     .password("123456").build(),*/
             AccountWithPassword.builder()
                     .account(
-                            GamerAccount.builder().withId(1L)
-                                    .withUserName("Зырянов")
-                                    .withEmail("player3@shareholdergame.com")
-                                    .withStatus(AccountStatus.ACTIVE)
-                                    .withCreationDate(LocalDate.of(2015, 8, 1))
-                                    .withLanguage("RU")
+                            GamerAccount.builder().id(1L)
+                                    .userName("Зырянов")
+                                    .email("player3@shareholdergame.com")
+                                    .status(AccountStatus.ACTIVE)
+                                    .creationDate(LocalDate.of(2015, 8, 1))
+                                    .language("RU")
                                     .build())
                     .password("123456").build()
     );
@@ -144,11 +144,11 @@ public final class MockDataProvider {
     public static List<Profile> getProfiles() {
         return Lists.newArrayList(
                 Profile.builder()
-                        .withCity("New York")
-                        .withCountry("US")
-                        .withStateProvince("NY")
-                        .withAbout("I like play cards")
-                        .withBirthday(LocalDate.of(1977, 12,12))
+                        .city("New York")
+                        .country("US")
+                        .stateProvince("NY")
+                        .about("I like play cards")
+                        .birthday(LocalDate.of(1977, 12,12))
                         .build()
         );
     }

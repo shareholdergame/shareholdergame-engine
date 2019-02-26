@@ -62,27 +62,27 @@ public final class Profile {
         private ProfileBuilder() {
         }
 
-        public ProfileBuilder withCountry(String country) {
+        public ProfileBuilder country(String country) {
             this.country = country;
             return this;
         }
 
-        public ProfileBuilder withStateProvince(String stateProvince) {
+        public ProfileBuilder stateProvince(String stateProvince) {
             this.stateProvince = stateProvince;
             return this;
         }
 
-        public ProfileBuilder withCity(String city) {
+        public ProfileBuilder city(String city) {
             this.city = city;
             return this;
         }
 
-        public ProfileBuilder withBirthday(LocalDate birthday) {
+        public ProfileBuilder birthday(LocalDate birthday) {
             this.birthday = birthday;
             return this;
         }
 
-        public ProfileBuilder withAbout(String about) {
+        public ProfileBuilder about(String about) {
             this.about = about;
             return this;
         }

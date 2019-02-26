@@ -22,6 +22,6 @@ public class AccountOperationDao implements AccountOperationMapper {
 
     @Override
     public void insertOperation(AccountOperation accountOperation) {
-
+        sqlSessionManager.getMapper(AccountOperationMapper.class).insertOperation(accountOperation);
     }
 }
