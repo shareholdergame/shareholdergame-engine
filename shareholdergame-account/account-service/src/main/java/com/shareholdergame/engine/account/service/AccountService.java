@@ -3,6 +3,7 @@ package com.shareholdergame.engine.account.service;
 import com.shareholdergame.engine.account.api.AccountOperations;
 import com.shareholdergame.engine.account.api.ChangePassword;
 import com.shareholdergame.engine.account.api.SignUp;
+import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.dao.AccountOperationDao;
 import com.shareholdergame.engine.account.dao.Transactional;
@@ -21,6 +22,9 @@ import java.time.LocalDateTime;
 
 @Controller("/account")
 public class AccountService implements AccountOperations {
+
+    @Inject
+    private AccountServiceConfiguration configuration;
 
     @Inject
     private AccountDao accountDao;
@@ -45,14 +49,18 @@ public class AccountService implements AccountOperations {
     @Transactional
     public void createAccount(SignUp signUp) {
         Long gamerId = IdentifierHelper.generateLongId();
+        LocalDateTime creationDate = LocalDateTime.now();
         GamerAccount gamerAccount = GamerAccount.builder()
                 .id(gamerId)
                 .userName(signUp.getUserName())
                 .email(signUp.getEmail())
                 .status(AccountStatus.NEW)
-                .creationDate(LocalDate.now())
+                .creationDate(creationDate)
                 .language(signUp.getLanguage())
                 .build();
+
+        String verificationCode = RandomStringGenerator.generate(configuration.getVerificationCodeLength());
+        LocalDateTime expirationDate = creationDate.plusDays(configuration.getVerificationExpirationDays());
 
         accountDao.insertAccount(AccountWithPassword.builder()
                 .account(gamerAccount)
@@ -63,8 +71,9 @@ public class AccountService implements AccountOperations {
                 .operationType(AccountOperationType.CHANGE_STATUS)
                 .oldValue(AccountStatus.NEW.name())
                 .newValue(AccountStatus.ACTIVE.name())
-                .verificationCode(RandomStringGenerator.generate(4))
-                .initiationDate(LocalDateTime.now())
+                .verificationCode(verificationCode)
+                .initiationDate(creationDate)
+                .expirationDate(expirationDate)
                 .operationStatus(AccountOperationStatus.VERIFICATION_PENDING)
                 .build()
         );

@@ -10,6 +10,8 @@ import com.shareholdergame.engine.facade.client.AccountClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.HttpRequestWrapper;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -20,6 +22,7 @@ import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.exceptions.HttpStatusException;
+import io.micronaut.http.util.HttpUtil;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
@@ -69,14 +72,18 @@ public class AccountController {
     public ResponseWrapper<?> signup(@QueryValue @NotBlank String userName,
                                      @QueryValue @NotBlank String email,
                                      @QueryValue @NotBlank @Length(min = 6) String password,
-                                     @Header Language language) {
+                                     @Header Language language,
+                                     HttpRequest httpRequest) {
         if (accountClient.checkUserExistence(userName) || accountClient.checkUserExistence(email)) {
             throw new BusinessException(Errors.USER_ALREADY_EXISTS.name());
         }
 
         accountClient.createAccount(SignUp.builder()
-                .withUserName(userName).withEmail(email).withPassword(password)
-                .withLanguage(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
+                .userName(userName)
+                .email(email)
+                .password(password)
+                .ipAddress(httpRequest.getRemoteAddress().toString())
+                .language(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
     }
 

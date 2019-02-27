@@ -12,7 +12,6 @@
           new_value,
           verification_code,
           initiation_date,
-          completion_date,
           operation_status,
           expiration_date
         )
@@ -23,7 +22,6 @@
           #{newValue};
           #{verificationCode};
           #{initiationDate};
-          #{completionDate};
           #{operationStatus};
           #{expirationDate};
         )

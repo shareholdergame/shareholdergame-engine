@@ -19,6 +19,8 @@ public class SignUp implements Serializable {
 
     private String language;
 
+    private String ipAddress;
+
     private SignUp() {
     }
 
@@ -27,6 +29,7 @@ public class SignUp implements Serializable {
         this.email = builder.email;
         this.password = builder.password;
         this.language = builder.language;
+        this.ipAddress = builder.ipAddress;
     }
 
     public String getUserName() {
@@ -45,6 +48,10 @@ public class SignUp implements Serializable {
         return language;
     }
 
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
     public static SignUpDataBuilder builder() {
         return new SignUpDataBuilder();
     }
@@ -55,27 +62,33 @@ public class SignUp implements Serializable {
         private String email;
         private String password;
         private String userName;
+        private String ipAddress;
 
         private SignUpDataBuilder() {
         }
 
-        public SignUpDataBuilder withEmail(String email) {
+        public SignUpDataBuilder email(String email) {
             this.email = email;
             return this;
         }
 
-        public SignUpDataBuilder withPassword(String password) {
+        public SignUpDataBuilder password(String password) {
             this.password = password;
             return this;
         }
 
-        public SignUpDataBuilder withUserName(String userName) {
+        public SignUpDataBuilder userName(String userName) {
             this.userName = userName;
             return this;
         }
 
-        public SignUpDataBuilder withLanguage(String language) {
+        public SignUpDataBuilder language(String language) {
             this.language = language;
+            return this;
+        }
+
+        public SignUpDataBuilder ipAddress(String ipAddress) {
+            this.ipAddress = ipAddress;
             return this;
         }
 

@@ -3,6 +3,7 @@ package com.shareholdergame.engine.account.model;
 import org.apache.commons.lang3.builder.Builder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public final class GamerAccount {
 
@@ -14,7 +15,9 @@ public final class GamerAccount {
 
     private AccountStatus status;
 
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
+
+    private String registeredFromIp;
 
     private String language;
 
@@ -27,6 +30,7 @@ public final class GamerAccount {
         this.email = builder.email;
         this.status = builder.status;
         this.creationDate = builder.creationDate;
+        this.registeredFromIp = builder.registeredFromIp;
         this.language = builder.language;
     }
 
@@ -46,8 +50,12 @@ public final class GamerAccount {
         return status;
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public String getRegisteredFromIp() {
+        return registeredFromIp;
     }
 
     public String getLanguage() {
@@ -60,11 +68,12 @@ public final class GamerAccount {
 
     public static class AccountBuilder implements Builder<GamerAccount> {
 
+        private Long id;
         private String email;
         private String userName;
-        private Long id;
         private AccountStatus status;
-        private LocalDate creationDate;
+        private LocalDateTime creationDate;
+        private String registeredFromIp;
         private String language;
 
         private AccountBuilder() {
@@ -90,8 +99,13 @@ public final class GamerAccount {
             return this;
         }
 
-        public AccountBuilder creationDate(LocalDate creationDate) {
+        public AccountBuilder creationDate(LocalDateTime creationDate) {
             this.creationDate = creationDate;
+            return this;
+        }
+
+        public AccountBuilder registeredFromIp(String registeredFromIp) {
+            this.registeredFromIp = registeredFromIp;
             return this;
         }
 

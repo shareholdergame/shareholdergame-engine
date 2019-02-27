@@ -25,30 +25,6 @@ public class SessionFactory {
         this.dataSource = dataSource;
     }
 
-    /*@Context
-    public SqlSessionFactory sessionFactory() {
-        try {
-            String resource = "mybatis-config.xml";
-
-            Reader configReader = Resources.getResourceAsReader(resource);
-
-            TransactionFactory transactionFactory = new JdbcTransactionFactory();
-            Environment environment = new Environment.Builder("default")
-                    .dataSource(dataSource)
-                    .transactionFactory(transactionFactory)
-                    .build();
-
-            XMLConfigBuilder xmlConfigBuilder = new XMLConfigBuilder(configReader);
-
-            Configuration configuration = xmlConfigBuilder.parse();
-            configuration.setEnvironment(environment);
-
-            return new SqlSessionFactoryBuilder().build(configuration);
-        } catch (IOException e) {
-            throw new ApplicationException(e);
-        }
-    }*/
-
     @Context
     public SqlSessionManager sessionManager() {
         try {

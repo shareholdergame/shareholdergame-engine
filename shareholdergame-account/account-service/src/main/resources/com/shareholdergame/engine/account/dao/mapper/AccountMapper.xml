@@ -32,8 +32,25 @@
     </select>
 
     <insert id="insertAccount" parameterType="AccountWithPassword">
-        insert into a_gamer_account
-        (gamer_id, email, user_name, user_password, account_status, registration_date, locale)
-        values (#{gamerAccount.id}, #{gamerAccount.email}, #{gamerAccount.userName}, #{password}, #{gamerAccount.status}, #{gamerAccount.creationDate}, #{gamerAccount.language})
+        insert into a_gamer_account (
+          gamer_id,
+          email,
+          user_name,
+          user_password,
+          account_status,
+          registration_date,
+          registered_from_ip,
+          locale
+        )
+        values (
+          #{gamerAccount.id},
+          #{gamerAccount.email},
+          #{gamerAccount.userName},
+          #{password},
+          #{gamerAccount.status},
+          #{gamerAccount.creationDate},
+          #{gamerAccount.registeredFromIp},
+          #{gamerAccount.language}
+        )
     </insert>
 </mapper>

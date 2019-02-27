@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public final class MockDataProvider {
                                     .userName("sergeychernyshev")
                                     .email("player1@shareholdergame.com")
                                     .status(AccountStatus.ACTIVE)
-                                    .creationDate(LocalDate.of(2015, 8, 1))
+                                    .creationDate(LocalDateTime.of(2015, 8, 1, 0, 0))
                                     .language("EN")
                                     .build())
                     .password("123456").build(),
@@ -57,7 +58,7 @@ public final class MockDataProvider {
                                     .userName("Зырянов")
                                     .email("player3@shareholdergame.com")
                                     .status(AccountStatus.ACTIVE)
-                                    .creationDate(LocalDate.of(2015, 8, 1))
+                                    .creationDate(LocalDateTime.of(2015, 8, 1, 0, 0))
                                     .language("RU")
                                     .build())
                     .password("123456").build()
