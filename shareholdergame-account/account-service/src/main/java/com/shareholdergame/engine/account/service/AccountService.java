@@ -60,6 +60,7 @@ public class AccountService implements AccountOperations {
                 .status(AccountStatus.NEW)
                 .creationDate(creationDate)
                 .language(signUp.getLanguage())
+                .registeredFromIp(signUp.getIpAddress())
                 .build();
 
         String verificationCode = RandomStringGenerator.generate(configuration.getVerificationCodeLength());

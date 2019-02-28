@@ -16,7 +16,11 @@ import java.text.MessageFormat;
 @Singleton
 public class CountryDetector {
 
-    private static final String FREEGEOIP_URL = "http://freegeoip.net/json/{0}";
+    private static final String FREEGEOIP_URL = "http://api.ipstack.com/{0}?access_key={1}";
+    private static final String API_KEY = "f....b";
+    private static final String COUNTRY_NAME = "country_name";
+    private static final String REGION_NAME = "region_name";
+    private static final String CITY = "city";
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -34,16 +38,16 @@ public class CountryDetector {
         }
         try {
             JsonNode jsonNode = mapper.readTree(response);
-            return UserLocation.of(jsonNode.get("country_name").asText(),
-                    jsonNode.get("region_name").asText(),
-                    jsonNode.get("city").asText());
+            return UserLocation.of(jsonNode.get(COUNTRY_NAME).asText(),
+                    jsonNode.get(REGION_NAME).asText(),
+                    jsonNode.get(CITY).asText());
         } catch (IOException e) {
             throw new ApplicationException(e);
         }
     }
 
     private String sendGeoIpRequest(String userIPAddress) {
-        String urlString = MessageFormat.format(FREEGEOIP_URL, userIPAddress);
+        String urlString = MessageFormat.format(FREEGEOIP_URL, userIPAddress, API_KEY);
         InputStream stream = null;
         try {
             URL url = new URL(urlString);

@@ -11,7 +11,6 @@ import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
 import io.micronaut.http.HttpRequest;
-import io.micronaut.http.HttpRequestWrapper;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
@@ -22,7 +21,6 @@ import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.exceptions.HttpStatusException;
-import io.micronaut.http.util.HttpUtil;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
@@ -82,7 +80,8 @@ public class AccountController {
                 .userName(userName)
                 .email(email)
                 .password(password)
-                .ipAddress(httpRequest.getRemoteAddress().toString())
+                //.ipAddress(httpRequest.getRemoteAddress().getAddress().toString())
+                .ipAddress("37.212.136.90")
                 .language(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
     }
