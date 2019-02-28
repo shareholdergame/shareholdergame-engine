@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shareholdergame.engine.account.dao.mapper.ProfileMapper">
+
+    <insert id="insertProfile" parameterType="Profile">
+        insert into a_profile (
+          gamer_id,
+          sex,
+          country,
+          state_province,
+          city,
+          birthday,
+          about,
+          avatar_url,
+          detected_country,
+          detected_state_province,
+          detected_city
+        )
+        values (
+          #{gamerId},
+          #{sex},
+          #{country},
+          #{stateProvince},
+          #{city},
+          #{birthday},
+          #{about},
+          #{avatarUrl},
+          #{detectedCountry},
+          #{detectedStateProvince},
+          #{detectedCity}
+        )
+    </insert>
+</mapper>

@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.account.dao;
+package com.shareholdergame.engine.common.sql.transaction;
 
 import io.micronaut.aop.MethodInterceptor;
 import io.micronaut.aop.MethodInvocationContext;

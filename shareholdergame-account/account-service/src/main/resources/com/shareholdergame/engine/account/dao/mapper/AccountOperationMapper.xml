@@ -17,13 +17,13 @@
         )
         values (
           #{gamerId},
-          #{operationType};
-          #{oldValue};
-          #{newValue};
-          #{verificationCode};
-          #{initiationDate};
-          #{operationStatus};
-          #{expirationDate};
+          #{operationType},
+          #{oldValue},
+          #{newValue},
+          #{verificationCode},
+          #{initiationDate},
+          #{operationStatus},
+          #{expirationDate}
         )
     </insert>
 </mapper>

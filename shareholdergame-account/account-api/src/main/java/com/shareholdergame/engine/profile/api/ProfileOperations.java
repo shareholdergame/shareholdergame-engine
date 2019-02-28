@@ -9,6 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Validated
 public interface ProfileOperations {
 
-    @Get("/{userNameOrEmail}")
-    Profile getProfile(@NotBlank String userNameOrEmail);
+    @Get("/{gamerId}")
+    Profile getProfile(@NotBlank Long gamerId);
 }

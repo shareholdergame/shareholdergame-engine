@@ -18,12 +18,15 @@
     <dependencies>
         <dependency>
             <groupId>com.shareholdergame.engine.common</groupId>
+            <artifactId>common-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.common</groupId>
             <artifactId>common-service-support</artifactId>
         </dependency>
         <dependency>
             <groupId>com.shareholdergame.engine.account</groupId>
             <artifactId>account-api</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>

@@ -13,6 +13,8 @@
     <name>shareholdergame-common</name>
 
     <modules>
+        <module>common-exception</module>
+        <module>common-dao-support</module>
         <module>common-service-support</module>
     </modules>
 

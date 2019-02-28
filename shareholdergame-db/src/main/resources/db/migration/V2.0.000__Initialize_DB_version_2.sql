@@ -31,7 +31,7 @@ create table a_account_operation (
   verification_code char(64),
   initiation_date datetime not null,
   completion_date datetime,
-  operation_status char(16) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
+  operation_status char(32) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
   expiration_date datetime,
   primary key (operation_id)
 ) engine=innodb;
@@ -42,13 +42,13 @@ create table a_profile (
   gamer_id bigint not null,
   sex char(1) check (sex in ('M', 'W')),
   country char(255),
-  region char(255),
+  state_province char(255),
   city char(255),
   birthday date,
   about text(4000),
   avatar_url char(255),
   detected_country char(255),
-  detected_region char(255),
+  detected_state_province char(255),
   detected_city char(255),
   primary key (gamer_id)
 ) engine=innodb;

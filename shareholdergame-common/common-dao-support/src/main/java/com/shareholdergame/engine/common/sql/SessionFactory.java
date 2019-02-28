@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.account.dao;
+package com.shareholdergame.engine.common.sql;
 
 import com.shareholdergame.engine.common.exception.ApplicationException;
 import io.micronaut.context.annotation.Context;
