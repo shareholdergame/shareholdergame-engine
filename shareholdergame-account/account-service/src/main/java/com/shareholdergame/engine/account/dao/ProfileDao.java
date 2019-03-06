@@ -16,7 +16,16 @@ public class ProfileDao implements ProfileMapper {
     }
 
     @Override
+    public Profile findById(Long gamerId) {
+        return getMapper().findById(gamerId);
+    }
+
+    @Override
     public void insertProfile(Profile profile) {
-        sqlSessionManager.getMapper(ProfileMapper.class).insertProfile(profile);
+        getMapper().insertProfile(profile);
+    }
+
+    private ProfileMapper getMapper() {
+        return sqlSessionManager.getMapper(ProfileMapper.class);
     }
 }
