@@ -2,11 +2,13 @@ package com.shareholdergame.engine.account.support;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.model.UserLocation;
 import com.shareholdergame.engine.common.exception.ApplicationException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,11 +18,13 @@ import java.text.MessageFormat;
 @Singleton
 public class CountryDetector {
 
-    private static final String FREEGEOIP_URL = "http://api.ipstack.com/{0}?access_key={1}";
-    private static final String API_KEY = "f....b";
+    private static final String IPSTACK_URL = "http://api.ipstack.com/{0}?access_key={1}";
     private static final String COUNTRY_NAME = "country_name";
     private static final String REGION_NAME = "region_name";
     private static final String CITY = "city";
+
+    @Inject
+    private AccountServiceConfiguration configuration;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -47,7 +51,7 @@ public class CountryDetector {
     }
 
     private String sendGeoIpRequest(String userIPAddress) {
-        String urlString = MessageFormat.format(FREEGEOIP_URL, userIPAddress, API_KEY);
+        String urlString = MessageFormat.format(IPSTACK_URL, userIPAddress, configuration.getIpStackApiKey());
         InputStream stream = null;
         try {
             URL url = new URL(urlString);

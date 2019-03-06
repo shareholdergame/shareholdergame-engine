@@ -74,12 +74,6 @@
             <artifactId>micronaut-http-client</artifactId>
         </dependency>
 
-        <!--<dependency>
-            <groupId>org.apache.flex.blazeds</groupId>
-            <artifactId>flex-messaging-core</artifactId>
-            <version>4.7.3</version>
-        </dependency>-->
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
