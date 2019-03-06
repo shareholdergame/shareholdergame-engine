@@ -1,5 +1,6 @@
 package com.shareholdergame.engine.facade.authentication;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.util.MD5Helper;
@@ -33,7 +34,9 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
         String secret = authenticationRequest.getSecret().toString();
         AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(identity);
         if (accountWithPassword != null && isPasswordIdentical(secret, accountWithPassword.getPassword())) {
-            return Flowable.just(new UserDetails(accountWithPassword.getGamerAccount().getUserName(), Lists.newArrayList("ROLE_USER")));
+            return Flowable.just(new UserDetails(accountWithPassword.getGamerAccount().getUserName(),
+                    Lists.newArrayList("ROLE_USER"),
+                    ImmutableMap.of("account", accountWithPassword.getGamerAccount())));
         }
 
         return Flowable.just(new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));

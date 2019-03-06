@@ -4,6 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shareholdergame.engine.account.dao.mapper.ProfileMapper">
 
+    <resultMap id="profileResultMap" type="Profile">
+        <id property="gamerId" column="gamer_id"/>
+        <result property="sex" column="sex"/>
+        <result property="country" column="country"/>
+        <result property="stateProvince" column="state_province"/>
+        <result property="city" column="city"/>
+        <result property="birthday" column="birthday"/>
+        <result property="about" column="about"/>
+        <result property="avatarUrl" column="avatar_url"/>
+    </resultMap>
+
+    <select id="findById" parameterType="long" resultMap="profileResultMap">
+        select
+          gamer_id,
+          sex,
+          country,
+          state_province,
+          city,
+          birthday,
+          about,
+          avatar_url
+        from a_profile
+        where gamer_id = #{value}
+    </select>
+
+
     <insert id="insertProfile" parameterType="Profile">
         insert into a_profile (
           gamer_id,

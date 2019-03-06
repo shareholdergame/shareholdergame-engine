@@ -16,6 +16,6 @@ public class ProfileService implements ProfileOperations {
 
     @Override
     public Profile getProfile(@NotBlank Long gamerId) {
-        return null;
+        return profileDao.findById(gamerId);
     }
 }
