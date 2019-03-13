@@ -6,7 +6,12 @@
 
     <resultMap id="AccountResultMap" type="Account">
         <id column="gamer_id" property="id"/>
+        <result column="email" property="email"/>
         <result column="user_name" property="userName"/>
+        <result column="account_status" property="status"/>
+        <result column="registration_date" property="creationDate"/>
+        <result column="registered_from_ip" property="registeredFromIp"/>
+        <result column="locale" property="language"/>
     </resultMap>
 
     <resultMap id="AccountWithPasswordResultMap" type="AccountWithPassword">
@@ -17,8 +22,13 @@
     <select id="findByUserNameOrEmail" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
         select
             gamer_id,
+            email,
             user_name,
-            user_password
+            user_password,
+            account_status,
+            registration_date,
+            registered_from_ip,
+            locale
         from a_gamer_account
         where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
                                                        and account_status != 'REMOVED_COMPLETELY'

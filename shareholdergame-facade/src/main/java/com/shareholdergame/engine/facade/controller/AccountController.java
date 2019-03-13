@@ -6,6 +6,7 @@ import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.exception.BusinessException;
 import com.shareholdergame.engine.common.exception.Errors;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
+import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
 import com.shareholdergame.engine.facade.client.AccountClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
@@ -80,8 +81,7 @@ public class AccountController {
                 .userName(userName)
                 .email(email)
                 .password(password)
-                //.ipAddress(httpRequest.getRemoteAddress().getAddress().toString())
-                .ipAddress("37.212.136.90")
+                .ipAddress(httpRequest.getRemoteAddress().getAddress().toString())
                 .language(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
     }
@@ -91,8 +91,9 @@ public class AccountController {
      * @param verificationCode verification code.
      * @return empty response if ok.
      */
-    @Get("/verify/{verificationCode}")
-    public ResponseWrapper<?> verify(@NotBlank String verificationCode, Principal principal) {
+    @Post("/verify/{verificationCode}")
+    public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
+        Long accountId = (Long) authentication.getAttributes().get(AuthenticationConstants.ACCOUNT_ID);
         return ResponseWrapper.ok();
     }
 
