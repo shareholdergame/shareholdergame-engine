@@ -7,7 +7,7 @@ import io.micronaut.validation.Validated;
 import javax.validation.constraints.NotBlank;
 
 @Validated
-public interface ProfileOperations {
+public interface ProfileService {
 
     @Get("/{gamerId}")
     Profile getProfile(@NotBlank Long gamerId);

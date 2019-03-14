@@ -1,6 +1,6 @@
 package com.shareholdergame.engine.account.service;
 
-import com.shareholdergame.engine.account.api.AccountOperations;
+import com.shareholdergame.engine.account.api.AccountService;
 import com.shareholdergame.engine.account.api.ChangePassword;
 import com.shareholdergame.engine.account.api.SignUp;
 import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 
 @Controller("/account")
-public class AccountService implements AccountOperations {
+public class AccountServiceImpl implements AccountService {
 
     @Inject
     private AccountServiceConfiguration configuration;
@@ -86,7 +86,12 @@ public class AccountService implements AccountOperations {
     }
 
     @Override
-    public void changePassword(ChangePassword changePassword) {
+    public void changePassword(Long gamerId, ChangePassword changePassword) {
+
+    }
+
+    @Override
+    public void resetPassword(Long gamerId) {
 
     }
 }

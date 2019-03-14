@@ -11,15 +11,16 @@ public final class ChangePassword {
 
     private String newPassword;
 
-    private String currentUser;
-
     private ChangePassword() {
     }
 
-    public ChangePassword(String oldPassword, String newPassword, String currentUser) {
+    private ChangePassword(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
-        this.currentUser = currentUser;
+    }
+
+    public static ChangePassword of(String oldPassword, String newPassword) {
+        return new ChangePassword(oldPassword, newPassword);
     }
 
     public String getOldPassword() {
@@ -28,9 +29,5 @@ public final class ChangePassword {
 
     public String getNewPassword() {
         return newPassword;
-    }
-
-    public String getCurrentUser() {
-        return currentUser;
     }
 }

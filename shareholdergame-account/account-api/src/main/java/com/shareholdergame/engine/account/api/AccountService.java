@@ -10,7 +10,7 @@ import io.micronaut.http.annotation.Put;
 import io.micronaut.validation.Validated;
 
 @Validated
-public interface AccountOperations {
+public interface AccountService {
 
     @Get("/exists/{userNameOrEmail}")
     boolean checkUserExistence(@NotBlank String userNameOrEmail);
@@ -21,6 +21,9 @@ public interface AccountOperations {
     @Put("/create")
     void createAccount(@Body SignUp signUp);
 
-    @Post("/update/password")
-    void changePassword(@Body ChangePassword changePassword);
+    @Post("/update/{gamerId}/password")
+    void changePassword(Long gamerId, @Body ChangePassword changePassword);
+
+    @Post("/update/{gamerId}/password/reset")
+    void resetPassword(Long gamerId);
 }

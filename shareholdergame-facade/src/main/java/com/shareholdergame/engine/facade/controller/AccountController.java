@@ -8,6 +8,7 @@ import com.shareholdergame.engine.common.exception.Errors;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
 import com.shareholdergame.engine.facade.client.AccountClient;
+import com.shareholdergame.engine.facade.client.AccountOperationClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
@@ -44,6 +45,9 @@ public class AccountController {
 
     @Inject
     private AccountClient accountClient;
+
+    @Inject
+    private AccountOperationClient accountOperationClient;
 
     /**
      * Check user existence.
@@ -89,22 +93,27 @@ public class AccountController {
     /**
      * Verify user account.
      * @param verificationCode verification code.
-     * @return empty response if ok.
+     * @return empty response if ok or 404 if account not existed or verification is not applicable to this account.
      */
     @Post("/verify/{verificationCode}")
     public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
-        Long accountId = (Long) authentication.getAttributes().get(AuthenticationConstants.ACCOUNT_ID);
+        accountOperationClient.verifyAccount(getGamerId(authentication), verificationCode);
         return ResponseWrapper.ok();
     }
 
     /**
      * Resets user password.
      * @param email user email.
-     * @return empty response if ok.
+     * @return empty response if ok or 404 if account not found.
      */
     @Post("/resetpassword/{email}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<?> resetPassword(@NotBlank String email) {
+        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(email);
+        if (null == accountWithPassword) {
+            throw new HttpStatusException(HttpStatus.NOT_FOUND, email);
+        }
+        accountClient.resetPassword(accountWithPassword.getGamerAccount().getId());
         return ResponseWrapper.ok();
     }
 
@@ -120,7 +129,6 @@ public class AccountController {
         if (null == accountWithPassword) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, principal.getName());
         }
-
         return ResponseWrapper.ok(Converters.convert(accountWithPassword.getGamerAccount()));
     }
 
@@ -180,7 +188,11 @@ public class AccountController {
     public ResponseWrapper<?> changePassword(@QueryValue @NotBlank String oldPassword,
                                              @QueryValue @NotBlank @Length(min = 6) String newPassword,
                                              Authentication authentication) {
-        accountClient.changePassword(new ChangePassword(oldPassword, newPassword, authentication.getName()));
+        accountClient.changePassword(getGamerId(authentication), ChangePassword.of(oldPassword, newPassword));
         return ResponseWrapper.ok();
+    }
+
+    private Long getGamerId(Authentication authentication) {
+        return (Long) authentication.getAttributes().get(AuthenticationConstants.ACCOUNT_ID);
     }
 }
