@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.account.api;
+package com.shareholdergame.engine.api.account;
 
 /**
  * Date: 01/15/2019

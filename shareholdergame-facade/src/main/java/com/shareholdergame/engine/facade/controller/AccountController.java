@@ -1,7 +1,8 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.account.api.ChangePassword;
-import com.shareholdergame.engine.account.api.SignUp;
+import com.shareholdergame.engine.account.model.AccountOperation;
+import com.shareholdergame.engine.api.account.ChangePassword;
+import com.shareholdergame.engine.api.account.SignUp;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.exception.BusinessException;
 import com.shareholdergame.engine.common.exception.Errors;
@@ -97,7 +98,12 @@ public class AccountController {
      */
     @Post("/verify/{verificationCode}")
     public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
-        accountOperationClient.verifyAccount(getGamerId(authentication), verificationCode);
+        AccountOperation accountOperation =
+                accountOperationClient.getOperation(getGamerId(authentication), verificationCode);
+        if (null == accountOperation) {
+            throw new HttpStatusException(HttpStatus.NOT_FOUND, "Nothing to verify");
+        }
+        accountOperationClient.markVerified(accountOperation.getOperationId());
         return ResponseWrapper.ok();
     }
 

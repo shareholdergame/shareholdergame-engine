@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.profile.api;
+package com.shareholdergame.engine.api.profile;
 
 import com.shareholdergame.engine.account.model.Profile;
 import io.micronaut.http.annotation.Get;

@@ -1,7 +1,7 @@
 package com.shareholdergame.engine.facade.client;
 
 import com.shareholdergame.engine.account.model.Profile;
-import com.shareholdergame.engine.profile.api.ProfileService;
+import com.shareholdergame.engine.api.profile.ProfileService;
 import io.micronaut.http.client.annotation.Client;
 
 @Client("${service.account.url}/profile")

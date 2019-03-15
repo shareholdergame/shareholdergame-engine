@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.account.api;
+package com.shareholdergame.engine.api.account;
 
 import javax.validation.constraints.NotBlank;
 

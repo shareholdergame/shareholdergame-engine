@@ -2,7 +2,7 @@ package com.shareholdergame.engine.account.service;
 
 import com.shareholdergame.engine.account.dao.ProfileDao;
 import com.shareholdergame.engine.account.model.Profile;
-import com.shareholdergame.engine.profile.api.ProfileService;
+import com.shareholdergame.engine.api.profile.ProfileService;
 import io.micronaut.http.annotation.Controller;
 
 import javax.inject.Inject;

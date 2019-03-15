@@ -4,6 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shareholdergame.engine.account.dao.mapper.AccountOperationMapper">
 
+    <resultMap id="AccountOperationResultMap" type="AccountOperation">
+        <id column="operation_id" property="operationId"/>
+        <result column="gamer_id" property="gamerId"/>
+        <result column="operation_type" property="operationType"/>
+        <result column="old_value" property="oldValue"/>
+        <result column="new_value" property="newValue"/>
+        <result column="verification_code" property="verificationCode"/>
+        <result column="initiation_date" property="initiationDate"/>
+        <result column="completion_date" property="completionDate"/>
+        <result column="operation_status" property="operationStatus"/>
+        <result column="expiration_date" property="expirationDate"/>
+    </resultMap>
+
+    <select id="findByGamerIdAndVerificationCode" parameterType="map" resultMap="AccountOperationResultMap">
+        select
+          operation_id,
+          gamer_id,
+          operation_type,
+          old_value,
+          new_value,
+          verification_code,
+          initiation_date,
+          completion_date,
+          operation_status,
+          expiration_date
+        from a_account_operation
+        where
+          gamer_id = #{gamerId}
+          and verification_code = #{verificationCode}
+    </select>
+
     <insert id="insertOperation" parameterType="AccountOperation">
         insert into a_account_operation (
           gamer_id,

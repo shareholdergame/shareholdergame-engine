@@ -24,4 +24,8 @@ public class AccountOperationDao implements AccountOperationMapper {
     public void insertOperation(AccountOperation accountOperation) {
         sqlSessionManager.getMapper(AccountOperationMapper.class).insertOperation(accountOperation);
     }
+
+    public AccountOperation findByGamerIdAndVerificationCode(Long gamerId, String verificationCode) {
+        return sqlSessionManager.getMapper(AccountOperationMapper.class).findByGamerIdAndVerificationCode(gamerId, verificationCode);
+    }
 }

@@ -1,8 +1,8 @@
 package com.shareholdergame.engine.account.service;
 
-import com.shareholdergame.engine.account.api.AccountService;
-import com.shareholdergame.engine.account.api.ChangePassword;
-import com.shareholdergame.engine.account.api.SignUp;
+import com.shareholdergame.engine.api.account.AccountService;
+import com.shareholdergame.engine.api.account.ChangePassword;
+import com.shareholdergame.engine.api.account.SignUp;
 import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.dao.AccountOperationDao;
