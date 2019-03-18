@@ -16,13 +16,7 @@ import com.shareholdergame.engine.facade.dto.Language;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Delete;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Header;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
-import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
@@ -185,16 +179,13 @@ public class AccountController {
 
     /**
      * Changes password.
-     * @param oldPassword old password.
-     * @param newPassword new password.
+     * @param changePassword old password.
      * @param authentication user principal.
      * @return empty response if ok.
      */
-    @Post(value = "/change/password", consumes = MediaType.APPLICATION_FORM_URLENCODED)
-    public ResponseWrapper<?> changePassword(@QueryValue @NotBlank String oldPassword,
-                                             @QueryValue @NotBlank @Length(min = 6) String newPassword,
-                                             Authentication authentication) {
-        accountClient.changePassword(getGamerId(authentication), ChangePassword.of(oldPassword, newPassword));
+    @Post(value = "/change/password")
+    public ResponseWrapper<?> changePassword(@Body ChangePassword changePassword, Authentication authentication) {
+        accountClient.changePassword(getGamerId(authentication), changePassword);
         return ResponseWrapper.ok();
     }
 
