@@ -25,6 +25,11 @@ public class ProfileDao implements ProfileMapper {
         getMapper().insertProfile(profile);
     }
 
+    @Override
+    public void updateProfile(Profile profile) {
+        getMapper().updateProfile(profile);
+    }
+
     private ProfileMapper getMapper() {
         return sqlSessionManager.getMapper(ProfileMapper.class);
     }

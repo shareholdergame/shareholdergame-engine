@@ -7,4 +7,6 @@ public interface ProfileMapper {
     Profile findById(Long gamerId);
 
     void insertProfile(Profile profile);
+
+    void updateProfile(Profile profile);
 }

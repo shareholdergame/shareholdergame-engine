@@ -165,9 +165,26 @@ public final class Profile {
             return this;
         }
 
+        public ProfileBuilder profile(Profile profile) {
+            this.gamerId = profile.gamerId;
+            this.sex = profile.sex;
+            this.country = profile.country;
+            this.stateProvince = profile.stateProvince;
+            this.city = profile.city;
+            this.birthday = profile.birthday;
+            this.about = profile.about;
+            this.avatarUrl = profile.avatarUrl;
+            this.detectedCountry = profile.detectedCountry;
+            this.detectedStateProvince = profile.detectedStateProvince;
+            this.detectedCity = profile.detectedCity;
+            return this;
+        }
+
         @Override
         public Profile build() {
             return new Profile(this);
         }
+
+
     }
 }

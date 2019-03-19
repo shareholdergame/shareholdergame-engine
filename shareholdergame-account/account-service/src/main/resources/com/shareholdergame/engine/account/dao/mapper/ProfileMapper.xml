@@ -58,4 +58,20 @@
           #{detectedCity}
         )
     </insert>
+
+    <update id="updateProfile" parameterType="Profile">
+        update a_profile
+        set
+          sex =                     #{sex},
+          country =                 #{country},
+          state_province =          #{stateProvince},
+          city =                    #{city},
+          birthday =                #{birthday},
+          about =                   #{about},
+          avatar_url =              #{avatarUrl},
+          detected_country =        #{detectedCountry},
+          detected_state_province = #{detectedStateProvince},
+          detected_city =           #{detectedCity}
+         where gamer_id = #{gamerId}
+    </update>
 </mapper>

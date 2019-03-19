@@ -7,6 +7,8 @@ import com.shareholdergame.engine.account.model.UserLocation;
 import com.shareholdergame.engine.common.exception.ApplicationException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,6 +19,8 @@ import java.text.MessageFormat;
 
 @Singleton
 public class CountryDetector {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CountryDetector.class);
 
     private static final String IPSTACK_URL = "http://api.ipstack.com/{0}?access_key={1}";
     private static final String COUNTRY_NAME = "country_name";
@@ -35,8 +39,7 @@ public class CountryDetector {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                // todo - bad practice! Write message to log.
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
             response = sendGeoIpRequest(ipAddress);
         }
