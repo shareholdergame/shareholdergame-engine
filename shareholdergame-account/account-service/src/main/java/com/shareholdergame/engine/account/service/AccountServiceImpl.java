@@ -1,8 +1,8 @@
 package com.shareholdergame.engine.account.service;
 
 import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.ChangePassword;
-import com.shareholdergame.engine.api.account.SignUp;
+import com.shareholdergame.engine.api.account.UpdatePassword;
+import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.dao.AccountOperationDao;
@@ -50,17 +50,17 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public void createAccount(SignUp signUp) {
+    public void createAccount(NewAccount newAccount) {
         Long gamerId = IdentifierHelper.generateLongId();
         LocalDateTime creationDate = LocalDateTime.now();
         GamerAccount gamerAccount = GamerAccount.builder()
                 .id(gamerId)
-                .userName(signUp.getUserName())
-                .email(signUp.getEmail())
+                .userName(newAccount.getUserName())
+                .email(newAccount.getEmail())
                 .status(AccountStatus.NEW)
                 .creationDate(creationDate)
-                .language(signUp.getLanguage())
-                .registeredFromIp(signUp.getIpAddress())
+                .language(newAccount.getLanguage())
+                .registeredFromIp(newAccount.getIpAddress())
                 .build();
 
         String verificationCode = RandomStringGenerator.generate(configuration.getVerificationCodeLength());
@@ -68,7 +68,7 @@ public class AccountServiceImpl implements AccountService {
 
         accountDao.insertAccount(AccountWithPassword.builder()
                 .account(gamerAccount)
-                .password(MD5Helper.generateMD5hashWithSalt(signUp.getPassword())).build());
+                .password(MD5Helper.generateMD5hashWithSalt(newAccount.getPassword())).build());
 
         accountOperationDao.insertOperation(AccountOperation.builder()
                 .gamerId(gamerId)
@@ -86,7 +86,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void changePassword(Long gamerId, ChangePassword changePassword) {
+    public void changePassword(Long gamerId, UpdatePassword updatePassword) {
 
     }
 

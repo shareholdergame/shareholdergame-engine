@@ -1,8 +1,8 @@
 package com.shareholdergame.engine.facade.client;
 
 import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.ChangePassword;
-import com.shareholdergame.engine.api.account.SignUp;
+import com.shareholdergame.engine.api.account.UpdatePassword;
+import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import io.micronaut.http.client.annotation.Client;
 
@@ -16,8 +16,8 @@ public interface AccountClient extends AccountService {
     AccountWithPassword findUserByNameOrEmail(String userNameOrEmail);
 
     @Override
-    void createAccount(SignUp signUp);
+    void createAccount(NewAccount newAccount);
 
     @Override
-    void changePassword(Long gamerId, ChangePassword changePassword);
+    void changePassword(Long gamerId, UpdatePassword updatePassword);
 }

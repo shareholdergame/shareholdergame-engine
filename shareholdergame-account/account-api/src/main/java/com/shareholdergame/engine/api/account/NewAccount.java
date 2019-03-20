@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.Builder;
  *
  * @author Aliaksandr Savin
  */
-public class SignUp implements Serializable {
+public class NewAccount implements Serializable {
 
     private String userName;
 
@@ -21,10 +21,10 @@ public class SignUp implements Serializable {
 
     private String ipAddress;
 
-    private SignUp() {
+    private NewAccount() {
     }
 
-    private SignUp(SignUpDataBuilder builder) {
+    private NewAccount(SignUpDataBuilder builder) {
         this.userName = builder.userName;
         this.email = builder.email;
         this.password = builder.password;
@@ -56,7 +56,7 @@ public class SignUp implements Serializable {
         return new SignUpDataBuilder();
     }
 
-    public static class SignUpDataBuilder implements Builder<SignUp> {
+    public static class SignUpDataBuilder implements Builder<NewAccount> {
 
         private String language;
         private String email;
@@ -93,8 +93,8 @@ public class SignUp implements Serializable {
         }
 
         @Override
-        public SignUp build() {
-            return new SignUp(this);
+        public NewAccount build() {
+            return new NewAccount(this);
         }
     }
 }

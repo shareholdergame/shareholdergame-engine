@@ -19,10 +19,10 @@ public interface AccountService {
     AccountWithPassword findUserByNameOrEmail(@NotBlank String userNameOrEmail);
 
     @Put("/create")
-    void createAccount(@Body SignUp signUp);
+    void createAccount(@Body NewAccount newAccount);
 
     @Post("/update/{gamerId}/password")
-    void changePassword(Long gamerId, @Body ChangePassword changePassword);
+    void changePassword(Long gamerId, @Body UpdatePassword updatePassword);
 
     @Post("/update/{gamerId}/password/reset")
     void resetPassword(Long gamerId);

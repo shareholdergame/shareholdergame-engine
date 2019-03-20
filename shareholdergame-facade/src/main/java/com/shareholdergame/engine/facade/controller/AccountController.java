@@ -1,8 +1,8 @@
 package com.shareholdergame.engine.facade.controller;
 
 import com.shareholdergame.engine.account.model.AccountOperation;
-import com.shareholdergame.engine.api.account.ChangePassword;
-import com.shareholdergame.engine.api.account.SignUp;
+import com.shareholdergame.engine.api.account.UpdatePassword;
+import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.exception.BusinessException;
 import com.shareholdergame.engine.common.exception.Errors;
@@ -13,6 +13,7 @@ import com.shareholdergame.engine.facade.client.AccountOperationClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
+import com.shareholdergame.engine.facade.dto.SignUp;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
@@ -28,6 +29,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -59,27 +61,23 @@ public class AccountController {
     /**
      * Sign user up.
      *
-     * @param userName user name
-     * @param email email
-     * @param password password
+     * @param signUp sign up data: user name, email and password
      * @param language language
      * @return empty response if ok.
      */
-    @Put(value = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    @Put("/signup")
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> signup(@QueryValue @NotBlank String userName,
-                                     @QueryValue @NotBlank String email,
-                                     @QueryValue @NotBlank @Length(min = 6) String password,
+    public ResponseWrapper<?> signup(@NotNull @Body SignUp signUp,
                                      @Header Language language,
                                      HttpRequest httpRequest) {
-        if (accountClient.checkUserExistence(userName) || accountClient.checkUserExistence(email)) {
+        if (accountClient.checkUserExistence(signUp.userName) || accountClient.checkUserExistence(signUp.email)) {
             throw new BusinessException(Errors.USER_ALREADY_EXISTS.name());
         }
 
-        accountClient.createAccount(SignUp.builder()
-                .userName(userName)
-                .email(email)
-                .password(password)
+        accountClient.createAccount(NewAccount.builder()
+                .userName(signUp.userName)
+                .email(signUp.email)
+                .password(signUp.password)
                 .ipAddress(httpRequest.getRemoteAddress().getAddress().toString())
                 .language(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
@@ -179,13 +177,13 @@ public class AccountController {
 
     /**
      * Changes password.
-     * @param changePassword old password.
+     * @param updatePassword old password.
      * @param authentication user principal.
      * @return empty response if ok.
      */
     @Post(value = "/change/password")
-    public ResponseWrapper<?> changePassword(@Body ChangePassword changePassword, Authentication authentication) {
-        accountClient.changePassword(getGamerId(authentication), changePassword);
+    public ResponseWrapper<?> changePassword(@Body UpdatePassword updatePassword, Authentication authentication) {
+        accountClient.changePassword(getGamerId(authentication), updatePassword);
         return ResponseWrapper.ok();
     }
 
