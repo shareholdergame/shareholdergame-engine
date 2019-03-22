@@ -2,9 +2,11 @@ package com.shareholdergame.engine.account.dao;
 
 import com.shareholdergame.engine.account.dao.mapper.AccountOperationMapper;
 import com.shareholdergame.engine.account.model.AccountOperation;
+import com.shareholdergame.engine.account.model.AccountOperationStatus;
 import org.apache.ibatis.session.SqlSessionManager;
 
 import javax.inject.Singleton;
+import java.time.LocalDateTime;
 
 /**
  * Date: 01/16/2019
@@ -22,10 +24,20 @@ public class AccountOperationDao implements AccountOperationMapper {
 
     @Override
     public void insertOperation(AccountOperation accountOperation) {
-        sqlSessionManager.getMapper(AccountOperationMapper.class).insertOperation(accountOperation);
+        getMapper().insertOperation(accountOperation);
     }
 
+    @Override
     public AccountOperation findByGamerIdAndVerificationCode(Long gamerId, String verificationCode) {
-        return sqlSessionManager.getMapper(AccountOperationMapper.class).findByGamerIdAndVerificationCode(gamerId, verificationCode);
+        return getMapper().findByGamerIdAndVerificationCode(gamerId, verificationCode);
+    }
+
+    @Override
+    public void updateStatus(Long operationId, AccountOperationStatus status, LocalDateTime completionDate) {
+        getMapper().updateStatus(operationId, status, completionDate);
+    }
+
+    private AccountOperationMapper getMapper() {
+        return sqlSessionManager.getMapper(AccountOperationMapper.class);
     }
 }

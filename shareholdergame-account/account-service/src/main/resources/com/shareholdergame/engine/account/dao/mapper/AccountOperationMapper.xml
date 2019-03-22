@@ -33,6 +33,7 @@
         where
           gamer_id = #{gamerId}
           and verification_code = #{verificationCode}
+          and operation_status not in ('COMPLETED', 'CANCELLED')
     </select>
 
     <insert id="insertOperation" parameterType="AccountOperation">
@@ -57,4 +58,13 @@
           #{expirationDate}
         )
     </insert>
+
+    <update id="updateStatus" parameterType="map">
+        update a_account_operation
+        set
+          operation_status = #{operationStatus},
+          completion_date = #{completionDate}
+        where
+          operation_id = #{operationId}
+    </update>
 </mapper>

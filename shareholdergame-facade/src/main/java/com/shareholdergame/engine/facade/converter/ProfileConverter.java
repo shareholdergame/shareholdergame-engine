@@ -13,9 +13,9 @@ public class ProfileConverter implements Converter<Profile, PlayerProfile> {
         Location pl = new Location();
         PlayerPersonalInfo ppi = new PlayerPersonalInfo();
 
-        pl.setCity(profile.getCity());
-        pl.setCountry(profile.getCountry());
-        pl.setStateProvince(profile.getStateProvince());
+        pl.city = profile.getCity();
+        pl.country = profile.getCountry();
+        pl.stateProvince = profile.getStateProvince();
 
         ppi.about = profile.getAbout();
         ppi.birthday = profile.getBirthday().toString();

@@ -94,8 +94,8 @@ public final class MockDataProvider {
 
                     JsonNode profileNode = userNode.get("profile");
                     Location pp = new Location();
-                    pp.setCountry(profileNode.has("country") ? profileNode.get("country").asText() : "");
-                    pp.setCity(profileNode.has("city") ? profileNode.get("city").asText() : "");
+                    pp.country = profileNode.has("country") ? profileNode.get("country").asText() : "";
+                    pp.city = profileNode.has("city") ? profileNode.get("city").asText() : "";
 
                     Achievements a = new Achievements(
                             item.get("gameSeriesCount").asLong(),
