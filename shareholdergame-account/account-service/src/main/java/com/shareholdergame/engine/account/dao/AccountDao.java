@@ -16,16 +16,21 @@ public class AccountDao implements AccountMapper {
     }
 
     @Override
-    public AccountWithPassword findByUserNameOrEmail(String userNameOrEmail) {
-        return sqlSessionManager.getMapper(AccountMapper.class).findByUserNameOrEmail(userNameOrEmail);
+    public AccountWithPassword findByUniqueIds(Long gamerId, String userNameOrEmail) {
+        return sqlSessionManager.getMapper(AccountMapper.class).findByUniqueIds(gamerId, userNameOrEmail);
     }
 
     @Override
-    public Long checkUserExistence(String userNameOrEmail) {
-        return sqlSessionManager.getMapper(AccountMapper.class).checkUserExistence(userNameOrEmail);
+    public Long checkUserExistence(String userNameOrEmail, Long gamerId) {
+        return sqlSessionManager.getMapper(AccountMapper.class).checkUserExistence(userNameOrEmail, gamerId);
     }
 
     public void insertAccount(AccountWithPassword accountWithPassword) {
         sqlSessionManager.getMapper(AccountMapper.class).insertAccount(accountWithPassword);
+    }
+
+    @Override
+    public void updatePassword(Long gamerId, String newPassword) {
+        sqlSessionManager.getMapper(AccountMapper.class).updatePassword(gamerId, newPassword);
     }
 }

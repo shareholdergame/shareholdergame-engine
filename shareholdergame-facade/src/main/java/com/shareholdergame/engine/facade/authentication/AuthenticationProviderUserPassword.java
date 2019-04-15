@@ -41,7 +41,7 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
         return Flowable.just(new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));
     }
 
-    private boolean isPasswordIdentical(String secret, String password) {
-        return MD5Helper.checkMD5hash(secret, password);
+    private boolean isPasswordIdentical(String secret, String passwordHash) {
+        return MD5Helper.checkMD5hash(secret, passwordHash);
     }
 }

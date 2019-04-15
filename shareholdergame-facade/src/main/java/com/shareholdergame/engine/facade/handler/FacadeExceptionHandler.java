@@ -8,6 +8,7 @@ import com.shareholdergame.engine.common.http.ResponseWrapper;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
+import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.http.server.exceptions.ExceptionHandler;
 import io.micronaut.security.authentication.AuthenticationException;
 import org.apache.commons.lang3.tuple.Pair;
@@ -33,6 +34,7 @@ public class FacadeExceptionHandler implements ExceptionHandler<Exception, HttpR
             .put(BusinessException.class, Pair.of(Throwable::getMessage, HttpStatus.INTERNAL_SERVER_ERROR))
             .put(AuthenticationException.class, Pair.of(Throwable::getMessage, HttpStatus.INTERNAL_SERVER_ERROR))
             .put(ConstraintViolationException.class, Pair.of(e -> String.format("Validation failed: %s", e.getMessage()), HttpStatus.BAD_REQUEST))
+            .put(HttpClientResponseException.class, Pair.of(Throwable::getMessage, HttpStatus.INTERNAL_SERVER_ERROR))
             .put(Exception.class, Pair.of(e -> String.format("Unhadled exception %s. %s", e.getClass().getName(), e.getMessage()),
                     HttpStatus.INTERNAL_SERVER_ERROR))
             .build();

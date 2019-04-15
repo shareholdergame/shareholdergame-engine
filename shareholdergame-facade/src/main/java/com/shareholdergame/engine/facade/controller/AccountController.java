@@ -1,11 +1,9 @@
 package com.shareholdergame.engine.facade.controller;
 
 import com.shareholdergame.engine.account.model.AccountOperation;
-import com.shareholdergame.engine.api.account.UpdatePassword;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
-import com.shareholdergame.engine.common.exception.BusinessException;
-import com.shareholdergame.engine.common.exception.Errors;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
 import com.shareholdergame.engine.facade.client.AccountClient;
@@ -25,7 +23,6 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.hibernate.validator.constraints.Length;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
@@ -54,8 +51,7 @@ public class AccountController {
     @Get("/exists/{userNameOrEmail}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<Boolean> checkUserExistence(@NotBlank String userNameOrEmail) {
-        boolean existence = accountClient.checkUserExistence(userNameOrEmail);
-        return ResponseWrapper.ok(existence);
+        return ResponseWrapper.ok(accountClient.checkUserExistence(userNameOrEmail));
     }
 
     /**
@@ -70,16 +66,13 @@ public class AccountController {
     public ResponseWrapper<?> signup(@NotNull @Body SignUp signUp,
                                      @Header Language language,
                                      HttpRequest httpRequest) {
-        if (accountClient.checkUserExistence(signUp.userName) || accountClient.checkUserExistence(signUp.email)) {
-            throw new BusinessException(Errors.USER_ALREADY_EXISTS.name());
-        }
-
         accountClient.createAccount(NewAccount.builder()
                 .userName(signUp.userName)
                 .email(signUp.email)
                 .password(signUp.password)
                 .ipAddress(httpRequest.getRemoteAddress().getAddress().toString())
                 .language(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
+
         return ResponseWrapper.ok();
     }
 
@@ -90,12 +83,14 @@ public class AccountController {
      */
     @Post("/verify/{verificationCode}")
     public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
-        AccountOperation accountOperation =
+        /*AccountOperation accountOperation =
                 accountOperationClient.getOperation(getGamerId(authentication), verificationCode);
         if (null == accountOperation) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, "Nothing to verify");
         }
-        accountOperationClient.markVerified(accountOperation.getOperationId());
+        accountOperationClient.markVerified(accountOperation.getOperationId());*/
+
+        accountClient.verify(getGamerId(authentication), verificationCode);
         return ResponseWrapper.ok();
     }
 
@@ -177,13 +172,13 @@ public class AccountController {
 
     /**
      * Changes password.
-     * @param updatePassword old password.
+     * @param passwordUpdate old password.
      * @param authentication user principal.
      * @return empty response if ok.
      */
     @Post(value = "/change/password")
-    public ResponseWrapper<?> changePassword(@Body UpdatePassword updatePassword, Authentication authentication) {
-        accountClient.changePassword(getGamerId(authentication), updatePassword);
+    public ResponseWrapper<?> changePassword(@Body PasswordUpdate passwordUpdate, Authentication authentication) {
+        accountClient.changePassword(getGamerId(authentication), passwordUpdate);
         return ResponseWrapper.ok();
     }
 

@@ -1,6 +1,7 @@
 package com.shareholdergame.engine.api.account;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import io.micronaut.http.annotation.Body;
@@ -22,8 +23,11 @@ public interface AccountService {
     void createAccount(@Body NewAccount newAccount);
 
     @Post("/update/{gamerId}/password")
-    void changePassword(Long gamerId, @Body UpdatePassword updatePassword);
+    void changePassword(@NotNull Long gamerId, @Body PasswordUpdate passwordUpdate);
 
     @Post("/update/{gamerId}/password/reset")
-    void resetPassword(Long gamerId);
+    void resetPassword(@NotNull Long gamerId);
+
+    @Post("/verify/{gamerId}/{verificationCode}")
+    void verify(@NotNull Long gamerId, @NotNull String verificationCode);
 }

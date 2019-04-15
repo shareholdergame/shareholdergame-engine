@@ -5,22 +5,22 @@ package com.shareholdergame.engine.api.account;
  *
  * @author Aliaksandr Savin
  */
-public final class UpdatePassword {
+public final class PasswordUpdate {
 
     private String oldPassword;
 
     private String newPassword;
 
-    private UpdatePassword() {
+    private PasswordUpdate() {
     }
 
-    private UpdatePassword(String oldPassword, String newPassword) {
+    private PasswordUpdate(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }
 
-    public static UpdatePassword of(String oldPassword, String newPassword) {
-        return new UpdatePassword(oldPassword, newPassword);
+    public static PasswordUpdate of(String oldPassword, String newPassword) {
+        return new PasswordUpdate(oldPassword, newPassword);
     }
 
     public String getOldPassword() {

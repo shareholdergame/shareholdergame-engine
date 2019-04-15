@@ -7,5 +7,11 @@ package com.shareholdergame.engine.common.exception;
  */
 public enum Errors {
 
-    USER_ALREADY_EXISTS
+    APPLICATION_ERROR,
+
+    USER_NOT_EXIST,
+
+    USER_ALREADY_EXISTS,
+
+    INCORRECT_PASSWORD;
 }

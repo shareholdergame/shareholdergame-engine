@@ -1,12 +1,13 @@
 package com.shareholdergame.engine.facade.client;
 
 import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.UpdatePassword;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import io.micronaut.http.client.annotation.Client;
 
-@Client("${service.account.url}/account")
+@Client(value = "${service.account.url}/account", errorType = ResponseWrapper.ErrorResponse.class)
 public interface AccountClient extends AccountService {
 
     @Override
@@ -19,5 +20,5 @@ public interface AccountClient extends AccountService {
     void createAccount(NewAccount newAccount);
 
     @Override
-    void changePassword(Long gamerId, UpdatePassword updatePassword);
+    void changePassword(Long gamerId, PasswordUpdate passwordUpdate);
 }
