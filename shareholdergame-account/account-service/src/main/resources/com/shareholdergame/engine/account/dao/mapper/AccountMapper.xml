@@ -6,7 +6,12 @@
 
     <resultMap id="AccountResultMap" type="Account">
         <id column="gamer_id" property="id"/>
+        <result column="email" property="email"/>
         <result column="user_name" property="userName"/>
+        <result column="account_status" property="status"/>
+        <result column="registration_date" property="creationDate"/>
+        <result column="registered_from_ip" property="registeredFromIp"/>
+        <result column="locale" property="language"/>
     </resultMap>
 
     <resultMap id="AccountWithPasswordResultMap" type="AccountWithPassword">
@@ -14,26 +19,67 @@
         <association property="gamerAccount" resultMap="AccountResultMap"/>
     </resultMap>
 
-    <select id="findByUserNameOrEmail" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
+    <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
         select
             gamer_id,
+            email,
             user_name,
-            user_password
+            user_password,
+            account_status,
+            registration_date,
+            registered_from_ip,
+            locale
         from a_gamer_account
-        where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
-                                                       and account_status != 'REMOVED_COMPLETELY'
+        where
+            account_status != 'REMOVED_COMPLETELY'
+            <if test="userNameOrEmail != null">
+                and lower(user_name) like lower(#{userNameOrEmail}) or lower(email) like lower(#{userNameOrEmail})
+            </if>
+            <if test="gamerId">
+                and gamer_id = #{gamerId}
+            </if>
     </select>
 
-    <select id="checkUserExistence" parameterType="string" resultType="long">
-        select gamer_id
+    <select id="checkUserExistence" parameterType="map" resultType="long">
+        select
+            gamer_id
         from a_gamer_account
-        where lower(user_name) like lower(#{value}) or lower(email) like lower(#{value})
-                                                       and account_status != 'REMOVED_COMPLETELY'
+        where
+            account_status != 'REMOVED_COMPLETELY'
+            <if test="userNameOrEmail != null">
+                and lower(user_name) like lower(#{userNameOrEmail}) or lower(email) like lower(#{userNameOrEmail})
+            </if>
+            <if test="gamerId">
+                and gamer_id = #{gamerId}
+            </if>
     </select>
 
     <insert id="insertAccount" parameterType="AccountWithPassword">
-        insert into a_gamer_account
-        (gamer_id, email, user_name, user_password, account_status, registration_date, locale)
-        values (#{gamerAccount.id}, #{gamerAccount.email}, #{gamerAccount.userName}, #{password}, #{gamerAccount.status}, #{gamerAccount.creationDate}, #{gamerAccount.language})
+        insert into a_gamer_account (
+          gamer_id,
+          email,
+          user_name,
+          user_password,
+          account_status,
+          registration_date,
+          registered_from_ip,
+          locale
+        )
+        values (
+          #{gamerAccount.id},
+          #{gamerAccount.email},
+          #{gamerAccount.userName},
+          #{password},
+          #{gamerAccount.status},
+          #{gamerAccount.creationDate},
+          #{gamerAccount.registeredFromIp},
+          #{gamerAccount.language}
+        )
     </insert>
+
+    <update id="updatePassword" parameterType="map">
+        update a_gamer_account
+        set user_password = #{password}
+        where gamer_id = #{gamerId}
+    </update>
 </mapper>

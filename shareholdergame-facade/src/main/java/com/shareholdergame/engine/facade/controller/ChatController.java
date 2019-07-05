@@ -1,7 +1,7 @@
 package com.shareholdergame.engine.facade.controller;
 
 import com.google.common.collect.Lists;
-import com.shareholdergame.engine.common.support.ResponseWrapper;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.dto.Chat;
 import com.shareholdergame.engine.facade.dto.Duration;
 import com.shareholdergame.engine.facade.dto.NewChatMessage;

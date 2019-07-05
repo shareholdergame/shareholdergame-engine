@@ -48,8 +48,28 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.shareholdergame.engine</groupId>
-                <artifactId>shareholdergame-common</artifactId>
+                <groupId>com.shareholdergame.engine.common</groupId>
+                <artifactId>common-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.common</groupId>
+                <artifactId>common-dao-support</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.common</groupId>
+                <artifactId>common-service-support</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.account</groupId>
+                <artifactId>account-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.account</groupId>
+                <artifactId>account-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

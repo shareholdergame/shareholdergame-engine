@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +34,12 @@ public final class MockDataProvider {
     private static final ArrayList<AccountWithPassword> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
             AccountWithPassword.builder()
                     .account(
-                            GamerAccount.builder().withId(1L)
-                                    .withUserName("sergeychernyshev")
-                                    .withEmail("player1@shareholdergame.com")
-                                    .withStatus(AccountStatus.ACTIVE)
-                                    .withCreationDate(LocalDate.of(2015, 8, 1))
-                                    .withLanguage("EN")
+                            GamerAccount.builder().id(1L)
+                                    .userName("sergeychernyshev")
+                                    .email("player1@shareholdergame.com")
+                                    .status(AccountStatus.ACTIVE)
+                                    .creationDate(LocalDateTime.of(2015, 8, 1, 0, 0))
+                                    .language("EN")
                                     .build())
                     .password("123456").build(),
             /*AccountWithPassword.builder()
@@ -53,12 +54,12 @@ public final class MockDataProvider {
                     .password("123456").build(),*/
             AccountWithPassword.builder()
                     .account(
-                            GamerAccount.builder().withId(1L)
-                                    .withUserName("Зырянов")
-                                    .withEmail("player3@shareholdergame.com")
-                                    .withStatus(AccountStatus.ACTIVE)
-                                    .withCreationDate(LocalDate.of(2015, 8, 1))
-                                    .withLanguage("RU")
+                            GamerAccount.builder().id(1L)
+                                    .userName("Зырянов")
+                                    .email("player3@shareholdergame.com")
+                                    .status(AccountStatus.ACTIVE)
+                                    .creationDate(LocalDateTime.of(2015, 8, 1, 0, 0))
+                                    .language("RU")
                                     .build())
                     .password("123456").build()
     );
@@ -93,8 +94,8 @@ public final class MockDataProvider {
 
                     JsonNode profileNode = userNode.get("profile");
                     Location pp = new Location();
-                    pp.setCountry(profileNode.has("country") ? profileNode.get("country").asText() : "");
-                    pp.setCity(profileNode.has("city") ? profileNode.get("city").asText() : "");
+                    pp.country = profileNode.has("country") ? profileNode.get("country").asText() : "";
+                    pp.city = profileNode.has("city") ? profileNode.get("city").asText() : "";
 
                     Achievements a = new Achievements(
                             item.get("gameSeriesCount").asLong(),
@@ -144,11 +145,11 @@ public final class MockDataProvider {
     public static List<Profile> getProfiles() {
         return Lists.newArrayList(
                 Profile.builder()
-                        .withCity("New York")
-                        .withCountry("US")
-                        .withStateProvince("NY")
-                        .withAbout("I like play cards")
-                        .withBirthday(LocalDate.of(1977, 12,12))
+                        .city("New York")
+                        .country("US")
+                        .stateProvince("NY")
+                        .about("I like play cards")
+                        .birthday(LocalDate.of(1977, 12,12))
                         .build()
         );
     }

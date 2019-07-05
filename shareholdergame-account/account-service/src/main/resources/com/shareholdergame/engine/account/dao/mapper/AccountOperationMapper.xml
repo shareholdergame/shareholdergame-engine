@@ -4,20 +4,67 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shareholdergame.engine.account.dao.mapper.AccountOperationMapper">
 
-    <!--
-    operation_type char(16) not null check (operation_type in ('CHANGE_STATUS', 'CHANGE_USERNAME', 'CHANGE_EMAIL', 'CHANGE_PASSWORD')),
-  old_value char(255),
-  new_value char(255),
-  verification_code char(64),
-  initiation_date datetime not null,
-  completion_date datetime,
-  operation_status char(16) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
-  expiration_date datetime,
-    -->
+    <resultMap id="AccountOperationResultMap" type="AccountOperation">
+        <id column="operation_id" property="operationId"/>
+        <result column="gamer_id" property="gamerId"/>
+        <result column="operation_type" property="operationType"/>
+        <result column="old_value" property="oldValue"/>
+        <result column="new_value" property="newValue"/>
+        <result column="verification_code" property="verificationCode"/>
+        <result column="initiation_date" property="initiationDate"/>
+        <result column="completion_date" property="completionDate"/>
+        <result column="operation_status" property="operationStatus"/>
+        <result column="expiration_date" property="expirationDate"/>
+    </resultMap>
+
+    <select id="findByGamerIdAndVerificationCode" parameterType="map" resultMap="AccountOperationResultMap">
+        select
+          operation_id,
+          gamer_id,
+          operation_type,
+          old_value,
+          new_value,
+          verification_code,
+          initiation_date,
+          completion_date,
+          operation_status,
+          expiration_date
+        from a_account_operation
+        where
+          gamer_id = #{gamerId}
+          and verification_code = #{verificationCode}
+          and operation_status not in ('COMPLETED', 'CANCELLED')
+    </select>
+
     <insert id="insertOperation" parameterType="AccountOperation">
-        insert into a_account_operation
-        (operation_id, gamer_id)
-        values
-        (#{operationId}, #{gamerId})
+        insert into a_account_operation (
+          gamer_id,
+          operation_type,
+          old_value,
+          new_value,
+          verification_code,
+          initiation_date,
+          operation_status,
+          expiration_date
+        )
+        values (
+          #{gamerId},
+          #{operationType},
+          #{oldValue},
+          #{newValue},
+          #{verificationCode},
+          #{initiationDate},
+          #{operationStatus},
+          #{expirationDate}
+        )
     </insert>
+
+    <update id="updateStatus" parameterType="map">
+        update a_account_operation
+        set
+          operation_status = #{operationStatus},
+          completion_date = #{completionDate}
+        where
+          operation_id = #{operationId}
+    </update>
 </mapper>

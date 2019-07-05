@@ -17,13 +17,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.shareholdergame.engine</groupId>
-            <artifactId>shareholdergame-common</artifactId>
+            <groupId>com.shareholdergame.engine.common</groupId>
+            <artifactId>common-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.common</groupId>
+            <artifactId>common-service-support</artifactId>
         </dependency>
         <dependency>
             <groupId>com.shareholdergame.engine.account</groupId>
             <artifactId>account-api</artifactId>
-            <version>0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.account</groupId>
+            <artifactId>account-service</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -66,16 +74,6 @@
             <artifactId>micronaut-inject-java</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-http-client</artifactId>
-        </dependency>
-
-        <!--<dependency>
-            <groupId>org.apache.flex.blazeds</groupId>
-            <artifactId>flex-messaging-core</artifactId>
-            <version>4.7.3</version>
-        </dependency>-->
 
         <dependency>
             <groupId>ch.qos.logback</groupId>

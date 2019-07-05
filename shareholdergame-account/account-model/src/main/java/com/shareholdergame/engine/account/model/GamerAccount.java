@@ -3,6 +3,7 @@ package com.shareholdergame.engine.account.model;
 import org.apache.commons.lang3.builder.Builder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public final class GamerAccount {
 
@@ -14,7 +15,9 @@ public final class GamerAccount {
 
     private AccountStatus status;
 
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
+
+    private String registeredFromIp;
 
     private String language;
 
@@ -27,6 +30,7 @@ public final class GamerAccount {
         this.email = builder.email;
         this.status = builder.status;
         this.creationDate = builder.creationDate;
+        this.registeredFromIp = builder.registeredFromIp;
         this.language = builder.language;
     }
 
@@ -46,8 +50,12 @@ public final class GamerAccount {
         return status;
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public String getRegisteredFromIp() {
+        return registeredFromIp;
     }
 
     public String getLanguage() {
@@ -60,42 +68,48 @@ public final class GamerAccount {
 
     public static class AccountBuilder implements Builder<GamerAccount> {
 
+        private Long id;
         private String email;
         private String userName;
-        private Long id;
         private AccountStatus status;
-        private LocalDate creationDate;
+        private LocalDateTime creationDate;
+        private String registeredFromIp;
         private String language;
 
         private AccountBuilder() {
         }
 
-        public AccountBuilder withEmail(String email) {
+        public AccountBuilder email(String email) {
             this.email = email;
             return this;
         }
 
-        public AccountBuilder withUserName(String userName) {
+        public AccountBuilder userName(String userName) {
             this.userName = userName;
             return this;
         }
 
-        public AccountBuilder withId(Long id) {
+        public AccountBuilder id(Long id) {
             this.id = id;
             return this;
         }
 
-        public AccountBuilder withStatus(AccountStatus status) {
+        public AccountBuilder status(AccountStatus status) {
             this.status = status;
             return this;
         }
 
-        public AccountBuilder withCreationDate(LocalDate creationDate) {
+        public AccountBuilder creationDate(LocalDateTime creationDate) {
             this.creationDate = creationDate;
             return this;
         }
 
-        public AccountBuilder withLanguage(String language) {
+        public AccountBuilder registeredFromIp(String registeredFromIp) {
+            this.registeredFromIp = registeredFromIp;
+            return this;
+        }
+
+        public AccountBuilder language(String language) {
             this.language = language;
             return this;
         }

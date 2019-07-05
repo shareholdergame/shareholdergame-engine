@@ -14,8 +14,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.shareholdergame.engine</groupId>
-            <artifactId>shareholdergame-common</artifactId>
+            <groupId>com.shareholdergame.engine.common</groupId>
+            <artifactId>common-service-support</artifactId>
         </dependency>
     </dependencies>
 </project>

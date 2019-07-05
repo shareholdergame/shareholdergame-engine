@@ -29,13 +29,14 @@ micronaut:
         paths: classpath:META-INF/swagger
         mapping: /swagger/**
 
-#datasources:
-#  default:
-#    url: jdbc:mysql://localhost:3306/stockholdergame?characterEncoding=UTF-8
-#    username: root
-#    password: 123
-#    driverClassName: com.mysql.jdbc.Driver
+  executors:
+    scheduled:
+      type: scheduled
+      core-pool-size: 10
 
-service:
-  account:
-    url: http://localhost:8091
+datasources:
+  default:
+    url: jdbc:mariadb://localhost:3306/shareholdergame
+    username: root
+    password: 123
+    driverClassName: org.mariadb.jdbc.Driver

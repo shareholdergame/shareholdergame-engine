@@ -1,24 +1,20 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.account.api.ChangePassword;
-import com.shareholdergame.engine.account.api.SignUp;
+import com.shareholdergame.engine.api.account.AccountOperationService;
+import com.shareholdergame.engine.api.account.AccountService;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
+import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
-import com.shareholdergame.engine.common.exception.BusinessException;
-import com.shareholdergame.engine.common.exception.Errors;
-import com.shareholdergame.engine.common.support.ResponseWrapper;
-import com.shareholdergame.engine.facade.client.AccountClient;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
+import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
+import com.shareholdergame.engine.facade.dto.SignUp;
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Delete;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Header;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
-import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
@@ -26,10 +22,10 @@ import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.hibernate.validator.constraints.Length;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -41,7 +37,10 @@ import java.util.Optional;
 public class AccountController {
 
     @Inject
-    private AccountClient accountClient;
+    private AccountService accountClient;
+
+    @Inject
+    private AccountOperationService accountOperationClient;
 
     /**
      * Check user existence.
@@ -51,53 +50,62 @@ public class AccountController {
     @Get("/exists/{userNameOrEmail}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<Boolean> checkUserExistence(@NotBlank String userNameOrEmail) {
-        boolean existence = accountClient.checkUserExistence(userNameOrEmail);
-        return ResponseWrapper.ok(existence);
+        return ResponseWrapper.ok(accountClient.checkUserExistence(userNameOrEmail));
     }
 
     /**
      * Sign user up.
      *
-     * @param userName user name
-     * @param email email
-     * @param password password
+     * @param signUp sign up data: user name, email and password
      * @param language language
      * @return empty response if ok.
      */
-    @Put(value = "/signup", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    @Put("/signup")
     @Secured(SecurityRule.IS_ANONYMOUS)
-    public ResponseWrapper<?> signup(@QueryValue @NotBlank String userName,
-                                     @QueryValue @NotBlank String email,
-                                     @QueryValue @NotBlank @Length(min = 6) String password,
-                                     @Header Language language) {
-        if (accountClient.checkUserExistence(userName) || accountClient.checkUserExistence(email)) {
-            throw new BusinessException(Errors.USER_ALREADY_EXISTS.name());
-        }
+    public ResponseWrapper<?> signup(@NotNull @Body SignUp signUp,
+                                     @Header Language language,
+                                     HttpRequest httpRequest) {
+        accountClient.createAccount(NewAccount.builder()
+                .userName(signUp.userName)
+                .email(signUp.email)
+                .password(signUp.password)
+                .ipAddress(httpRequest.getRemoteAddress().getAddress().toString())
+                .language(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
 
-        accountClient.createAccount(SignUp.builder()
-                .withUserName(userName).withEmail(email).withPassword(password)
-                .withLanguage(Optional.of(language).map(Enum::name).orElse(Language.en.name())).build());
         return ResponseWrapper.ok();
     }
 
     /**
      * Verify user account.
      * @param verificationCode verification code.
-     * @return empty response if ok.
+     * @return empty response if ok or 404 if account not existed or verification is not applicable to this account.
      */
-    @Get("/verify/{verificationCode}")
-    public ResponseWrapper<?> verify(@NotBlank String verificationCode, Principal principal) {
+    @Post("/verify/{verificationCode}")
+    public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
+        /*AccountOperation accountOperation =
+                accountOperationClient.getOperation(getGamerId(authentication), verificationCode);
+        if (null == accountOperation) {
+            throw new HttpStatusException(HttpStatus.NOT_FOUND, "Nothing to verify");
+        }
+        accountOperationClient.markVerified(accountOperation.getOperationId());*/
+
+        accountClient.verify(getGamerId(authentication), verificationCode);
         return ResponseWrapper.ok();
     }
 
     /**
      * Resets user password.
      * @param email user email.
-     * @return empty response if ok.
+     * @return empty response if ok or 404 if account not found.
      */
     @Post("/resetpassword/{email}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<?> resetPassword(@NotBlank String email) {
+        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(email);
+        if (null == accountWithPassword) {
+            throw new HttpStatusException(HttpStatus.NOT_FOUND, email);
+        }
+        accountClient.resetPassword(accountWithPassword.getGamerAccount().getId());
         return ResponseWrapper.ok();
     }
 
@@ -113,7 +121,6 @@ public class AccountController {
         if (null == accountWithPassword) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, principal.getName());
         }
-
         return ResponseWrapper.ok(Converters.convert(accountWithPassword.getGamerAccount()));
     }
 
@@ -164,16 +171,17 @@ public class AccountController {
 
     /**
      * Changes password.
-     * @param oldPassword old password.
-     * @param newPassword new password.
+     * @param passwordUpdate old password.
      * @param authentication user principal.
      * @return empty response if ok.
      */
-    @Post(value = "/change/password", consumes = MediaType.APPLICATION_FORM_URLENCODED)
-    public ResponseWrapper<?> changePassword(@QueryValue @NotBlank String oldPassword,
-                                             @QueryValue @NotBlank @Length(min = 6) String newPassword,
-                                             Authentication authentication) {
-        accountClient.changePassword(new ChangePassword(oldPassword, newPassword, authentication.getName()));
+    @Post(value = "/change/password")
+    public ResponseWrapper<?> changePassword(@Body PasswordUpdate passwordUpdate, Authentication authentication) {
+        accountClient.changePassword(getGamerId(authentication), passwordUpdate);
         return ResponseWrapper.ok();
+    }
+
+    private Long getGamerId(Authentication authentication) {
+        return (Long) authentication.getAttributes().get(AuthenticationConstants.ACCOUNT_ID);
     }
 }

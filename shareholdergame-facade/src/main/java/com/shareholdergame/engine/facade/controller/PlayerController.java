@@ -1,6 +1,6 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.common.support.ResponseWrapper;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.dto.Filter;
 import com.shareholdergame.engine.facade.dto.GameOptionFilter;
 import com.shareholdergame.engine.facade.dto.Pagination;

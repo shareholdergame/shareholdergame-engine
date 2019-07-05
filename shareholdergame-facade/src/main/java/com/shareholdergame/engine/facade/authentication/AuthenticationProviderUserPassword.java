@@ -2,19 +2,20 @@ package com.shareholdergame.engine.facade.authentication;
 
 import com.google.common.collect.Lists;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.common.util.MD5Helper;
-import com.shareholdergame.engine.facade.client.AccountClient;
 import io.micronaut.security.authentication.AuthenticationFailed;
 import io.micronaut.security.authentication.AuthenticationFailureReason;
 import io.micronaut.security.authentication.AuthenticationProvider;
 import io.micronaut.security.authentication.AuthenticationRequest;
 import io.micronaut.security.authentication.AuthenticationResponse;
-import io.micronaut.security.authentication.UserDetails;
 import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import static com.shareholdergame.engine.facade.authentication.AuthenticationConstants.ROLE_USER;
 
 /**
  * Date: 10/19/2018
@@ -25,7 +26,7 @@ import javax.inject.Singleton;
 public class AuthenticationProviderUserPassword implements AuthenticationProvider {
 
     @Inject
-    private AccountClient accountClient;
+    private AccountService accountClient;
 
     @Override
     public Publisher<AuthenticationResponse> authenticate(AuthenticationRequest authenticationRequest) {
@@ -33,13 +34,14 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
         String secret = authenticationRequest.getSecret().toString();
         AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(identity);
         if (accountWithPassword != null && isPasswordIdentical(secret, accountWithPassword.getPassword())) {
-            return Flowable.just(new UserDetails(accountWithPassword.getGamerAccount().getUserName(), Lists.newArrayList("ROLE_USER")));
+            return Flowable.just(new ExtendedUserDetails(accountWithPassword.getGamerAccount().getUserName(),
+                    Lists.newArrayList(ROLE_USER), accountWithPassword.getGamerAccount().getId()));
         }
 
         return Flowable.just(new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));
     }
 
-    private boolean isPasswordIdentical(String secret, String password) {
-        return MD5Helper.checkMD5hash(secret, password);
+    private boolean isPasswordIdentical(String secret, String passwordHash) {
+        return MD5Helper.checkMD5hash(secret, passwordHash);
     }
 }

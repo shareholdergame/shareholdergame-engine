@@ -7,6 +7,7 @@ create table a_gamer_account (
   user_password char(64) not null,
   account_status char(16) not null check (account_status in ('NEW', 'ACTIVE', 'REMOVED', 'REMOVED_COMPLETELY')),
   registration_date datetime not null,
+  registered_from_ip char(64),
   removal_date datetime,
   locale char(16) not null default 'en' check (locale in ('en', 'ru')),
   primary key (gamer_id),
@@ -16,7 +17,7 @@ create table a_gamer_account (
 create table a_gamer_role (
   gamer_role_id bigint not null auto_increment,
   gamer_id bigint not null,
-  role_name char(16) not null check (role_name in ('ROLE_ADMIN', 'ROLE_MODERATOR')),
+  role_name char(16) not null check (role_name in ('ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_REMOVED_USER')),
   primary key (gamer_role_id),
   unique key (gamer_id, role_name)
 ) engine=innodb;
@@ -30,7 +31,26 @@ create table a_account_operation (
   verification_code char(64),
   initiation_date datetime not null,
   completion_date datetime,
-  operation_status char(16) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
+  operation_status char(32) not null check (operation_status in ('VERIFICATION_PENDING', 'COMPLETED', 'CANCELLED')),
   expiration_date datetime,
   primary key (operation_id)
 ) engine=innodb;
+
+alter table a_account_operation add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+
+create table a_profile (
+  gamer_id bigint not null,
+  sex char(1) check (sex in ('M', 'W')),
+  country char(255),
+  state_province char(255),
+  city char(255),
+  birthday date,
+  about text(4000),
+  avatar_url char(255),
+  detected_country char(255),
+  detected_state_province char(255),
+  detected_city char(255),
+  primary key (gamer_id)
+) engine=innodb;
+
+alter table a_profile add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);

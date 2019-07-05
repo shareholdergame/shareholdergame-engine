@@ -1,7 +1,8 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.common.support.ErrorBody;
-import com.shareholdergame.engine.common.support.ResponseWrapper;
+import com.shareholdergame.engine.api.profile.ProfileService;
+import com.shareholdergame.engine.common.http.ErrorBody;
+import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.FriendRequestAction;
 import com.shareholdergame.engine.facade.dto.FriendsResponse;
@@ -28,6 +29,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.reactivestreams.Publisher;
 
+import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.security.Principal;
@@ -43,6 +45,9 @@ public class ProfileController {
 
     @Value("${facade.avatar.base.path:./}")
     private String basePath;
+
+    @Inject
+    private ProfileService profileClient;
 
     /**
      * Returns user's profile.
