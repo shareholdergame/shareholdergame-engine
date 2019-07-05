@@ -1,9 +1,8 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.account.model.Profile;
+import com.shareholdergame.engine.api.profile.ProfileService;
 import com.shareholdergame.engine.common.http.ErrorBody;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
-import com.shareholdergame.engine.facade.client.ProfileClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.FriendRequestAction;
 import com.shareholdergame.engine.facade.dto.FriendsResponse;
@@ -48,7 +47,7 @@ public class ProfileController {
     private String basePath;
 
     @Inject
-    private ProfileClient profileClient;
+    private ProfileService profileClient;
 
     /**
      * Returns user's profile.

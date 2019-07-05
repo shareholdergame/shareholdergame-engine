@@ -67,6 +67,11 @@
                 <artifactId>account-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.account</groupId>
+                <artifactId>account-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.micronaut</groupId>

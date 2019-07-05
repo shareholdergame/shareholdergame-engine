@@ -51,7 +51,7 @@
                             <artifactId>micronaut-inject-java</artifactId>
                             <version>${micronaut.version}</version>
                         </path>
-                        <path>
+                        <!--<path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-security</artifactId>
                             <version>${micronaut.version}</version>
@@ -60,7 +60,7 @@
                             <groupId>io.micronaut.configuration</groupId>
                             <artifactId>micronaut-openapi</artifactId>
                             <version>${micronaut.version}</version>
-                        </path>
+                        </path>-->
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>

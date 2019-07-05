@@ -20,13 +20,12 @@ import com.shareholdergame.engine.common.util.IdentifierHelper;
 import com.shareholdergame.engine.common.util.MD5Helper;
 import com.shareholdergame.engine.common.util.RandomStringGenerator;
 import io.micronaut.context.event.ApplicationEventPublisher;
-import io.micronaut.http.annotation.Controller;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
+import javax.inject.Singleton;
 import java.time.LocalDateTime;
 
-@Controller("/account")
+@Singleton
 public class AccountServiceImpl implements AccountService {
 
     @Inject
@@ -111,7 +110,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void verify(@NotNull Long gamerId, @NotNull String verificationCode) {
+    public void verify(Long gamerId, String verificationCode) {
 
     }
 

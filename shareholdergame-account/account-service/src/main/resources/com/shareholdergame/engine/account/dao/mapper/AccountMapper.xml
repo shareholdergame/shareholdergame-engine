@@ -19,7 +19,7 @@
         <association property="gamerAccount" resultMap="AccountResultMap"/>
     </resultMap>
 
-    <select id="findByUserNameOrEmail" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
+    <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
         select
             gamer_id,
             email,

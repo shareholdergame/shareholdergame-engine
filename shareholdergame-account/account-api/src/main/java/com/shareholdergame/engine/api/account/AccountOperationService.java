@@ -8,12 +8,9 @@ import io.micronaut.validation.Validated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Validated
 public interface AccountOperationService {
 
-    @Post("/{operationId}/verify")
-    void markVerified(@NotNull Long operationId);
+    void markVerified(Long operationId);
 
-    @Get("/{gamerId}/{verificationCode}")
-    AccountOperation getOperation(@NotNull Long gamerId, @NotBlank String verificationCode);
+    AccountOperation getOperation(Long gamerId, String verificationCode);
 }

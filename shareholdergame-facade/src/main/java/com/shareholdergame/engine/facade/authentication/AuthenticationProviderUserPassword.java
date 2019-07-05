@@ -2,8 +2,8 @@ package com.shareholdergame.engine.facade.authentication;
 
 import com.google.common.collect.Lists;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.common.util.MD5Helper;
-import com.shareholdergame.engine.facade.client.AccountClient;
 import io.micronaut.security.authentication.AuthenticationFailed;
 import io.micronaut.security.authentication.AuthenticationFailureReason;
 import io.micronaut.security.authentication.AuthenticationProvider;
@@ -26,7 +26,7 @@ import static com.shareholdergame.engine.facade.authentication.AuthenticationCon
 public class AuthenticationProviderUserPassword implements AuthenticationProvider {
 
     @Inject
-    private AccountClient accountClient;
+    private AccountService accountClient;
 
     @Override
     public Publisher<AuthenticationResponse> authenticate(AuthenticationRequest authenticationRequest) {

@@ -1,13 +1,12 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.account.model.AccountOperation;
+import com.shareholdergame.engine.api.account.AccountOperationService;
+import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
-import com.shareholdergame.engine.facade.client.AccountClient;
-import com.shareholdergame.engine.facade.client.AccountOperationClient;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
@@ -38,10 +37,10 @@ import java.util.Optional;
 public class AccountController {
 
     @Inject
-    private AccountClient accountClient;
+    private AccountService accountClient;
 
     @Inject
-    private AccountOperationClient accountOperationClient;
+    private AccountOperationService accountOperationClient;
 
     /**
      * Check user existence.
