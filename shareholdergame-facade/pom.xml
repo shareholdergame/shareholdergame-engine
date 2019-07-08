@@ -139,12 +139,12 @@
                         <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-security</artifactId>
-                            <version>${micronaut.version}</version>
+                            <version>${micronaut.security.version}</version>
                         </path>
                         <path>
                             <groupId>io.micronaut.configuration</groupId>
                             <artifactId>micronaut-openapi</artifactId>
-                            <version>${micronaut.version}</version>
+                            <version>${micronaut.openapi.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

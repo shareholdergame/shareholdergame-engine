@@ -31,7 +31,9 @@
         <mariadb.version>2.3.0</mariadb.version>
         <mybatis.version>3.4.6</mybatis.version>
         <spring.jdbc.version>4.3.22.RELEASE</spring.jdbc.version>
-        <micronaut.version>1.1.0.M1</micronaut.version>
+        <micronaut.version>1.1.4</micronaut.version>
+        <micronaut.security.version>1.1.1</micronaut.security.version>
+        <micronaut.openapi.version>1.1.1</micronaut.openapi.version>
     </properties>
 
     <repositories>
