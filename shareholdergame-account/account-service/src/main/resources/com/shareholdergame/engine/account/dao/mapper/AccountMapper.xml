@@ -89,6 +89,12 @@
         where gamer_id = #{gamerId}
     </update>
 
+    <update id="updateUserName" parameterType="map">
+        update a_gamer_account
+        set user_name = #{userName}
+        where gamer_id = #{gamerId}
+    </update>
+
     <update id="updateStatus" parameterType="map">
         update a_gamer_account
         set account_status = #{status}

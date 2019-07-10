@@ -17,4 +17,6 @@ public interface AccountMapper {
     void updateEmail(@Param("gamerId") Long gamerId, @Param("email") String newEmail);
 
     void updateStatus(@Param("gamerId") Long gamerId, @Param("status") AccountStatus newStatus);
+
+    void updateUserName(@Param("gamerId") Long gamerId, @Param("userName") String newUserName);
 }

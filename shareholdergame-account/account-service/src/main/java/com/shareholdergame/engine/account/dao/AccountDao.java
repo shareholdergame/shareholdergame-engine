@@ -43,4 +43,9 @@ public class AccountDao extends BaseDao<AccountMapper> implements AccountMapper 
     public void updateStatus(Long gamerId, AccountStatus newStatus) {
         getMapper().updateStatus(gamerId, newStatus);
     }
+
+    @Override
+    public void updateUserName(Long gamerId, String newUserName) {
+        getMapper().updateUserName(gamerId, newUserName);
+    }
 }

@@ -1,13 +1,16 @@
 package com.shareholdergame.engine.facade.controller;
 
+import com.shareholdergame.engine.account.model.Profile;
 import com.shareholdergame.engine.api.profile.ProfileService;
 import com.shareholdergame.engine.common.http.ErrorBody;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
-import com.shareholdergame.engine.facade.converter.Converters;
+import com.shareholdergame.engine.facade.authentication.AuthenticationUtils;
 import com.shareholdergame.engine.facade.dto.FriendRequestAction;
 import com.shareholdergame.engine.facade.dto.FriendsResponse;
+import com.shareholdergame.engine.facade.dto.Location;
 import com.shareholdergame.engine.facade.dto.Pagination;
 import com.shareholdergame.engine.facade.dto.PlayerAchievements;
+import com.shareholdergame.engine.facade.dto.player.PlayerPersonalInfo;
 import com.shareholdergame.engine.facade.dto.player.ProfileDetails;
 import com.shareholdergame.engine.facade.dto.player.ProfileUpdate;
 import com.shareholdergame.engine.facade.mock.MockDataProvider;
@@ -21,6 +24,7 @@ import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.multipart.StreamingFileUpload;
 import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
 import io.reactivex.Single;
@@ -33,6 +37,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,22 +56,34 @@ public class ProfileController {
 
     /**
      * Returns user's profile.
-     * @param principal user principal.
+     * @param authentication user principal.
      * @return user's profile details.
      */
     @Get
-    public ResponseWrapper<ProfileDetails> getProfile(Principal principal) {
-        return ResponseWrapper.ok(Converters.convert(MockDataProvider.getProfiles().get(0)));
+    public ResponseWrapper<ProfileDetails> getProfile(Authentication authentication) {
+        Profile profile = profileClient.getProfile(AuthenticationUtils.getGamerId(authentication));
+        ProfileDetails profileDetails = new ProfileDetails();
+        PlayerPersonalInfo personalInfo = new PlayerPersonalInfo();
+        personalInfo.about = profile.getAbout();
+        personalInfo.birthday = profile.getBirthday().format(DateTimeFormatter.ISO_DATE);
+        Location location = new Location();
+        location.country = profile.getCountry();
+        location.stateProvince = profile.getStateProvince();
+        location.city = profile.getCity();
+        profileDetails.location = location;
+        profileDetails.personalInfo = personalInfo;
+        return ResponseWrapper.ok(profileDetails);
     }
 
     /**
      * Updates profile.
      * @param profileUpdate updated profile.
-     * @param principal user principal.
+     * @param authentication user principal.
      * @return empty response if ok.
      */
     @Post("/update")
-    public ResponseWrapper<?> updateProfile(@Body ProfileUpdate profileUpdate, Principal principal) {
+    public ResponseWrapper<?> updateProfile(@Body ProfileUpdate profileUpdate, Authentication authentication) {
+        // todo
         return ResponseWrapper.ok();
     }
 

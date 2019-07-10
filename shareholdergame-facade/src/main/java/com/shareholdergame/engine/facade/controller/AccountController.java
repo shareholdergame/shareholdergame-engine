@@ -1,11 +1,11 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.PasswordUpdate;
-import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.api.account.AccountService;
+import com.shareholdergame.engine.api.account.NewAccount;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
-import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
+import com.shareholdergame.engine.facade.authentication.AuthenticationUtils;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
@@ -13,7 +13,13 @@ import com.shareholdergame.engine.facade.dto.SignUp;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Body;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Delete;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Header;
+import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.Put;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
@@ -78,7 +84,7 @@ public class AccountController {
      */
     @Post("/verify/{verificationCode}")
     public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
-        accountClient.verify(getGamerId(authentication), verificationCode);
+        accountClient.verify(AuthenticationUtils.getGamerId(authentication), verificationCode);
         return ResponseWrapper.ok();
     }
 
@@ -146,7 +152,6 @@ public class AccountController {
     public ResponseWrapper<?> changeEmail(@NotBlank String newEmail, Principal principal) {
         // todo = check new email existence
 
-
         return ResponseWrapper.ok();
     }
 
@@ -171,11 +176,7 @@ public class AccountController {
      */
     @Post(value = "/change/password")
     public ResponseWrapper<?> changePassword(@Body PasswordUpdate passwordUpdate, Authentication authentication) {
-        accountClient.changePassword(getGamerId(authentication), passwordUpdate);
+        accountClient.changePassword(AuthenticationUtils.getGamerId(authentication), passwordUpdate);
         return ResponseWrapper.ok();
-    }
-
-    private Long getGamerId(Authentication authentication) {
-        return (Long) authentication.getAttributes().get(AuthenticationConstants.ACCOUNT_ID);
     }
 }

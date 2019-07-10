@@ -1,9 +1,5 @@
 package com.shareholdergame.engine.account.service;
 
-import com.google.common.collect.ImmutableMap;
-import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.PasswordUpdate;
-import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.dao.AccountOperationDao;
@@ -14,6 +10,9 @@ import com.shareholdergame.engine.account.model.AccountOperationType;
 import com.shareholdergame.engine.account.model.AccountStatus;
 import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.account.model.GamerAccount;
+import com.shareholdergame.engine.api.account.AccountService;
+import com.shareholdergame.engine.api.account.NewAccount;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.common.exception.BusinessException;
 import com.shareholdergame.engine.common.exception.Errors;
 import com.shareholdergame.engine.common.sql.transaction.Transactional;
@@ -25,8 +24,6 @@ import io.micronaut.context.event.ApplicationEventPublisher;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.function.Consumer;
 
 @Singleton
 public class AccountServiceImpl implements AccountService {
@@ -108,6 +105,7 @@ public class AccountServiceImpl implements AccountService {
         if (isUserNotExist(gamerId)) {
             throw new BusinessException(Errors.USER_NOT_EXIST.name());
         }
+        // todo
     }
 
     @Override
@@ -117,7 +115,17 @@ public class AccountServiceImpl implements AccountService {
             throw new BusinessException(Errors.WRONG_VERIFICATION_CODE.name());
         }
 
-        callbackMap.get(operation.getOperationType()).accept(operation);
+        switch (operation.getOperationType()) {
+            case CHANGE_STATUS:
+                accountDao.updateStatus(operation.getGamerId(), AccountStatus.valueOf(operation.getNewValue()));
+                break;
+            case CHANGE_USERNAME:
+                accountDao.updateUserName(operation.getGamerId(), operation.getNewValue());
+                break;
+            case CHANGE_EMAIL:
+                accountDao.updateEmail(operation.getGamerId(), operation.getNewValue());
+                break;
+        }
 
         operation.setOperationStatus(AccountOperationStatus.COMPLETED);
         operation.setCompletionDate(LocalDateTime.now());
@@ -135,12 +143,4 @@ public class AccountServiceImpl implements AccountService {
     private boolean isPasswordIdentical(String secret, String passwordHash) {
         return MD5Helper.checkMD5hash(secret, passwordHash);
     }
-
-    private Map<AccountOperationType, Consumer<AccountOperation>> callbackMap = ImmutableMap
-            .<AccountOperationType, Consumer<AccountOperation>>builder()
-            .put(AccountOperationType.CHANGE_EMAIL, accountOperation ->
-                    accountDao.updateEmail(accountOperation.getGamerId(), accountOperation.getNewValue()))
-            .put(AccountOperationType.CHANGE_STATUS, accountOperation ->
-                    accountDao.updateStatus(accountOperation.getGamerId(), AccountStatus.valueOf(accountOperation.getNewValue())))
-            .build();
 }
