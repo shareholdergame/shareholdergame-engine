@@ -1,5 +1,6 @@
 package com.shareholdergame.engine.account.service;
 
+import com.google.common.collect.ImmutableMap;
 import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.api.account.NewAccount;
@@ -24,6 +25,8 @@ import io.micronaut.context.event.ApplicationEventPublisher;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.function.Consumer;
 
 @Singleton
 public class AccountServiceImpl implements AccountService {
@@ -84,7 +87,6 @@ public class AccountServiceImpl implements AccountService {
                 .verificationCode(verificationCode)
                 .initiationDate(creationDate)
                 .expirationDate(expirationDate)
-                .operationStatus(AccountOperationStatus.VERIFICATION_PENDING)
                 .build()
         );
 
@@ -106,12 +108,20 @@ public class AccountServiceImpl implements AccountService {
         if (isUserNotExist(gamerId)) {
             throw new BusinessException(Errors.USER_NOT_EXIST.name());
         }
-
     }
 
     @Override
     public void verify(Long gamerId, String verificationCode) {
+        AccountOperation operation = accountOperationDao.findByGamerIdAndVerificationCode(gamerId, verificationCode);
+        if (null == operation) {
+            throw new BusinessException(Errors.WRONG_VERIFICATION_CODE.name());
+        }
 
+        callbackMap.get(operation.getOperationType()).accept(operation);
+
+        operation.setOperationStatus(AccountOperationStatus.COMPLETED);
+        operation.setCompletionDate(LocalDateTime.now());
+        accountOperationDao.updateStatus(operation);
     }
 
     private boolean isUserNotExist(Long gamerId) {
@@ -125,4 +135,12 @@ public class AccountServiceImpl implements AccountService {
     private boolean isPasswordIdentical(String secret, String passwordHash) {
         return MD5Helper.checkMD5hash(secret, passwordHash);
     }
+
+    private Map<AccountOperationType, Consumer<AccountOperation>> callbackMap = ImmutableMap
+            .<AccountOperationType, Consumer<AccountOperation>>builder()
+            .put(AccountOperationType.CHANGE_EMAIL, accountOperation ->
+                    accountDao.updateEmail(accountOperation.getGamerId(), accountOperation.getNewValue()))
+            .put(AccountOperationType.CHANGE_STATUS, accountOperation ->
+                    accountDao.updateStatus(accountOperation.getGamerId(), AccountStatus.valueOf(accountOperation.getNewValue())))
+            .build();
 }

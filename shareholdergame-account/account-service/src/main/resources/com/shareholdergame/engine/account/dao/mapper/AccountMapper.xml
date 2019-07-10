@@ -82,4 +82,16 @@
         set user_password = #{password}
         where gamer_id = #{gamerId}
     </update>
+
+    <update id="updateEmail" parameterType="map">
+        update a_gamer_account
+        set email = #{email}
+        where gamer_id = #{gamerId}
+    </update>
+
+    <update id="updateStatus" parameterType="map">
+        update a_gamer_account
+        set account_status = #{status}
+        where gamer_id = #{gamerId}
+    </update>
 </mapper>

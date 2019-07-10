@@ -1,6 +1,5 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.api.account.AccountOperationService;
 import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.api.account.NewAccount;
@@ -38,9 +37,6 @@ public class AccountController {
 
     @Inject
     private AccountService accountClient;
-
-    @Inject
-    private AccountOperationService accountOperationClient;
 
     /**
      * Check user existence.
@@ -82,13 +78,6 @@ public class AccountController {
      */
     @Post("/verify/{verificationCode}")
     public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
-        /*AccountOperation accountOperation =
-                accountOperationClient.getOperation(getGamerId(authentication), verificationCode);
-        if (null == accountOperation) {
-            throw new HttpStatusException(HttpStatus.NOT_FOUND, "Nothing to verify");
-        }
-        accountOperationClient.markVerified(accountOperation.getOperationId());*/
-
         accountClient.verify(getGamerId(authentication), verificationCode);
         return ResponseWrapper.ok();
     }
@@ -155,6 +144,9 @@ public class AccountController {
      */
     @Post(value = "/change/email/{newEmail}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public ResponseWrapper<?> changeEmail(@NotBlank String newEmail, Principal principal) {
+        // todo = check new email existence
+
+
         return ResponseWrapper.ok();
     }
 
@@ -166,6 +158,8 @@ public class AccountController {
      */
     @Post(value = "/change/username/{newUserName}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public ResponseWrapper<?> changeUserName(@NotBlank String newUserName, Principal principal) {
+        // todo - check user name existence
+
         return ResponseWrapper.ok();
     }
 

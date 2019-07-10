@@ -35,15 +35,13 @@ public final class AccountOperation {
     }
 
     public AccountOperation(AccountOperationBuilder builder) {
-        this.operationId = builder.operationId;
         this.gamerId = builder.gamerId;
         this.operationType = builder.operationType;
         this.oldValue = builder.oldValue;
         this.newValue = builder.newValue;
         this.verificationCode = builder.verificationCode;
+        this.operationStatus = AccountOperationStatus.VERIFICATION_PENDING;
         this.initiationDate = builder.initiationDate;
-        this.completionDate = builder.completionDate;
-        this.operationStatus = builder.operationStatus;
         this.expirationDate = builder.expirationDate;
     }
 
@@ -79,8 +77,16 @@ public final class AccountOperation {
         return completionDate;
     }
 
+    public void setCompletionDate(LocalDateTime completionDate) {
+        this.completionDate = completionDate;
+    }
+
     public AccountOperationStatus getOperationStatus() {
         return operationStatus;
+    }
+
+    public void setOperationStatus(AccountOperationStatus operationStatus) {
+        this.operationStatus = operationStatus;
     }
 
     public LocalDateTime getExpirationDate() {
@@ -93,23 +99,15 @@ public final class AccountOperation {
 
     public static class AccountOperationBuilder implements Builder<AccountOperation> {
 
-        private Long operationId;
         private Long gamerId;
         private AccountOperationType operationType;
         private String oldValue;
         private String newValue;
         private String verificationCode;
         private LocalDateTime initiationDate;
-        private LocalDateTime completionDate;
-        private AccountOperationStatus operationStatus;
         private LocalDateTime expirationDate;
 
         private AccountOperationBuilder() {
-        }
-
-        public AccountOperationBuilder operationId(Long operationId) {
-            this.operationId = operationId;
-            return this;
         }
 
         public AccountOperationBuilder gamerId(Long gamerId) {
@@ -139,16 +137,6 @@ public final class AccountOperation {
 
         public AccountOperationBuilder initiationDate(LocalDateTime initiationDate) {
             this.initiationDate = initiationDate;
-            return this;
-        }
-
-        public AccountOperationBuilder completionDate(LocalDateTime completionDate) {
-            this.completionDate = completionDate;
-            return this;
-        }
-
-        public AccountOperationBuilder operationStatus(AccountOperationStatus operationStatus) {
-            this.operationStatus = operationStatus;
             return this;
         }
 

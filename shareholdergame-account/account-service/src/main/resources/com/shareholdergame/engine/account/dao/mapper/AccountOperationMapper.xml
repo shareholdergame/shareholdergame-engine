@@ -33,7 +33,7 @@
         where
           gamer_id = #{gamerId}
           and verification_code = #{verificationCode}
-          and operation_status not in ('COMPLETED', 'CANCELLED')
+          and operation_status in ('VERIFICATION_PENDING')
     </select>
 
     <insert id="insertOperation" parameterType="AccountOperation">
@@ -59,7 +59,7 @@
         )
     </insert>
 
-    <update id="updateStatus" parameterType="map">
+    <update id="updateStatus" parameterType="AccountOperation">
         update a_account_operation
         set
           operation_status = #{operationStatus},

@@ -6,9 +6,10 @@ import com.shareholdergame.engine.api.profile.ProfileService;
 import io.micronaut.http.annotation.Controller;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.validation.constraints.NotBlank;
 
-@Controller("/profile")
+@Singleton
 public class ProfileServiceImpl implements ProfileService {
 
     @Inject

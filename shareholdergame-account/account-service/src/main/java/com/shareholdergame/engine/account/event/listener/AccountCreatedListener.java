@@ -29,24 +29,24 @@ public class AccountCreatedListener {
         UserLocation userLocation = countryDetector.detect(ipAddresss);
 
         Profile profile = profileDao.findById(gamerAccount.getId());
-        Profile.ProfileBuilder profileBuilder = Profile.builder();
+
         if (null == profile) {
-            profileBuilder.gamerId(gamerAccount.getId());
-            profileBuilder.country(userLocation.getCountry());
-            profileBuilder.detectedCountry(userLocation.getCountry());
-            profileBuilder.city(userLocation.getCity());
-            profileBuilder.detectedCity(userLocation.getCity());
-            profileBuilder.stateProvince(userLocation.getProvince());
-            profileBuilder.detectedStateProvince(userLocation.getProvince());
+            Profile.ProfileBuilder profileBuilder = Profile.builder()
+                    .gamerId(gamerAccount.getId())
+                    .country(userLocation.getCountry())
+                    .detectedCountry(userLocation.getCountry())
+                    .city(userLocation.getCity())
+                    .detectedCity(userLocation.getCity())
+                    .stateProvince(userLocation.getProvince())
+                    .detectedStateProvince(userLocation.getProvince());
 
             profileDao.insertProfile(profileBuilder.build());
         } else {
-            profileBuilder.profile(profile);
-            profileBuilder.detectedCountry(userLocation.getCountry());
-            profileBuilder.detectedCity(userLocation.getCity());
-            profileBuilder.detectedStateProvince(userLocation.getProvince());
+            profile.setDetectedCountry(userLocation.getCountry());
+            profile.setDetectedCity(userLocation.getCity());
+            profile.setDetectedStateProvince(userLocation.getProvince());
 
-            profileDao.updateProfile(profileBuilder.build());
+            profileDao.updateProfile(profile);
         }
     }
 }
