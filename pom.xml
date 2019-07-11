@@ -15,6 +15,7 @@
         <module>shareholdergame-facade</module>
         <module>shareholdergame-common</module>
         <module>shareholdergame-account</module>
+        <module>shareholdergame-chat</module>
         <module>shareholdergame-db</module>
     </modules>
 
@@ -56,6 +57,11 @@
             </dependency>
             <dependency>
                 <groupId>com.shareholdergame.engine.common</groupId>
+                <artifactId>common-model-support</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.common</groupId>
                 <artifactId>common-dao-support</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -72,6 +78,16 @@
             <dependency>
                 <groupId>com.shareholdergame.engine.account</groupId>
                 <artifactId>account-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.chat</groupId>
+                <artifactId>chat-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.chat</groupId>
+                <artifactId>chat-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
