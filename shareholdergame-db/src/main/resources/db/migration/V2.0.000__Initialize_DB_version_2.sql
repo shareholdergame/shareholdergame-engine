@@ -54,3 +54,14 @@ create table a_profile (
 ) engine=innodb;
 
 alter table a_profile add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+
+create table a_friends (
+  gamer_id bigint not null,
+  friend_id bigint not null,
+  friendship_status char(32) not null check (friendship_status in ('REQUESTED', 'ACCEPTED')),
+  requested_date datetime,
+  accepted_date datetime,
+  primary key (gamer_id, friend_id)
+) engine=innodb;
+
+

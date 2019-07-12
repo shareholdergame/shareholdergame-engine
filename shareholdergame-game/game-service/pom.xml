@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>shareholdergame-account</artifactId>
+        <artifactId>shareholdergame-game</artifactId>
         <groupId>com.shareholdergame.engine</groupId>
         <version>0.1.0</version>
     </parent>
-    <groupId>com.shareholdergame.engine.account</groupId>
-    <artifactId>account-service</artifactId>
+    <groupId>com.shareholdergame.engine.game</groupId>
+    <artifactId>game-service</artifactId>
     <version>0.1.0</version>
-    <name>account-service</name>
+    <name>game-service</name>
 
     <dependencies>
         <dependency>
@@ -22,8 +22,8 @@
             <artifactId>common-service-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.shareholdergame.engine.account</groupId>
-            <artifactId>account-api</artifactId>
+            <groupId>com.shareholdergame.engine.game</groupId>
+            <artifactId>game-api</artifactId>
         </dependency>
 
         <dependency>

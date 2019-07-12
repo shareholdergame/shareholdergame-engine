@@ -12,10 +12,6 @@
     <version>0.1.0</version>
     <name>chat-service</name>
 
-    <properties>
-        <exec.mainClass>com.shareholdergame.engine.account.runner.Application</exec.mainClass>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.shareholdergame.engine.common</groupId>
