@@ -64,4 +64,16 @@ create table a_friends (
   primary key (gamer_id, friend_id)
 ) engine=innodb;
 
+alter table a_friends add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+alter table a_friends add constraint foreign key (friend_id) references a_gamer_account (gamer_id);
 
+create table a_user_session_log (
+  session_id bigint not null auto_increment,
+  gamer_id bigint not null,
+  ip_address char(16) not null,
+  start_time datetime not null,
+  end_time datetime,
+  primary key (session_id)
+) engine=innodb;
+
+alter table a_user_session_log add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);

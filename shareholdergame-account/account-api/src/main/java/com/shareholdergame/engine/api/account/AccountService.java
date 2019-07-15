@@ -16,4 +16,6 @@ public interface AccountService {
     void resetPassword(Long gamerId);
 
     void verify(Long gamerId, String verificationCode);
+
+    void logUserSession(Long gamerId, String ipAddress);
 }

@@ -4,12 +4,8 @@ import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.dao.AccountOperationDao;
 import com.shareholdergame.engine.account.event.AccountCreatedEvent;
-import com.shareholdergame.engine.account.model.AccountOperation;
-import com.shareholdergame.engine.account.model.AccountOperationStatus;
-import com.shareholdergame.engine.account.model.AccountOperationType;
-import com.shareholdergame.engine.account.model.AccountStatus;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
-import com.shareholdergame.engine.account.model.GamerAccount;
+import com.shareholdergame.engine.account.event.UserLoggedInEvent;
+import com.shareholdergame.engine.account.model.*;
 import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.api.account.PasswordUpdate;
@@ -130,6 +126,13 @@ public class AccountServiceImpl implements AccountService {
         operation.setOperationStatus(AccountOperationStatus.COMPLETED);
         operation.setCompletionDate(LocalDateTime.now());
         accountOperationDao.updateStatus(operation);
+    }
+
+    @Override
+    public void logUserSession(Long gamerId, String ipAddress) {
+        UserSessionLogRecord logRecord = UserSessionLogRecord.builder()
+                .gamerId(gamerId).ipAddress(ipAddress).startTime(LocalDateTime.now()).build();
+        eventPublisher.publishEvent(UserLoggedInEvent.of(logRecord));
     }
 
     private boolean isUserNotExist(Long gamerId) {
