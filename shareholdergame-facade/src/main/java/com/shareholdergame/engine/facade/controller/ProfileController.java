@@ -1,6 +1,8 @@
 package com.shareholdergame.engine.facade.controller;
 
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.account.model.Profile;
+import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.api.profile.ProfileService;
 import com.shareholdergame.engine.common.http.ErrorBody;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
@@ -15,6 +17,7 @@ import com.shareholdergame.engine.facade.dto.player.ProfileDetails;
 import com.shareholdergame.engine.facade.dto.player.ProfileUpdate;
 import com.shareholdergame.engine.facade.mock.MockDataProvider;
 import io.micronaut.context.annotation.Value;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
@@ -22,6 +25,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.http.multipart.StreamingFileUpload;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
@@ -53,6 +57,9 @@ public class ProfileController {
 
     @Inject
     private ProfileService profileClient;
+
+    @Inject
+    private AccountService accountService;
 
     /**
      * Returns user's profile.
@@ -129,23 +136,29 @@ public class ProfileController {
     /**
      * Perform specified action on friend request.
      * @param action friend request action.
-     * @param principal user principal.
+     * @param authentication user principal.
      * @return empty response if ok.
      */
     @Post("/friends/{playerName}")
     public ResponseWrapper<?> performRequestAction(@NotBlank String playerName,
-                                                   @QueryValue("action") FriendRequestAction action, Principal principal) {
+                                                   @QueryValue("action") FriendRequestAction action, Authentication authentication) {
         return ResponseWrapper.ok();
     }
 
     /**
      * Sends request to player to add him as friend.
      * @param playerName player name.
-     * @param principal user principal.
+     * @param authentication user principal.
      * @return empty response if ok.
      */
     @Put("/friends/{playerName}")
-    public ResponseWrapper<?> addFriend(@NotBlank String playerName, Principal principal) {
+    public ResponseWrapper<?> addFriend(@NotBlank String playerName, Authentication authentication) {
+        Long gamerId = AuthenticationUtils.getGamerId(authentication);
+        GamerAccount friendAccount = accountService.findUserByNameOrEmail(playerName);
+        if (null == friendAccount) {
+            throw new HttpStatusException(HttpStatus.NOT_FOUND, playerName);
+        }
+        profileClient.createFriendRequest(gamerId, friendAccount.getId());
         return ResponseWrapper.ok();
     }
 }

@@ -1,6 +1,6 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.api.account.PasswordUpdate;
@@ -96,11 +96,11 @@ public class AccountController {
     @Post("/resetpassword/{email}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<?> resetPassword(@NotBlank String email) {
-        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(email);
-        if (null == accountWithPassword) {
+        GamerAccount gamerAccount = accountClient.findUserByNameOrEmail(email);
+        if (null == gamerAccount) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, email);
         }
-        accountClient.resetPassword(accountWithPassword.getGamerAccount().getId());
+        accountClient.resetPassword(gamerAccount.getId());
         return ResponseWrapper.ok();
     }
 
@@ -112,11 +112,11 @@ public class AccountController {
      */
     @Get
     public ResponseWrapper<AccountDetails> getAccount(Principal principal) {
-        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(principal.getName());
-        if (null == accountWithPassword) {
+        GamerAccount gamerAccount = accountClient.findUserByNameOrEmail(principal.getName());
+        if (null == gamerAccount) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, principal.getName());
         }
-        return ResponseWrapper.ok(Converters.convert(accountWithPassword.getGamerAccount()));
+        return ResponseWrapper.ok(Converters.convert(gamerAccount));
     }
 
     /**

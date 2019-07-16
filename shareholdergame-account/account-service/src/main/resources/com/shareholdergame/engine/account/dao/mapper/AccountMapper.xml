@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shareholdergame.engine.account.dao.mapper.AccountMapper">
 
-    <resultMap id="AccountResultMap" type="Account">
+    <resultMap id="AccountResultMap" type="GamerAccount">
         <id column="gamer_id" property="id"/>
         <result column="email" property="email"/>
         <result column="user_name" property="userName"/>
@@ -14,12 +14,12 @@
         <result column="locale" property="language"/>
     </resultMap>
 
-    <resultMap id="AccountWithPasswordResultMap" type="AccountWithPassword">
+    <resultMap id="AccountWithPasswordResultMap" type="GamerAccount">
         <result column="user_password" property="password"/>
         <association property="gamerAccount" resultMap="AccountResultMap"/>
     </resultMap>
 
-    <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
+    <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap">
         select
             gamer_id,
             email,
@@ -54,7 +54,7 @@
             </if>
     </select>
 
-    <insert id="insertAccount" parameterType="AccountWithPassword">
+    <insert id="insertAccount" parameterType="GamerAccount">
         insert into a_gamer_account (
           gamer_id,
           email,

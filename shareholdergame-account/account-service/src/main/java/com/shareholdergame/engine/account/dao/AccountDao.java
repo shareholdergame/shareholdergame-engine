@@ -2,7 +2,7 @@ package com.shareholdergame.engine.account.dao;
 
 import com.shareholdergame.engine.account.dao.mapper.AccountMapper;
 import com.shareholdergame.engine.account.model.AccountStatus;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.common.sql.BaseDao;
 import org.apache.ibatis.session.SqlSessionManager;
 
@@ -16,7 +16,7 @@ public class AccountDao extends BaseDao<AccountMapper> implements AccountMapper 
     }
 
     @Override
-    public AccountWithPassword findByUniqueIds(Long gamerId, String userNameOrEmail) {
+    public GamerAccount findByUniqueIds(Long gamerId, String userNameOrEmail) {
         return getMapper().findByUniqueIds(gamerId, userNameOrEmail);
     }
 
@@ -25,8 +25,8 @@ public class AccountDao extends BaseDao<AccountMapper> implements AccountMapper 
         return getMapper().checkUserExistence(userNameOrEmail, gamerId);
     }
 
-    public void insertAccount(AccountWithPassword accountWithPassword) {
-        getMapper().insertAccount(accountWithPassword);
+    public void insertAccount(GamerAccount gamerAccount) {
+        getMapper().insertAccount(gamerAccount);
     }
 
     @Override

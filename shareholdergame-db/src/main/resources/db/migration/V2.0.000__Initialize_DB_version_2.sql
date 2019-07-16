@@ -55,17 +55,17 @@ create table a_profile (
 
 alter table a_profile add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
 
-create table a_friends (
+create table a_friend (
   gamer_id bigint not null,
   friend_id bigint not null,
-  friendship_status char(32) not null check (friendship_status in ('REQUESTED', 'ACCEPTED')),
-  requested_date datetime,
+  friendship_status char(32) not null check (friendship_status in ('REQUESTED', 'ACCEPTED', 'REJECTED')),
+  requested_date datetime not null,
   accepted_date datetime,
   primary key (gamer_id, friend_id)
 ) engine=innodb;
 
-alter table a_friends add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
-alter table a_friends add constraint foreign key (friend_id) references a_gamer_account (gamer_id);
+alter table a_friend add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+alter table a_friend add constraint foreign key (friend_id) references a_gamer_account (gamer_id);
 
 create table a_user_session_log (
   session_id bigint not null auto_increment,

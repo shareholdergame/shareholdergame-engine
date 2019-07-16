@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountWithPassword findUserByNameOrEmail(String userNameOrEmail) {
+    public GamerAccount findUserByNameOrEmail(String userNameOrEmail) {
         return accountDao.findByUniqueIds(null, userNameOrEmail);
     }
 
@@ -59,6 +59,7 @@ public class AccountServiceImpl implements AccountService {
                 .id(gamerId)
                 .userName(newAccount.getUserName())
                 .email(newAccount.getEmail())
+                .password(MD5Helper.generateMD5hashWithSalt(newAccount.getPassword()))
                 .status(AccountStatus.NEW)
                 .creationDate(creationDate)
                 .language(newAccount.getLanguage())
@@ -68,9 +69,7 @@ public class AccountServiceImpl implements AccountService {
         String verificationCode = RandomStringGenerator.generate(configuration.getVerificationCodeLength());
         LocalDateTime expirationDate = creationDate.plusDays(configuration.getVerificationExpirationDays());
 
-        accountDao.insertAccount(AccountWithPassword.builder()
-                .account(gamerAccount)
-                .password(MD5Helper.generateMD5hashWithSalt(newAccount.getPassword())).build());
+        accountDao.insertAccount(gamerAccount);
 
         accountOperationDao.insertOperation(AccountOperation.builder()
                 .gamerId(gamerId)
@@ -88,8 +87,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void changePassword(Long gamerId, PasswordUpdate passwordUpdate) {
-        AccountWithPassword accountWithPassword = accountDao.findByUniqueIds(gamerId, null);
-        if (isPasswordIdentical(passwordUpdate.getOldPassword(), accountWithPassword.getPassword())) {
+        GamerAccount gamerAccount = accountDao.findByUniqueIds(gamerId, null);
+        if (isPasswordIdentical(passwordUpdate.getOldPassword(), gamerAccount.getPassword())) {
             accountDao.updatePassword(gamerId, MD5Helper.generateMD5hashWithSalt(passwordUpdate.getNewPassword()));
         } else {
             throw new BusinessException(Errors.INCORRECT_PASSWORD.name());

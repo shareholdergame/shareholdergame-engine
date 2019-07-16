@@ -1,13 +1,12 @@
 package com.shareholdergame.engine.api.account;
 
-import com.shareholdergame.engine.account.model.AccountOperation;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.account.model.GamerAccount;
 
 public interface AccountService {
 
     boolean checkUserExistence(String userNameOrEmail);
 
-    AccountWithPassword findUserByNameOrEmail(String userNameOrEmail);
+    GamerAccount findUserByNameOrEmail(String userNameOrEmail);
 
     void createAccount(NewAccount newAccount);
 

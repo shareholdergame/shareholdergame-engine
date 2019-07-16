@@ -1,7 +1,7 @@
 package com.shareholdergame.engine.facade.authentication;
 
 import com.google.common.collect.Lists;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.api.account.AccountService;
 import com.shareholdergame.engine.common.util.MD5Helper;
 import io.micronaut.security.authentication.AuthenticationFailed;
@@ -32,10 +32,10 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
     public Publisher<AuthenticationResponse> authenticate(AuthenticationRequest authenticationRequest) {
         String identity = authenticationRequest.getIdentity().toString();
         String secret = authenticationRequest.getSecret().toString();
-        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(identity);
-        if (accountWithPassword != null && isPasswordIdentical(secret, accountWithPassword.getPassword())) {
-            return Flowable.just(new ExtendedUserDetails(accountWithPassword.getGamerAccount().getUserName(),
-                    Lists.newArrayList(ROLE_USER), accountWithPassword.getGamerAccount().getId()));
+        GamerAccount gamerAccount = accountClient.findUserByNameOrEmail(identity);
+        if (gamerAccount != null && isPasswordIdentical(secret, gamerAccount.getPassword())) {
+            return Flowable.just(new ExtendedUserDetails(gamerAccount.getUserName(),
+                    Lists.newArrayList(ROLE_USER), gamerAccount.getId()));
         }
 
         return Flowable.just(new AuthenticationFailed(AuthenticationFailureReason.CREDENTIALS_DO_NOT_MATCH));
