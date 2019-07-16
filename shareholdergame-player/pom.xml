@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>shareholdergame-engine</artifactId>
+        <groupId>com.shareholdergame.engine</groupId>
+        <version>0.1.0</version>
+    </parent>
+    <artifactId>shareholdergame-player</artifactId>
+    <version>0.1.0</version>
+    <packaging>pom</packaging>
+    <name>shareholdergame-player</name>
+
+    <modules>
+        <module>player-model</module>
+        <module>player-service</module>
+        <module>player-api</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.shareholdergame.engine.common</groupId>
+                <artifactId>common-service-support</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-model</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-api</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-service</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

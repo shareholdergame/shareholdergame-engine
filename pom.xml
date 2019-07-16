@@ -16,6 +16,7 @@
         <module>shareholdergame-common</module>
         <module>shareholdergame-account</module>
         <module>shareholdergame-game</module>
+        <module>shareholdergame-player</module>
         <module>shareholdergame-chat</module>
         <module>shareholdergame-db</module>
     </modules>
