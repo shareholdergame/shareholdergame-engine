@@ -13,6 +13,7 @@
     <name>shareholdergame-game</name>
 
     <modules>
+	<module>game-core</module>
         <module>game-model</module>
         <module>game-service</module>
         <module>game-api</module>
@@ -24,6 +25,11 @@
                 <groupId>com.shareholdergame.engine.common</groupId>
                 <artifactId>common-service-support</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+	    <dependency>
+                <groupId>com.shareholdergame.engine.game</groupId>
+                <artifactId>game-core</artifactId>
+                <version>0.1.0</version>
             </dependency>
             <dependency>
                 <groupId>com.shareholdergame.engine.game</groupId>
