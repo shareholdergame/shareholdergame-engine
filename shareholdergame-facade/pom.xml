@@ -33,6 +33,10 @@
             <artifactId>chat-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.shareholdergame.engine.player</groupId>
+            <artifactId>player-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.shareholdergame.engine.account</groupId>
             <artifactId>account-service</artifactId>
             <scope>runtime</scope>
@@ -40,6 +44,11 @@
         <dependency>
             <groupId>com.shareholdergame.engine.chat</groupId>
             <artifactId>chat-service</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.player</groupId>
+            <artifactId>player-service</artifactId>
             <scope>runtime</scope>
         </dependency>
 

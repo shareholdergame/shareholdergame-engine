@@ -1,4 +1,4 @@
-package com.shareholdergame.engine.game.core.builder;
+package com.shareholdergame.engine.game.core.api.builder;
 
 import com.shareholdergame.engine.game.core.Game;
 import org.testng.Assert;
@@ -8,10 +8,12 @@ public class GameBuilderTest {
 
     @Test
     public void testBuild() {
-        Game game = new GameBuilder()
+        Game game = Builders.newGameBuilder()
                 .cardOption(4, 6)
                 .share(1L, 100)
-                .player().name("alex").finish()
+                .player()
+                    .name("alex")
+                    .finish()
                 .player().name("bob").finish()
                 .build();
 

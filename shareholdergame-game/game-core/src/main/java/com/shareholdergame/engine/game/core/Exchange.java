@@ -1,4 +1,10 @@
 package com.shareholdergame.engine.game.core;
 
-public class Exchange {
+import com.google.common.collect.Sets;
+
+import java.util.Set;
+
+class Exchange {
+
+    private Set<SharePrice> sharePriceSet = Sets.newTreeSet();
 }

@@ -93,6 +93,16 @@
                 <artifactId>chat-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.micronaut</groupId>
