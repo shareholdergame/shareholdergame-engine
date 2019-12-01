@@ -34,9 +34,9 @@
         <mariadb.version>2.3.0</mariadb.version>
         <mybatis.version>3.4.6</mybatis.version>
         <spring.jdbc.version>4.3.22.RELEASE</spring.jdbc.version>
-        <micronaut.version>1.1.4</micronaut.version>
-        <micronaut.security.version>1.1.1</micronaut.security.version>
-        <micronaut.openapi.version>1.1.1</micronaut.openapi.version>
+        <micronaut.version>1.2.6</micronaut.version>
+        <micronaut.security.version>1.2.2</micronaut.security.version>
+        <micronaut.openapi.version>1.3.1</micronaut.openapi.version>
         <testng.version>6.14.3</testng.version>
     </properties>
 
@@ -169,5 +169,16 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.12.2</version>
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                    <xmlOutputDirectory>target/spotbugs</xmlOutputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

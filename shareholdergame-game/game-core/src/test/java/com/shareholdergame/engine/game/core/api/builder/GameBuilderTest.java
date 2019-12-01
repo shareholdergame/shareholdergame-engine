@@ -8,7 +8,7 @@ public class GameBuilderTest {
 
     @Test
     public void testBuild() {
-        Game game = Builders.newGameBuilder()
+        Game game = Game.builder()
                 .cardOption(4, 6)
                 .share(1L, 100)
                 .player()
