@@ -14,7 +14,7 @@ public class PriceScale {
         this.step = step;
     }
 
-    public PriceScale of(int minPrice, int maxPrice, int step) {
+    public static PriceScale of(int minPrice, int maxPrice, int step) {
         return new PriceScale(minPrice, maxPrice, step);
     }
 

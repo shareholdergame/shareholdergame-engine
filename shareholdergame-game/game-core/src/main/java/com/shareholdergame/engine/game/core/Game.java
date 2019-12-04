@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Game {
+public final class Game {
 
     private Exchange exchange;
 

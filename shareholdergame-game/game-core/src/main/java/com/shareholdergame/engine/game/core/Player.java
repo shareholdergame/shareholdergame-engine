@@ -9,8 +9,6 @@ public class Player {
 
     private String name;
 
-    private Set<ShareQuantity> shareQuantitySet = Sets.newTreeSet();
-
     private Player(PlayerBuilder playerBuilder) {
 
     }
@@ -23,7 +21,7 @@ public class Player {
             super(gameBuilder);
         }
 
-        public PlayerBuilder card() {
+        public PlayerBuilder card(CardOperation cardOperation) {
             return this;
         }
 

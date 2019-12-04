@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-public class CardSet {
+public final class CardSet {
 
     private Map<CardGroup, Set<Card>> cards;
 

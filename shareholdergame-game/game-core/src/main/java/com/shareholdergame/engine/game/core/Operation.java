@@ -1,6 +1,8 @@
 package com.shareholdergame.engine.game.core;
 
-public class Operation {
+import org.apache.commons.lang3.Validate;
+
+public final class Operation {
 
     private int operand;
 
@@ -12,6 +14,8 @@ public class Operation {
     }
 
     public static Operation of(int operand, ArithmeticOperation operation) {
+        Validate.isTrue(operand != 0);
+        Validate.notNull(operation);
         return new Operation(operand, operation);
     }
 
