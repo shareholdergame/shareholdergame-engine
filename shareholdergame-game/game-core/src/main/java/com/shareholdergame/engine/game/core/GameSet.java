@@ -55,7 +55,6 @@ public final class GameSet {
         private CardOption cardOption;
         private PriceScale priceScale;
         private Map<Long, Share> shareMap = Maps.newHashMap();
-        private Set<Player.PlayerBuilder> playerBuilders = Sets.newHashSet();
 
         private GameSetBuilder() {
         }

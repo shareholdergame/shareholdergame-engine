@@ -1,37 +1,48 @@
 package com.shareholdergame.engine.game.core;
 
-import com.google.common.collect.Sets;
-import com.shareholdergame.engine.game.core.builder.AbstractNestedBuilder;
-
-import java.util.Set;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Player {
 
     private String name;
 
-    private Player(PlayerBuilder playerBuilder) {
-
+    private Player(String name) {
+        this.name = name;
     }
 
-    public static class PlayerBuilder extends AbstractNestedBuilder<Game.GameBuilder> {
+    public static Player of(String name) {
+        return new Player(name);
+    }
 
-        private String name;
+    public String getName() {
+        return name;
+    }
 
-        PlayerBuilder(Game.GameBuilder gameBuilder) {
-            super(gameBuilder);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
-        public PlayerBuilder card(CardOperation cardOperation) {
-            return this;
-        }
+        if (o == null || getClass() != o.getClass()) return false;
 
-        public PlayerBuilder name(String name) {
-            this.name = name;
-            return this;
-        }
+        Player that = (Player) o;
 
-        public Player build() {
-            return new Player(this);
-        }
+        return new EqualsBuilder()
+                .append(name, that.name)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(name)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("name", name).build();
     }
 }
