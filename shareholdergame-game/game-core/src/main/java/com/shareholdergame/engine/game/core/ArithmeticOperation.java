@@ -2,11 +2,9 @@ package com.shareholdergame.engine.game.core;
 
 public enum ArithmeticOperation {
 
-    ADD(Integer::sum),
+    ADD(Double::sum),
 
-    MULT((value, operand) -> value * operand),
-
-    DIV((value, operand) -> value / operand);
+    MULT((value, operand) -> value * operand);
 
     private ArithmeticOperationFunction function;
 
@@ -14,12 +12,12 @@ public enum ArithmeticOperation {
         this.function = function;
     }
 
-    public int apply(int value, int operand) {
+    public double apply(double value, double operand) {
         return function.apply(value, operand);
     }
 
     @FunctionalInterface
     private interface ArithmeticOperationFunction {
-        int apply(int value, int operand);
+        double apply(double value, double operand);
     }
 }

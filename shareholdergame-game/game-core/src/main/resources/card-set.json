@@ -1,0 +1,954 @@
+[
+  {
+    "cardId": 10011,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10012,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10013,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10021,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10022,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10023,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10031,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10032,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10033,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10041,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10042,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 10043,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 100,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -20,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -10,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 21,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 1
+      },
+      {
+        "operand": -2,
+        "operation": "MULT",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 22,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 2
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 23,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 3
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 24,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 4
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": -21,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 0
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 1
+      }
+    ]
+  },
+  {
+    "cardId": -22,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 0
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 2
+      }
+    ]
+  },
+  {
+    "cardId": -23,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 0
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 3
+      }
+    ]
+  },
+  {
+    "cardId": -24,
+    "group": "major",
+    "operations": [
+      {
+        "operand": 2,
+        "operation": "MULT",
+        "shareId": 0
+      },
+      {
+        "operand": 0.5,
+        "operation": "MULT",
+        "shareId": 4
+      }
+    ]
+  },
+  {
+    "cardId": 301,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 302,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 303,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 304,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": -301,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 1
+      }
+    ]
+  },
+  {
+    "cardId": -302,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 2
+      }
+    ]
+  },
+  {
+    "cardId": -303,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 3
+      }
+    ]
+  },
+  {
+    "cardId": -304,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 4
+      }
+    ]
+  },
+  {
+    "cardId": 401,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 402,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 403,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 404,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": -401,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 1
+      }
+    ]
+  },
+  {
+    "cardId": -402,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 2
+      }
+    ]
+  },
+  {
+    "cardId": -403,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 3
+      }
+    ]
+  },
+  {
+    "cardId": -404,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 4
+      }
+    ]
+  },
+  {
+    "cardId": 501,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 502,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 503,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 504,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 50,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -40,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": -501,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 1
+      }
+    ]
+  },
+  {
+    "cardId": -502,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 2
+      }
+    ]
+  },
+  {
+    "cardId": -503,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 3
+      }
+    ]
+  },
+  {
+    "cardId": -504,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 40,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -50,
+        "operation": "ADD",
+        "shareId": 4
+      }
+    ]
+  },
+  {
+    "cardId": 601,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 1
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 602,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 2
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 603,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 3
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": 604,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 60,
+        "operation": "ADD",
+        "shareId": 4
+      },
+      {
+        "operand": -30,
+        "operation": "ADD",
+        "shareId": 0
+      }
+    ]
+  },
+  {
+    "cardId": -601,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 1
+      }
+    ]
+  },
+  {
+    "cardId": -602,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 2
+      }
+    ]
+  },
+  {
+    "cardId": -603,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 3
+      }
+    ]
+  },
+  {
+    "cardId": -604,
+    "group": "minor",
+    "operations": [
+      {
+        "operand": 30,
+        "operation": "ADD",
+        "shareId": 0
+      },
+      {
+        "operand": -60,
+        "operation": "ADD",
+        "shareId": 4
+      }
+    ]
+  }
+]

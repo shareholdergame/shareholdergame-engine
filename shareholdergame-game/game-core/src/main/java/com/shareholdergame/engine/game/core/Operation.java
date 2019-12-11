@@ -7,26 +7,26 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public final class Operation {
 
-    private int operand;
+    private double operand;
 
     private ArithmeticOperation operation;
 
-    private Operation(int operand, ArithmeticOperation operation) {
+    private Operation(double operand, ArithmeticOperation operation) {
         this.operand = operand;
         this.operation = operation;
     }
 
-    public static Operation of(int operand, ArithmeticOperation operation) {
+    public static Operation of(double operand, ArithmeticOperation operation) {
         Validate.isTrue(operand != 0);
         Validate.notNull(operation);
         return new Operation(operand, operation);
     }
 
-    public int getOperand() {
+    public double getOperand() {
         return operand;
     }
 
-    public int apply(int value) {
+    public double apply(double value) {
         return operation.apply(value, operand);
     }
 
@@ -40,7 +40,6 @@ public final class Operation {
 
         return new EqualsBuilder()
                 .append(operand, that.operand)
-                .append(operation, that.operation)
                 .isEquals();
     }
 
@@ -48,7 +47,6 @@ public final class Operation {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(operand)
-                .append(operation)
                 .toHashCode();
     }
 
