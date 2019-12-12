@@ -4,17 +4,17 @@ public final class Color {
 
     private Long colorId;
 
-    private int initialPrice;
+    private double initialPrice;
 
     private long initialQuantity;
 
-    private Color(Long colorId, int initialPrice, long initialQuantity) {
+    private Color(Long colorId, double initialPrice, long initialQuantity) {
         this.colorId = colorId;
         this.initialPrice = initialPrice;
         this.initialQuantity = initialQuantity;
     }
 
-    public static Color of(Long colorId, int initialPrice, int initialQuantity) {
+    public static Color of(Long colorId, double initialPrice, int initialQuantity) {
         return new Color(colorId, initialPrice, initialQuantity);
     }
 
@@ -22,7 +22,7 @@ public final class Color {
         return colorId;
     }
 
-    public int getInitialPrice() {
+    public double getInitialPrice() {
         return initialPrice;
     }
 

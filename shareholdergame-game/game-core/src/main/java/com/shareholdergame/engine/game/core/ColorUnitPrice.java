@@ -7,7 +7,7 @@ public final class ColorUnitPrice implements Comparable<ColorUnitPrice> {
 
     private final Long colorId;
 
-    private Double price = 0.0;
+    private double price = 0.0;
 
     private ColorUnitPrice(Long colorId) {
         this.colorId = colorId;
@@ -21,7 +21,7 @@ public final class ColorUnitPrice implements Comparable<ColorUnitPrice> {
         return price;
     }
 
-    public static ColorUnitPrice of(Long colorId, Double price) {
+    public static ColorUnitPrice of(Long colorId, double price) {
         ColorUnitPrice colorUnitPrice = new ColorUnitPrice(colorId);
         colorUnitPrice.price = price;
         return colorUnitPrice;

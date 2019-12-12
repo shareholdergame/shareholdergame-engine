@@ -7,7 +7,7 @@ public final class ColorUnitQuantity implements Comparable<ColorUnitQuantity> {
 
     private final Long colorId;
 
-    private Long quantity = 0L;
+    private long quantity = 0L;
 
     private ColorUnitQuantity(Long colorId) {
         this.colorId = colorId;
@@ -17,11 +17,11 @@ public final class ColorUnitQuantity implements Comparable<ColorUnitQuantity> {
         return colorId;
     }
 
-    public Long getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public static ColorUnitQuantity of(Long colorId, Long quantity) {
+    public static ColorUnitQuantity of(Long colorId, long quantity) {
         ColorUnitQuantity colorUnitQuantity = new ColorUnitQuantity(colorId);
         colorUnitQuantity.quantity = quantity;
         return colorUnitQuantity;
