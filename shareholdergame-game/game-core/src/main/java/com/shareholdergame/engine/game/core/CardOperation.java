@@ -7,32 +7,32 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public final class CardOperation {
 
-    private Long shareId;
+    private Long colorId;
 
     private final Operation operation;
 
-    private CardOperation(Long shareId, Operation operation) {
-        this.shareId = shareId;
+    private CardOperation(Long colorId, Operation operation) {
+        this.colorId = colorId;
         this.operation = operation;
     }
 
-    public static CardOperation of(Long shareId, Operation operation) {
-        Validate.notNull(shareId);
+    public static CardOperation of(Long colorId, Operation operation) {
+        Validate.notNull(colorId);
         Validate.notNull(operation);
-        return new CardOperation(shareId, operation);
+        return new CardOperation(colorId, operation);
     }
 
-    public Long getShareId() {
-        return shareId;
+    public Long getColorId() {
+        return colorId;
     }
 
     public Operation getOperation() {
         return operation;
     }
 
-    public void assignShare(Long shareId) {
-        if (shareId.equals(0L)) {
-            this.shareId = shareId;
+    public void assignColor(Long colorId) {
+        if (colorId.equals(0L)) {
+            this.colorId = colorId;
         } else {
             throw new RuntimeException();
         }
@@ -47,7 +47,7 @@ public final class CardOperation {
         CardOperation that = (CardOperation) o;
 
         return new EqualsBuilder()
-                .append(shareId, that.shareId)
+                .append(colorId, that.colorId)
                 .append(operation, that.operation)
                 .isEquals();
     }
@@ -55,7 +55,7 @@ public final class CardOperation {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(shareId)
+                .append(colorId)
                 .append(operation)
                 .toHashCode();
     }
@@ -63,7 +63,7 @@ public final class CardOperation {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("shareId", shareId)
+                .append("colorId", colorId)
                 .append("operation", operation)
                 .build();
     }

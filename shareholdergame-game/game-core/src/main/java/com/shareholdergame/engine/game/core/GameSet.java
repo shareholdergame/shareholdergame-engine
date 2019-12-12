@@ -1,7 +1,6 @@
 package com.shareholdergame.engine.game.core;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import org.apache.commons.lang3.builder.Builder;
 
 import java.util.Collections;
@@ -14,7 +13,7 @@ public final class GameSet {
 
     private PriceScale priceScale;
 
-    private Map<Long, Share> shares;
+    private Map<Long, Color> shares;
 
     private Set<Player> players;
 
@@ -38,7 +37,7 @@ public final class GameSet {
         return priceScale;
     }
 
-    public Map<Long, Share> getShares() {
+    public Map<Long, Color> getShares() {
         return Collections.unmodifiableMap(shares);
     }
 
@@ -54,7 +53,7 @@ public final class GameSet {
 
         private CardOption cardOption;
         private PriceScale priceScale;
-        private Map<Long, Share> shareMap = Maps.newHashMap();
+        private Map<Long, Color> shareMap = Maps.newHashMap();
 
         private GameSetBuilder() {
         }
@@ -69,8 +68,8 @@ public final class GameSet {
             return this;
         }
 
-        public GameSetBuilder share(Long shareId, int initialPrice, int initialQuantity) {
-            shareMap.putIfAbsent(shareId, Share.of(shareId, initialPrice, initialQuantity));
+        public GameSetBuilder color(Long colorId, int initialPrice, int initialQuantity) {
+            shareMap.putIfAbsent(colorId, Color.of(colorId, initialPrice, initialQuantity));
             return this;
         }
 

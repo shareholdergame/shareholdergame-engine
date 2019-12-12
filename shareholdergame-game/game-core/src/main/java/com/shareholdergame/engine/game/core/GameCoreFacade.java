@@ -33,7 +33,7 @@ public class GameCoreFacade {
 
         public GameReport initialize() {
             GameSet gameSet = GameSet.builder()
-                    .share(1L, 100)
+                    .color(1L, 100, 1)
                     .build();
 
 

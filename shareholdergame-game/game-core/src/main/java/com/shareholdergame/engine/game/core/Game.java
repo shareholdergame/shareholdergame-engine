@@ -1,12 +1,8 @@
 package com.shareholdergame.engine.game.core;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import org.apache.commons.lang3.builder.Builder;
 
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class Game {
 

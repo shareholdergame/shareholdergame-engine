@@ -6,22 +6,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -32,22 +32,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -58,22 +58,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -84,22 +84,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -110,22 +110,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -136,22 +136,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -162,22 +162,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -188,22 +188,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -214,22 +214,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -240,22 +240,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -266,22 +266,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -292,22 +292,22 @@
       {
         "operand": 100,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -20,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -10,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -318,12 +318,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -2,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -334,12 +334,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -350,12 +350,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -366,12 +366,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -382,12 +382,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 1
+        "colorId": 1
       }
     ]
   },
@@ -398,12 +398,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 2
+        "colorId": 2
       }
     ]
   },
@@ -414,12 +414,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 3
+        "colorId": 3
       }
     ]
   },
@@ -430,12 +430,12 @@
       {
         "operand": 2,
         "operation": "MULT",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": 0.5,
         "operation": "MULT",
-        "shareId": 4
+        "colorId": 4
       }
     ]
   },
@@ -446,12 +446,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -462,12 +462,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -478,12 +478,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -494,12 +494,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -510,12 +510,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       }
     ]
   },
@@ -526,12 +526,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       }
     ]
   },
@@ -542,12 +542,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       }
     ]
   },
@@ -558,12 +558,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       }
     ]
   },
@@ -574,12 +574,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -590,12 +590,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -606,12 +606,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -622,12 +622,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -638,12 +638,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       }
     ]
   },
@@ -654,12 +654,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       }
     ]
   },
@@ -670,12 +670,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       }
     ]
   },
@@ -686,12 +686,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       }
     ]
   },
@@ -702,12 +702,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -718,12 +718,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -734,12 +734,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -750,12 +750,12 @@
       {
         "operand": 50,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -766,12 +766,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       }
     ]
   },
@@ -782,12 +782,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       }
     ]
   },
@@ -798,12 +798,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       }
     ]
   },
@@ -814,12 +814,12 @@
       {
         "operand": 40,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -50,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       }
     ]
   },
@@ -830,12 +830,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -846,12 +846,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -862,12 +862,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -878,12 +878,12 @@
       {
         "operand": 60,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       },
       {
         "operand": -30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       }
     ]
   },
@@ -894,12 +894,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 1
+        "colorId": 1
       }
     ]
   },
@@ -910,12 +910,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 2
+        "colorId": 2
       }
     ]
   },
@@ -926,12 +926,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 3
+        "colorId": 3
       }
     ]
   },
@@ -942,12 +942,12 @@
       {
         "operand": 30,
         "operation": "ADD",
-        "shareId": 0
+        "colorId": 0
       },
       {
         "operand": -60,
         "operation": "ADD",
-        "shareId": 4
+        "colorId": 4
       }
     ]
   }

@@ -1,25 +1,25 @@
 package com.shareholdergame.engine.game.core;
 
-public final class Share {
+public final class Color {
 
-    private Long shareId;
+    private Long colorId;
 
     private int initialPrice;
 
     private long initialQuantity;
 
-    private Share(Long shareId, int initialPrice, long initialQuantity) {
-        this.shareId = shareId;
+    private Color(Long colorId, int initialPrice, long initialQuantity) {
+        this.colorId = colorId;
         this.initialPrice = initialPrice;
         this.initialQuantity = initialQuantity;
     }
 
-    public static Share of(Long shareId, int initialPrice, int initialQuantity) {
-        return new Share(shareId, initialPrice, initialQuantity);
+    public static Color of(Long colorId, int initialPrice, int initialQuantity) {
+        return new Color(colorId, initialPrice, initialQuantity);
     }
 
-    public Long getShareId() {
-        return shareId;
+    public Long getColorId() {
+        return colorId;
     }
 
     public int getInitialPrice() {

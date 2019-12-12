@@ -6,5 +6,5 @@ public class PriceOperation {
 
     private Long appliedCardId;
 
-    private Map<Long, Integer> assignedShares;
+    private Map<Long, Double> assignedColors;
 }

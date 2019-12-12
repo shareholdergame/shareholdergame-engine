@@ -2,31 +2,31 @@ package com.shareholdergame.engine.game.core;
 
 public class PriceScale {
 
-    private int minPrice;
+    private double minPrice;
 
-    private int maxPrice;
+    private double maxPrice;
 
-    private int step;
+    private double step;
 
-    private PriceScale(int minPrice, int maxPrice, int step) {
+    private PriceScale(double minPrice, double maxPrice, double step) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.step = step;
     }
 
-    public static PriceScale of(int minPrice, int maxPrice, int step) {
+    public static PriceScale of(double minPrice, double maxPrice, double step) {
         return new PriceScale(minPrice, maxPrice, step);
     }
 
-    public int getMinPrice() {
+    public double getMinPrice() {
         return minPrice;
     }
 
-    public int getMaxPrice() {
+    public double getMaxPrice() {
         return maxPrice;
     }
 
-    public int getStep() {
+    public double getStep() {
         return step;
     }
 }
