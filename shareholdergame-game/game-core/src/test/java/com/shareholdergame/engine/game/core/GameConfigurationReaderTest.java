@@ -4,13 +4,11 @@ import com.shareholdergame.engine.game.core.exception.CardSetGenerationException
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
-public class CardSetLoaderTest {
+public class GameConfigurationReaderTest {
 
     @Test
     public void testLoad() throws CardSetGenerationException {
-        CardSet cardSet = new CardSetLoader().load();
+        CardSet cardSet = new GameConfigurationReader().load();
         Assert.assertNotNull(cardSet);
         Assert.assertEquals(20, cardSet.getMajorCards().size());
         Assert.assertEquals(32, cardSet.getMinorCards().size());

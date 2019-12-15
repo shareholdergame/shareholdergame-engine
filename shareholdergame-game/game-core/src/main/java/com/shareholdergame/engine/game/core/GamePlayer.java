@@ -8,5 +8,5 @@ public class GamePlayer {
 
     private int turnOrder;
 
-    private Set<Card> cards;
+    private Set<PlayerCard> cards;
 }

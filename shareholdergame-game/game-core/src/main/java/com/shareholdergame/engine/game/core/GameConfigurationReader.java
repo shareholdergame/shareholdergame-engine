@@ -10,8 +10,9 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
-public class CardSetLoader {
+public class GameConfigurationReader {
 
+    private static final String GAME_CLASSIC_CONFIG_JSON = "game-classic-config.json";
     private static final String CARD_SET_JSON = "card-set.json";
     private static final String CARD_ID = "cardId";
     private static final String GROUP = "group";
@@ -22,8 +23,14 @@ public class CardSetLoader {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+    public GameConfiguration readConfiguration() {
+        JsonNode rootNode = loadJson(GAME_CLASSIC_CONFIG_JSON);
+
+        return null;
+    }
+
     public CardSet load() throws CardSetGenerationException {
-        JsonNode jsonNode = loadJson();
+        JsonNode jsonNode = loadJson(CARD_SET_JSON);
         if (!jsonNode.isArray() || jsonNode.isEmpty()) {
             throw new CardSetGenerationException();
         }
@@ -61,9 +68,9 @@ public class CardSetLoader {
                 .orElseThrow(CardSetGenerationException::new);
     }
 
-    private JsonNode loadJson() {
+    private JsonNode loadJson(String fileName) {
         final AtomicReference<JsonNode> jsonNodeAtomicReference = new AtomicReference<>();
-        Optional.ofNullable(this.getClass().getClassLoader().getResource(CARD_SET_JSON))
+        Optional.ofNullable(this.getClass().getClassLoader().getResource(fileName))
                 .ifPresent(url -> {
             try {
                 jsonNodeAtomicReference.set(mapper.readTree(url));

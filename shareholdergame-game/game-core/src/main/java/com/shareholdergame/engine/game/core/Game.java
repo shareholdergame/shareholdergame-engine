@@ -1,24 +1,40 @@
 package com.shareholdergame.engine.game.core;
 
 import org.apache.commons.lang3.builder.Builder;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Map;
 import java.util.Set;
 
 public final class Game {
 
     private String letter;
 
-    private Set<GamePlayer> players;
+    private GameStatus gameStatus;
+
+    private Map<Integer, Pair<String, Set<PlayerCard>>> turnOrderMap;
 
     private Game(GameBuilder gameBuilder) {
-
+        this.gameStatus = GameStatus.CREATED;
     }
 
     public static GameBuilder builder() {
         return new GameBuilder();
     }
 
-    public void doTurn() {
+    public String getLetter() {
+        return letter;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public void start() {
+
+    }
+
+    public void doTurn(Turn turn) {
 
     }
 
