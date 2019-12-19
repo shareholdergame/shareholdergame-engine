@@ -2,6 +2,9 @@ package com.shareholdergame.engine.game.core;
 
 public class GameCoreFacade {
 
+    GameCoreFacade() {
+    }
+
     public void startGameSet(Long gameSetId, String gameConfigurationName, CardOption cardOption, String... players) {
 
     }

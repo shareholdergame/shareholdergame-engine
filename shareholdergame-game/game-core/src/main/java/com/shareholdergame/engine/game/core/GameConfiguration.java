@@ -5,6 +5,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
 
+import java.util.Collections;
 import java.util.Set;
 
 public final class GameConfiguration {
@@ -29,7 +30,7 @@ public final class GameConfiguration {
     }
 
     public Set<Color> getColors() {
-        return colors;
+        return Collections.unmodifiableSet(colors);
     }
 
     public CardSet getCardSet() {

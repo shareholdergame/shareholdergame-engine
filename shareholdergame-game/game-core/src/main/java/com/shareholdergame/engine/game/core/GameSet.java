@@ -48,7 +48,7 @@ public final class GameSet {
         private CardOption cardOption;
         private GameConfiguration gameConfiguration;
         private Set<String> players;
-        private Map<Character, Game.GameBuilder> gameBuilderMap = Maps.newHashMap();
+        private Map<String, Game.GameBuilder> gameBuilderMap = Maps.newHashMap();
 
         private GameSetBuilder() {
         }
@@ -68,8 +68,10 @@ public final class GameSet {
             return this;
         }
 
-        public Game.GameBuilder game(Character gameLetter) {
-            Game.GameBuilder gameBuilder = Game.builder(this);
+        public Game.GameBuilder game(String gameLetter) {
+            Game.GameBuilder gameBuilder = Game.builder(this)
+                    .letter(gameLetter)
+                    .priceScale(gameConfiguration.getPriceScale());
             gameBuilderMap.putIfAbsent(gameLetter, gameBuilder);
             return gameBuilder;
         }

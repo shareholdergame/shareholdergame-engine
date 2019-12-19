@@ -1,5 +1,6 @@
 package com.shareholdergame.engine.game.core;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class GameSetTest {
@@ -12,7 +13,7 @@ public class GameSetTest {
                 .gameConfiguration(gc)
                 .cardOption(co)
                 .players("alex", "bob")
-                .game('A')
+                .game("A")
                 .turnOrder("alex", "bob")
                 .playerCardSet("alex")
                 .addCard(PlayerCard.builder().build())
@@ -21,9 +22,11 @@ public class GameSetTest {
                 .addCard(PlayerCard.builder().build())
                 .finish()
                 .finish()
-                .game('B')
+                .game("B")
                 .turnOrder("bob", "alex")
                 .finish()
                 .build();
+
+        Assert.assertNotNull(gameSet);
     }
 }
