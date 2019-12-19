@@ -10,6 +10,7 @@ public final class PlayerCard {
     private boolean applied;
 
     private PlayerCard(PlayerCardBuilder builder) {
+        this.applied = builder.applied;
         this.card = builder.card;
     }
 
@@ -32,12 +33,18 @@ public final class PlayerCard {
         applied = true;
     }
 
-    private static class PlayerCardBuilder implements Builder<PlayerCard> {
+    public static class PlayerCardBuilder implements Builder<PlayerCard> {
 
         private Card card;
+        private boolean applied;
 
         public PlayerCardBuilder card(Card card) {
             this.card = card;
+            return this;
+        }
+
+        public PlayerCardBuilder applied(boolean applied) {
+            this.applied = applied;
             return this;
         }
 

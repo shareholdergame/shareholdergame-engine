@@ -1,5 +1,6 @@
 package com.shareholdergame.engine.game.core;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
@@ -18,7 +19,7 @@ public final class GameSet {
 
     private Set<Player> players;
 
-    private Map<Character, Game> gameMap;
+    private Map<Character, Game> games;
 
     private GameSet(GameSetBuilder builder) {
         this.cardOption = builder.cardOption;
@@ -39,7 +40,7 @@ public final class GameSet {
     }
 
     public Collection<Game> getGames() {
-        return Collections.unmodifiableCollection(gameMap.values());
+        return Collections.unmodifiableCollection(games.values());
     }
 
     public static class GameSetBuilder implements Builder<GameSet> {
@@ -47,12 +48,13 @@ public final class GameSet {
         private CardOption cardOption;
         private GameConfiguration gameConfiguration;
         private Set<String> players;
+        private Map<Character, Game.GameBuilder> gameBuilderMap = Maps.newHashMap();
 
         private GameSetBuilder() {
         }
 
-        public GameSetBuilder cardOption(int major, int minor) {
-            this.cardOption = CardOption.of(major, minor);
+        public GameSetBuilder cardOption(CardOption cardOption) {
+            this.cardOption = cardOption;
             return this;
         }
 
@@ -64,6 +66,12 @@ public final class GameSet {
         public GameSetBuilder players(String... players) {
             this.players = Sets.newHashSet(players);
             return this;
+        }
+
+        public Game.GameBuilder game(Character gameLetter) {
+            Game.GameBuilder gameBuilder = Game.builder(this);
+            gameBuilderMap.putIfAbsent(gameLetter, gameBuilder);
+            return gameBuilder;
         }
 
         @Override
