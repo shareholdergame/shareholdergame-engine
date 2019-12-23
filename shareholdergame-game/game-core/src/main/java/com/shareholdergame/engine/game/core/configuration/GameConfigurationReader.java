@@ -1,8 +1,9 @@
-package com.shareholdergame.engine.game.core;
+package com.shareholdergame.engine.game.core.configuration;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.shareholdergame.engine.game.core.*;
 import com.shareholdergame.engine.game.core.exception.CardSetGenerationException;
 
 import java.io.IOException;

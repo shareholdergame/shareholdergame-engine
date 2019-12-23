@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.Builder;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public final class Game {
 
@@ -34,7 +35,21 @@ public final class Game {
             GamePlayer gamePlayer = gamePlayerBuilder.cards(playerCardSetBuilder.playerCards).build();
             turnOrderMap.putIfAbsent(gamePlayer.getTurnOrder(), gamePlayer);
         }
+        buildInitialPositions();
+    }
 
+    private void buildInitialPositions() {
+        turnOrderMap.values().forEach(new Consumer<GamePlayer>() {
+            @Override
+            public void accept(GamePlayer gamePlayer) {
+                colors.forEach(new Consumer<Color>() {
+                    @Override
+                    public void accept(Color color) {
+                        //todo
+                    }
+                });
+            }
+        });
     }
 
     static GameBuilder builder(GameSet.GameSetBuilder gameSetBuilder) {

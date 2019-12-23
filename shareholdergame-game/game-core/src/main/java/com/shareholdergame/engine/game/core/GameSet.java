@@ -2,6 +2,7 @@ package com.shareholdergame.engine.game.core;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.shareholdergame.engine.game.core.configuration.GameConfiguration;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
 
@@ -19,12 +20,17 @@ public final class GameSet {
 
     private Set<Player> players;
 
-    private Map<Character, Game> games;
+    private Map<String, Game> games;
 
     private GameSet(GameSetBuilder builder) {
         this.cardOption = builder.cardOption;
         this.gameConfiguration = builder.gameConfiguration;
         this.players = builder.players.stream().map(Player::of).collect(Collectors.toSet());
+        this.games = Maps.newTreeMap();
+        builder.gameBuilderMap.values().forEach(gameBuilder -> {
+            Game game = gameBuilder.build();
+            games.putIfAbsent(game.getLetter(), game);
+        });
     }
 
     public static GameSetBuilder builder() {
@@ -37,6 +43,10 @@ public final class GameSet {
 
     public GameConfiguration getGameConfiguration() {
         return gameConfiguration;
+    }
+
+    public Set<Player> getPlayers() {
+        return Collections.unmodifiableSet(players);
     }
 
     public Collection<Game> getGames() {
@@ -82,6 +92,7 @@ public final class GameSet {
             Validate.notNull(gameConfiguration);
             Validate.notEmpty(players);
             Validate.isTrue(players.size() > 1);
+            Validate.isTrue(gameBuilderMap.size() >= players.size());
             return new GameSet(this);
         }
     }

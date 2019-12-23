@@ -1,5 +1,6 @@
 package com.shareholdergame.engine.game.core;
 
+import com.shareholdergame.engine.game.core.configuration.GameConfigurationReader;
 import com.shareholdergame.engine.game.core.exception.CardSetGenerationException;
 import org.testng.Assert;
 import org.testng.annotations.Test;

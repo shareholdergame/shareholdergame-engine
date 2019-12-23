@@ -28,7 +28,7 @@ public final class CardSet {
         return Collections.unmodifiableSet(cards.get(CardGroup.MINOR));
     }
 
-    static class CardSetBuilder implements Builder<CardSet> {
+    public static class CardSetBuilder implements Builder<CardSet> {
 
         private Map<CardGroup, Set<Card>> cards = ImmutableMap.<CardGroup, Set<Card>>builder()
                 .put(CardGroup.MAJOR, Sets.newHashSet())

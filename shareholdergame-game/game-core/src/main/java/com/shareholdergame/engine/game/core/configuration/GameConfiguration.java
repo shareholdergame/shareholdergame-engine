@@ -1,7 +1,9 @@
-package com.shareholdergame.engine.game.core;
+package com.shareholdergame.engine.game.core.configuration;
 
 import com.google.common.collect.Sets;
-import com.sun.org.apache.xerces.internal.impl.dv.ValidatedInfo;
+import com.shareholdergame.engine.game.core.CardSet;
+import com.shareholdergame.engine.game.core.Color;
+import com.shareholdergame.engine.game.core.PriceScale;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
 

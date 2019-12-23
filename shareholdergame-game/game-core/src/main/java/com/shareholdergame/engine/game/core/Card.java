@@ -59,7 +59,7 @@ public final class Card {
                 .append("cardId", cardId).build();
     }
 
-    static class CardBuilder implements Builder<Card> {
+    public static class CardBuilder implements Builder<Card> {
 
         private Long cardId;
         private Set<CardOperation> operations = Sets.newHashSet();
