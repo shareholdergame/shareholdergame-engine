@@ -25,6 +25,10 @@
             <groupId>com.shareholdergame.engine.game</groupId>
             <artifactId>game-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.game</groupId>
+            <artifactId>game-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.micronaut</groupId>

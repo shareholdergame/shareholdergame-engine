@@ -5,4 +5,6 @@ public class TurnRecord {
     private int roundNumber;
 
     private int turnNumber;
+
+    private BuySellStepResult buySellStepResult;
 }

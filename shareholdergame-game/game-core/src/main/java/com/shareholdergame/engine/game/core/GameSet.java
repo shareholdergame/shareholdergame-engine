@@ -1,16 +1,17 @@
 package com.shareholdergame.engine.game.core;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.shareholdergame.engine.game.core.configuration.GameConfiguration;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class GameSet {
 
@@ -81,6 +82,7 @@ public final class GameSet {
         public Game.GameBuilder game(String gameLetter) {
             Game.GameBuilder gameBuilder = Game.builder(this)
                     .letter(gameLetter)
+                    .colors(gameConfiguration.getColors())
                     .priceScale(gameConfiguration.getPriceScale());
             gameBuilderMap.putIfAbsent(gameLetter, gameBuilder);
             return gameBuilder;

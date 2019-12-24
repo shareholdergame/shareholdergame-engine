@@ -5,10 +5,10 @@ import com.google.common.collect.Sets;
 import com.shareholdergame.engine.game.core.builder.AbstractNestedBuilder;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public final class Game {
 
@@ -39,16 +39,12 @@ public final class Game {
     }
 
     private void buildInitialPositions() {
-        turnOrderMap.values().forEach(new Consumer<GamePlayer>() {
-            @Override
-            public void accept(GamePlayer gamePlayer) {
-                colors.forEach(new Consumer<Color>() {
-                    @Override
-                    public void accept(Color color) {
-                        //todo
-                    }
-                });
-            }
+        turnOrderMap.values().forEach(gamePlayer -> {
+            PlayerPosition.PlayerPositionBuilder playerPositionBuilder = PlayerPosition.builder();
+            colors.forEach(color -> playerPositionBuilder.addColorUnit(color.getColorId(), color.getInitialQuantity()));
+            PlayerPosition playerPosition = playerPositionBuilder.build();
+            BuySellStepResult buySellStepResult = BuySellStepResult.of(playerPosition);
+
         });
     }
 
@@ -87,6 +83,11 @@ public final class Game {
 
         public GameBuilder turnOrder(String... playersInTurnOrder) {
             this.playersInTurnOrder = playersInTurnOrder;
+            return this;
+        }
+
+        public GameBuilder colors(Set<Color> colors) {
+            this.colors = colors;
             return this;
         }
 
