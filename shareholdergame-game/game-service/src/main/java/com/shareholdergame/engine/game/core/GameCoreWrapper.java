@@ -1,5 +1,7 @@
 package com.shareholdergame.engine.game.core;
 
+import com.shareholdergame.engine.game.core.facade.GameCoreFacade;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 

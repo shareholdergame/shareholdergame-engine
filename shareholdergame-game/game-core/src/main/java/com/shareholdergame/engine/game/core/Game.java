@@ -3,9 +3,9 @@ package com.shareholdergame.engine.game.core;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.shareholdergame.engine.game.core.builder.AbstractNestedBuilder;
+import com.shareholdergame.engine.game.core.turn.Turn;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +21,8 @@ public final class Game {
     private PriceScale priceScale;
 
     private Set<Color> colors;
+
+    private TurnSet turnSet = new TurnSet();
 
     private Game(GameBuilder builder) {
         this.letter = builder.letter;
@@ -39,12 +41,14 @@ public final class Game {
     }
 
     private void buildInitialPositions() {
-        turnOrderMap.values().forEach(gamePlayer -> {
+        turnOrderMap.keySet().forEach(turnOrder -> {
             PlayerPosition.PlayerPositionBuilder playerPositionBuilder = PlayerPosition.builder();
             colors.forEach(color -> playerPositionBuilder.addColorUnit(color.getColorId(), color.getInitialQuantity()));
             PlayerPosition playerPosition = playerPositionBuilder.build();
             BuySellStepResult buySellStepResult = BuySellStepResult.of(playerPosition);
-
+            TurnRecord turnRecord = TurnRecord.builder()
+                    .roundNumber(0).turnNumber(turnOrder).zeroStep(buySellStepResult).build();
+            turnSet.addTurn(turnRecord);
         });
     }
 
@@ -86,7 +90,7 @@ public final class Game {
             return this;
         }
 
-        public GameBuilder colors(Set<Color> colors) {
+        GameBuilder colors(Set<Color> colors) {
             this.colors = colors;
             return this;
         }
@@ -97,7 +101,7 @@ public final class Game {
             return playerCardSetBuilder;
         }
 
-        public GameBuilder priceScale(PriceScale priceScale) {
+        GameBuilder priceScale(PriceScale priceScale) {
             this.priceScale = priceScale;
             return this;
         }

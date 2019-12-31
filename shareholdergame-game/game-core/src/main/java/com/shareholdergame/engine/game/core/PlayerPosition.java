@@ -5,14 +5,12 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
 
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.function.BiConsumer;
 
 public final class PlayerPosition {
 
     private Map<Long, Long> colorUnits;
 
-    private double cash = 0.0;
+    private double cash;
 
     private PlayerPosition(PlayerPositionBuilder builder) {
         this.colorUnits = builder.colorUnits;
@@ -34,7 +32,6 @@ public final class PlayerPosition {
     public static class PlayerPositionBuilder implements Builder<PlayerPosition> {
 
         private Map<Long, Long> colorUnits = Maps.newHashMap();
-
         private double cash;
 
         public PlayerPositionBuilder addColorUnit(Long colorId, Long unitsQuantity) {

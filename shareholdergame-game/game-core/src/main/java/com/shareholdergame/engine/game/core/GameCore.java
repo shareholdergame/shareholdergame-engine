@@ -1,6 +1,7 @@
 package com.shareholdergame.engine.game.core;
 
 import com.shareholdergame.engine.game.core.configuration.GameConfigurationManager;
+import com.shareholdergame.engine.game.core.facade.GameCoreFacade;
 
 public final class GameCore {
 

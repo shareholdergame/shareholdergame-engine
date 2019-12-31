@@ -11,7 +11,7 @@ public final class BuySellStepResult {
 
     private Map<Long, Long> colorUnits;
 
-    private double cash = 0.0;
+    private double cash;
 
     private BuySellStepResult(PlayerPosition playerPosition) {
         this.colorUnits = Maps.newHashMap(playerPosition.getColorUnits());
