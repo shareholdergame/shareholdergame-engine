@@ -1,5 +1,6 @@
 package com.shareholdergame.engine.facade.dto.game;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Set;
  */
 public class NewGame {
 
-    public Set<GameOption> options;
+    public Map<String, Object> options;
 
     public Set<String> invitedPlayers;
 }

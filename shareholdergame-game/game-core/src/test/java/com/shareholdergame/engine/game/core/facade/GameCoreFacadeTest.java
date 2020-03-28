@@ -7,13 +7,10 @@ import com.shareholdergame.engine.game.core.exception.ConfigurationReadingExcept
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 public class GameCoreFacadeTest {
 
     @Test
     public void testStartGameSet() throws ConfigurationReadingException {
-        GameCore.initialize();
         GameCoreFacade gameCoreFacade = GameCore.facade();
 
         gameCoreFacade.startGameSet(1L, gameCoreFacade.getDefaultConfiguration(),

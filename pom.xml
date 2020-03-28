@@ -95,6 +95,16 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.shareholdergame.engine.game</groupId>
+                <artifactId>game-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.game</groupId>
+                <artifactId>game-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.shareholdergame.engine.player</groupId>
                 <artifactId>player-api</artifactId>
                 <version>${project.version}</version>

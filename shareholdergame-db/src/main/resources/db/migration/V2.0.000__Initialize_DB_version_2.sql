@@ -77,3 +77,18 @@ create table a_user_session_log (
 ) engine=innodb;
 
 alter table a_user_session_log add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+
+/* Active games */
+
+create table ag_game_set (
+    game_set_id bigint not null,
+    
+    primary key (game_set_id)
+) engine=innodb;
+
+/* Finished games (Archive) */
+
+create table fg_game_set (
+    game_set_id bigint not null,
+    primary key (game_set_id)
+) engine=innodb;
