@@ -12,10 +12,6 @@
     <version>0.1.0</version>
     <name>account-service</name>
 
-    <properties>
-        <exec.mainClass>com.shareholdergame.engine.account.runner.Application</exec.mainClass>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.shareholdergame.engine.common</groupId>
@@ -41,8 +37,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.configuration</groupId>
-            <artifactId>micronaut-hibernate-validator</artifactId>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -51,7 +47,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.configuration</groupId>
+            <groupId>io.micronaut.sql</groupId>
             <artifactId>micronaut-jdbc-hikari</artifactId>
             <scope>compile</scope>
         </dependency>

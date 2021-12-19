@@ -81,12 +81,24 @@ public final class Profile {
         return detectedCountry;
     }
 
+    public void setDetectedCountry(String detectedCountry) {
+        this.detectedCountry = detectedCountry;
+    }
+
     public String getDetectedStateProvince() {
         return detectedStateProvince;
     }
 
+    public void setDetectedStateProvince(String detectedStateProvince) {
+        this.detectedStateProvince = detectedStateProvince;
+    }
+
     public String getDetectedCity() {
         return detectedCity;
+    }
+
+    public void setDetectedCity(String detectedCity) {
+        this.detectedCity = detectedCity;
     }
 
     public static ProfileBuilder builder() {
@@ -162,21 +174,6 @@ public final class Profile {
 
         public ProfileBuilder detectedCity(String detectedCity) {
             this.detectedCity = detectedCity;
-            return this;
-        }
-
-        public ProfileBuilder profile(Profile profile) {
-            this.gamerId = profile.gamerId;
-            this.sex = profile.sex;
-            this.country = profile.country;
-            this.stateProvince = profile.stateProvince;
-            this.city = profile.city;
-            this.birthday = profile.birthday;
-            this.about = profile.about;
-            this.avatarUrl = profile.avatarUrl;
-            this.detectedCountry = profile.detectedCountry;
-            this.detectedStateProvince = profile.detectedStateProvince;
-            this.detectedCity = profile.detectedCity;
             return this;
         }
 

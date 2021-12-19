@@ -2,17 +2,15 @@ package com.shareholdergame.engine.account.dao;
 
 import com.shareholdergame.engine.account.dao.mapper.ProfileMapper;
 import com.shareholdergame.engine.account.model.Profile;
+import com.shareholdergame.engine.common.sql.BaseDao;
+import jakarta.inject.Singleton;
 import org.apache.ibatis.session.SqlSessionManager;
 
-import javax.inject.Singleton;
-
 @Singleton
-public class ProfileDao implements ProfileMapper {
-
-    private final SqlSessionManager sqlSessionManager;
+public class ProfileDao extends BaseDao<ProfileMapper> implements ProfileMapper {
 
     public ProfileDao(SqlSessionManager sqlSessionManager) {
-        this.sqlSessionManager = sqlSessionManager;
+        super(sqlSessionManager);
     }
 
     @Override
@@ -28,9 +26,5 @@ public class ProfileDao implements ProfileMapper {
     @Override
     public void updateProfile(Profile profile) {
         getMapper().updateProfile(profile);
-    }
-
-    private ProfileMapper getMapper() {
-        return sqlSessionManager.getMapper(ProfileMapper.class);
     }
 }

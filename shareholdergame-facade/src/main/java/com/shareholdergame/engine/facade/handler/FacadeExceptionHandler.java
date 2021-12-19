@@ -14,7 +14,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import javax.validation.ConstraintViolationException;
 import java.util.Map;
 import java.util.function.Function;

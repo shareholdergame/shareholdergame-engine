@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shareholdergame.engine.account.dao.mapper.AccountMapper">
 
-    <resultMap id="AccountResultMap" type="Account">
+    <resultMap id="AccountResultMap" type="GamerAccount">
         <id column="gamer_id" property="id"/>
         <result column="email" property="email"/>
         <result column="user_name" property="userName"/>
@@ -14,12 +14,11 @@
         <result column="locale" property="language"/>
     </resultMap>
 
-    <resultMap id="AccountWithPasswordResultMap" type="AccountWithPassword">
+    <resultMap id="AccountWithPasswordResultMap" type="GamerAccount" extends="AccountResultMap">
         <result column="user_password" property="password"/>
-        <association property="gamerAccount" resultMap="AccountResultMap"/>
     </resultMap>
 
-    <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap" resultType="AccountWithPassword">
+    <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap">
         select
             gamer_id,
             email,
@@ -54,7 +53,7 @@
             </if>
     </select>
 
-    <insert id="insertAccount" parameterType="AccountWithPassword">
+    <insert id="insertAccount" parameterType="GamerAccount">
         insert into a_gamer_account (
           gamer_id,
           email,
@@ -66,20 +65,38 @@
           locale
         )
         values (
-          #{gamerAccount.id},
-          #{gamerAccount.email},
-          #{gamerAccount.userName},
+          #{id},
+          #{email},
+          #{userName},
           #{password},
-          #{gamerAccount.status},
-          #{gamerAccount.creationDate},
-          #{gamerAccount.registeredFromIp},
-          #{gamerAccount.language}
+          #{status},
+          #{creationDate},
+          #{registeredFromIp},
+          #{language}
         )
     </insert>
 
     <update id="updatePassword" parameterType="map">
         update a_gamer_account
         set user_password = #{password}
+        where gamer_id = #{gamerId}
+    </update>
+
+    <update id="updateEmail" parameterType="map">
+        update a_gamer_account
+        set email = #{email}
+        where gamer_id = #{gamerId}
+    </update>
+
+    <update id="updateUserName" parameterType="map">
+        update a_gamer_account
+        set user_name = #{userName}
+        where gamer_id = #{gamerId}
+    </update>
+
+    <update id="updateStatus" parameterType="map">
+        update a_gamer_account
+        set account_status = #{status}
         where gamer_id = #{gamerId}
     </update>
 </mapper>

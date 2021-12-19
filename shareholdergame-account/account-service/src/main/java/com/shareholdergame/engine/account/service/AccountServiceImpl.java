@@ -1,18 +1,14 @@
 package com.shareholdergame.engine.account.service;
 
-import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.PasswordUpdate;
-import com.shareholdergame.engine.api.account.NewAccount;
 import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.dao.AccountDao;
 import com.shareholdergame.engine.account.dao.AccountOperationDao;
 import com.shareholdergame.engine.account.event.AccountCreatedEvent;
-import com.shareholdergame.engine.account.model.AccountOperation;
-import com.shareholdergame.engine.account.model.AccountOperationStatus;
-import com.shareholdergame.engine.account.model.AccountOperationType;
-import com.shareholdergame.engine.account.model.AccountStatus;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
-import com.shareholdergame.engine.account.model.GamerAccount;
+import com.shareholdergame.engine.account.event.UserLoggedInEvent;
+import com.shareholdergame.engine.account.model.*;
+import com.shareholdergame.engine.api.account.AccountService;
+import com.shareholdergame.engine.api.account.NewAccount;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.common.exception.BusinessException;
 import com.shareholdergame.engine.common.exception.Errors;
 import com.shareholdergame.engine.common.sql.transaction.Transactional;
@@ -21,8 +17,8 @@ import com.shareholdergame.engine.common.util.MD5Helper;
 import com.shareholdergame.engine.common.util.RandomStringGenerator;
 import io.micronaut.context.event.ApplicationEventPublisher;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.time.LocalDateTime;
 
 @Singleton
@@ -46,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountWithPassword findUserByNameOrEmail(String userNameOrEmail) {
+    public GamerAccount findUserByNameOrEmail(String userNameOrEmail) {
         return accountDao.findByUniqueIds(null, userNameOrEmail);
     }
 
@@ -63,6 +59,7 @@ public class AccountServiceImpl implements AccountService {
                 .id(gamerId)
                 .userName(newAccount.getUserName())
                 .email(newAccount.getEmail())
+                .password(MD5Helper.generateMD5hashWithSalt(newAccount.getPassword()))
                 .status(AccountStatus.NEW)
                 .creationDate(creationDate)
                 .language(newAccount.getLanguage())
@@ -72,9 +69,7 @@ public class AccountServiceImpl implements AccountService {
         String verificationCode = RandomStringGenerator.generate(configuration.getVerificationCodeLength());
         LocalDateTime expirationDate = creationDate.plusDays(configuration.getVerificationExpirationDays());
 
-        accountDao.insertAccount(AccountWithPassword.builder()
-                .account(gamerAccount)
-                .password(MD5Helper.generateMD5hashWithSalt(newAccount.getPassword())).build());
+        accountDao.insertAccount(gamerAccount);
 
         accountOperationDao.insertOperation(AccountOperation.builder()
                 .gamerId(gamerId)
@@ -84,7 +79,6 @@ public class AccountServiceImpl implements AccountService {
                 .verificationCode(verificationCode)
                 .initiationDate(creationDate)
                 .expirationDate(expirationDate)
-                .operationStatus(AccountOperationStatus.VERIFICATION_PENDING)
                 .build()
         );
 
@@ -93,8 +87,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void changePassword(Long gamerId, PasswordUpdate passwordUpdate) {
-        AccountWithPassword accountWithPassword = accountDao.findByUniqueIds(gamerId, null);
-        if (isPasswordIdentical(passwordUpdate.getOldPassword(), accountWithPassword.getPassword())) {
+        GamerAccount gamerAccount = accountDao.findByUniqueIds(gamerId, null);
+        if (isPasswordIdentical(passwordUpdate.getOldPassword(), gamerAccount.getPassword())) {
             accountDao.updatePassword(gamerId, MD5Helper.generateMD5hashWithSalt(passwordUpdate.getNewPassword()));
         } else {
             throw new BusinessException(Errors.INCORRECT_PASSWORD.name());
@@ -106,12 +100,38 @@ public class AccountServiceImpl implements AccountService {
         if (isUserNotExist(gamerId)) {
             throw new BusinessException(Errors.USER_NOT_EXIST.name());
         }
-
+        // todo
     }
 
     @Override
     public void verify(Long gamerId, String verificationCode) {
+        AccountOperation operation = accountOperationDao.findByGamerIdAndVerificationCode(gamerId, verificationCode);
+        if (null == operation) {
+            throw new BusinessException(Errors.WRONG_VERIFICATION_CODE.name());
+        }
 
+        switch (operation.getOperationType()) {
+            case CHANGE_STATUS:
+                accountDao.updateStatus(operation.getGamerId(), AccountStatus.valueOf(operation.getNewValue()));
+                break;
+            case CHANGE_USERNAME:
+                accountDao.updateUserName(operation.getGamerId(), operation.getNewValue());
+                break;
+            case CHANGE_EMAIL:
+                accountDao.updateEmail(operation.getGamerId(), operation.getNewValue());
+                break;
+        }
+
+        operation.setOperationStatus(AccountOperationStatus.COMPLETED);
+        operation.setCompletionDate(LocalDateTime.now());
+        accountOperationDao.updateStatus(operation);
+    }
+
+    @Override
+    public void logUserSession(Long gamerId, String ipAddress) {
+        UserSessionLogRecord logRecord = UserSessionLogRecord.builder()
+                .gamerId(gamerId).ipAddress(ipAddress).startTime(LocalDateTime.now()).build();
+        eventPublisher.publishEvent(UserLoggedInEvent.of(logRecord));
     }
 
     private boolean isUserNotExist(Long gamerId) {

@@ -2,6 +2,7 @@ package com.shareholdergame.engine.facade.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.shareholdergame.engine.api.game.GameService;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
 import com.shareholdergame.engine.facade.dto.GameEvent;
 import com.shareholdergame.engine.facade.dto.GameListResponse;
@@ -27,6 +28,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import javax.annotation.Nullable;
+import jakarta.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
@@ -40,6 +42,9 @@ import java.util.Map;
 @Tag(name = "Game")
 public class GameController {
 
+    @Inject
+    private GameService gameService;
+
     /**
      * Initiates new game.
      * @param newGame object with game options and invited users.
@@ -49,7 +54,8 @@ public class GameController {
     @Put("/new")
     public ResponseWrapper<?> startGame(@NotNull @Body NewGame newGame,
                                         Principal principal) {
-        return ResponseWrapper.ok();
+        Long gameId = gameService.startGame(newGame.options, principal.getName(), newGame.invitedPlayers.toArray(new String[0]));
+        return ResponseWrapper.ok(gameId);
     }
 
     /**

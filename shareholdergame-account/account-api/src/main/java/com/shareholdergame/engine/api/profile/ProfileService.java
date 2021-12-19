@@ -9,4 +9,6 @@ import javax.validation.constraints.NotBlank;
 public interface ProfileService {
 
     Profile getProfile(Long gamerId);
+
+    void createFriendRequest(Long gamerId, Long friendId);
 }

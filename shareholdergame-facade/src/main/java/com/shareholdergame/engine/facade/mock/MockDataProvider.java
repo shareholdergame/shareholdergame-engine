@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.account.model.AccountStatus;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
 import com.shareholdergame.engine.account.model.Profile;
 import com.shareholdergame.engine.common.exception.ApplicationException;
 import com.shareholdergame.engine.facade.dto.Achievements;
@@ -31,37 +30,22 @@ import java.util.List;
  */
 public final class MockDataProvider {
 
-    private static final ArrayList<AccountWithPassword> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
-            AccountWithPassword.builder()
-                    .account(
+    private static final ArrayList<GamerAccount> ACCOUNT_WITH_PASSWORDS = Lists.newArrayList(
                             GamerAccount.builder().id(1L)
                                     .userName("sergeychernyshev")
                                     .email("player1@shareholdergame.com")
+                                    .password("123456")
                                     .status(AccountStatus.ACTIVE)
                                     .creationDate(LocalDateTime.of(2015, 8, 1, 0, 0))
                                     .language("EN")
-                                    .build())
-                    .password("123456").build(),
-            /*AccountWithPassword.builder()
-                    .account(
-                            Account.builder().withId(1L)
-                                    .withUserName("Admin")
-                                    .withEmail("player2@shareholdergame.com")
-                                    .withStatus(AccountStatus.ACTIVE)
-                                    .withCreationDate(LocalDate.of(2015, 8, 1))
-                                    .withLanguage("EN")
-                                    .build())
-                    .password("123456").build(),*/
-            AccountWithPassword.builder()
-                    .account(
+                                    .build(),
                             GamerAccount.builder().id(1L)
                                     .userName("Зырянов")
                                     .email("player3@shareholdergame.com")
                                     .status(AccountStatus.ACTIVE)
                                     .creationDate(LocalDateTime.of(2015, 8, 1, 0, 0))
                                     .language("RU")
-                                    .build())
-                    .password("123456").build()
+                                    .build()
     );
 
     private static ObjectMapper mapper = new ObjectMapper();
@@ -138,7 +122,7 @@ public final class MockDataProvider {
         }
     }
 
-    public static List<AccountWithPassword> getAccountWithPasswordList() {
+    public static List<GamerAccount> getAccountWithPasswordList() {
         return ACCOUNT_WITH_PASSWORDS;
     }
 

@@ -4,15 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.shareholdergame.engine.account.model.GamerAccount" alias="Account"/>
-        <typeAlias type="com.shareholdergame.engine.account.model.AccountWithPassword" alias="AccountWithPassword"/>
+        <typeAlias type="com.shareholdergame.engine.account.model.GamerAccount" alias="GamerAccount"/>
         <typeAlias type="com.shareholdergame.engine.account.model.AccountOperation" alias="AccountOperation"/>
         <typeAlias type="com.shareholdergame.engine.account.model.Profile" alias="Profile"/>
+        <typeAlias type="com.shareholdergame.engine.account.model.Friend" alias="Friend"/>
+        <typeAlias type="com.shareholdergame.engine.account.model.UserSessionLogRecord" alias="UserSessionLogRecord"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="com/shareholdergame/engine/account/dao/mapper/AccountMapper.xml"/>
         <mapper resource="com/shareholdergame/engine/account/dao/mapper/AccountOperationMapper.xml"/>
         <mapper resource="com/shareholdergame/engine/account/dao/mapper/ProfileMapper.xml"/>
+        <mapper resource="com/shareholdergame/engine/account/dao/mapper/FriendMapper.xml"/>
+        <mapper resource="com/shareholdergame/engine/account/dao/mapper/UserSessionLogMapper.xml"/>
     </mappers>
 </configuration>

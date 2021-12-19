@@ -3,9 +3,10 @@ package com.shareholdergame.engine.account.dao;
 import com.shareholdergame.engine.account.dao.mapper.AccountOperationMapper;
 import com.shareholdergame.engine.account.model.AccountOperation;
 import com.shareholdergame.engine.account.model.AccountOperationStatus;
+import com.shareholdergame.engine.common.sql.BaseDao;
 import org.apache.ibatis.session.SqlSessionManager;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import java.time.LocalDateTime;
 
 /**
@@ -14,12 +15,10 @@ import java.time.LocalDateTime;
  * @author Aliaksandr Savin
  */
 @Singleton
-public class AccountOperationDao implements AccountOperationMapper {
-
-    private final SqlSessionManager sqlSessionManager;
+public class AccountOperationDao extends BaseDao<AccountOperationMapper> implements AccountOperationMapper {
 
     public AccountOperationDao(SqlSessionManager sqlSessionManager) {
-        this.sqlSessionManager = sqlSessionManager;
+        super(sqlSessionManager);
     }
 
     @Override
@@ -33,11 +32,7 @@ public class AccountOperationDao implements AccountOperationMapper {
     }
 
     @Override
-    public void updateStatus(Long operationId, AccountOperationStatus status, LocalDateTime completionDate) {
-        getMapper().updateStatus(operationId, status, completionDate);
-    }
-
-    private AccountOperationMapper getMapper() {
-        return sqlSessionManager.getMapper(AccountOperationMapper.class);
+    public void updateStatus(AccountOperation accountOperation) {
+        getMapper().updateStatus(accountOperation);
     }
 }

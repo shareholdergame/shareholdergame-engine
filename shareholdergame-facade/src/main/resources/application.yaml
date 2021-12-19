@@ -9,7 +9,7 @@ micronaut:
       configurations:
         web:
           allowedOrigins:
-            - http://dev.stockholdergame.com
+            - http://stockholdergame.com
 
   security:
     enabled: true

@@ -8,6 +8,7 @@ import com.shareholdergame.engine.facade.dto.PlayerAchievements;
 import com.shareholdergame.engine.facade.dto.PlayerAchievementsResponse;
 import com.shareholdergame.engine.facade.dto.PlayerListResponse;
 import com.shareholdergame.engine.facade.dto.player.PlayerProfile;
+import com.shareholdergame.engine.facade.dto.player.PlayerSession;
 import com.shareholdergame.engine.facade.dto.player.PlayerWithLocation;
 import com.shareholdergame.engine.facade.mock.MockDataProvider;
 import io.micronaut.http.HttpStatus;

@@ -13,6 +13,8 @@ public final class GamerAccount {
 
     private String email;
 
+    private String password;
+
     private AccountStatus status;
 
     private LocalDateTime creationDate;
@@ -28,6 +30,7 @@ public final class GamerAccount {
         this.id = builder.id;
         this.userName = builder.userName;
         this.email = builder.email;
+        this.password = builder.password;
         this.status = builder.status;
         this.creationDate = builder.creationDate;
         this.registeredFromIp = builder.registeredFromIp;
@@ -44,6 +47,10 @@ public final class GamerAccount {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public AccountStatus getStatus() {
@@ -71,6 +78,7 @@ public final class GamerAccount {
         private Long id;
         private String email;
         private String userName;
+        private String password;
         private AccountStatus status;
         private LocalDateTime creationDate;
         private String registeredFromIp;
@@ -86,6 +94,11 @@ public final class GamerAccount {
 
         public AccountBuilder userName(String userName) {
             this.userName = userName;
+            return this;
+        }
+
+        public AccountBuilder password(String password) {
+            this.password = password;
             return this;
         }
 

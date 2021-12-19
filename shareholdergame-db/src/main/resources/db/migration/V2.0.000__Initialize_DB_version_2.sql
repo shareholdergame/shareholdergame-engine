@@ -17,7 +17,7 @@ create table a_gamer_account (
 create table a_gamer_role (
   gamer_role_id bigint not null auto_increment,
   gamer_id bigint not null,
-  role_name char(16) not null check (role_name in ('ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_REMOVED_USER')),
+  role_name char(16) not null check (role_name in ('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_REMOVED_USER')),
   primary key (gamer_role_id),
   unique key (gamer_id, role_name)
 ) engine=innodb;
@@ -54,3 +54,41 @@ create table a_profile (
 ) engine=innodb;
 
 alter table a_profile add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+
+create table a_friend (
+  gamer_id bigint not null,
+  friend_id bigint not null,
+  friendship_status char(32) not null check (friendship_status in ('REQUESTED', 'ACCEPTED', 'REJECTED')),
+  requested_date datetime not null,
+  accepted_date datetime,
+  primary key (gamer_id, friend_id)
+) engine=innodb;
+
+alter table a_friend add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+alter table a_friend add constraint foreign key (friend_id) references a_gamer_account (gamer_id);
+
+create table a_user_session_log (
+  session_id bigint not null auto_increment,
+  gamer_id bigint not null,
+  ip_address char(16) not null,
+  start_time datetime not null,
+  end_time datetime,
+  primary key (session_id)
+) engine=innodb;
+
+alter table a_user_session_log add constraint foreign key (gamer_id) references a_gamer_account (gamer_id);
+
+/* Active games */
+
+create table ag_game_set (
+    game_set_id bigint not null,
+    
+    primary key (game_set_id)
+) engine=innodb;
+
+/* Finished games (Archive) */
+
+create table fg_game_set (
+    game_set_id bigint not null,
+    primary key (game_set_id)
+) engine=innodb;

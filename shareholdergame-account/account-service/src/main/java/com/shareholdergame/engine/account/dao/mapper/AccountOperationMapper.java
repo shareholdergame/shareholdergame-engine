@@ -17,5 +17,5 @@ public interface AccountOperationMapper {
 
     AccountOperation findByGamerIdAndVerificationCode(@Param("gamerId") Long gamerId, @Param("verificationCode") String verificationCode);
 
-    void updateStatus(@Param("operationId") Long operationId, @Param("operationStatus") AccountOperationStatus status, @Param("completionDate")LocalDateTime completionDate);
+    void updateStatus(AccountOperation accountOperation);
 }

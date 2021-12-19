@@ -1,12 +1,11 @@
 package com.shareholdergame.engine.facade.controller;
 
-import com.shareholdergame.engine.api.account.AccountOperationService;
+import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.api.account.AccountService;
-import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.api.account.NewAccount;
-import com.shareholdergame.engine.account.model.AccountWithPassword;
+import com.shareholdergame.engine.api.account.PasswordUpdate;
 import com.shareholdergame.engine.common.http.ResponseWrapper;
-import com.shareholdergame.engine.facade.authentication.AuthenticationConstants;
+import com.shareholdergame.engine.facade.authentication.AuthenticationUtils;
 import com.shareholdergame.engine.facade.converter.Converters;
 import com.shareholdergame.engine.facade.dto.AccountDetails;
 import com.shareholdergame.engine.facade.dto.Language;
@@ -14,7 +13,13 @@ import com.shareholdergame.engine.facade.dto.SignUp;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Body;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Delete;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Header;
+import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.Put;
 import io.micronaut.http.exceptions.HttpStatusException;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
@@ -23,7 +28,7 @@ import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
@@ -38,9 +43,6 @@ public class AccountController {
 
     @Inject
     private AccountService accountClient;
-
-    @Inject
-    private AccountOperationService accountOperationClient;
 
     /**
      * Check user existence.
@@ -82,14 +84,7 @@ public class AccountController {
      */
     @Post("/verify/{verificationCode}")
     public ResponseWrapper<?> verify(@NotBlank String verificationCode, Authentication authentication) {
-        /*AccountOperation accountOperation =
-                accountOperationClient.getOperation(getGamerId(authentication), verificationCode);
-        if (null == accountOperation) {
-            throw new HttpStatusException(HttpStatus.NOT_FOUND, "Nothing to verify");
-        }
-        accountOperationClient.markVerified(accountOperation.getOperationId());*/
-
-        accountClient.verify(getGamerId(authentication), verificationCode);
+        accountClient.verify(AuthenticationUtils.getGamerId(authentication), verificationCode);
         return ResponseWrapper.ok();
     }
 
@@ -101,11 +96,11 @@ public class AccountController {
     @Post("/resetpassword/{email}")
     @Secured(SecurityRule.IS_ANONYMOUS)
     public ResponseWrapper<?> resetPassword(@NotBlank String email) {
-        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(email);
-        if (null == accountWithPassword) {
+        GamerAccount gamerAccount = accountClient.findUserByNameOrEmail(email);
+        if (null == gamerAccount) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, email);
         }
-        accountClient.resetPassword(accountWithPassword.getGamerAccount().getId());
+        accountClient.resetPassword(gamerAccount.getId());
         return ResponseWrapper.ok();
     }
 
@@ -117,11 +112,11 @@ public class AccountController {
      */
     @Get
     public ResponseWrapper<AccountDetails> getAccount(Principal principal) {
-        AccountWithPassword accountWithPassword = accountClient.findUserByNameOrEmail(principal.getName());
-        if (null == accountWithPassword) {
+        GamerAccount gamerAccount = accountClient.findUserByNameOrEmail(principal.getName());
+        if (null == gamerAccount) {
             throw new HttpStatusException(HttpStatus.NOT_FOUND, principal.getName());
         }
-        return ResponseWrapper.ok(Converters.convert(accountWithPassword.getGamerAccount()));
+        return ResponseWrapper.ok(Converters.convert(gamerAccount));
     }
 
     /**
@@ -155,6 +150,8 @@ public class AccountController {
      */
     @Post(value = "/change/email/{newEmail}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public ResponseWrapper<?> changeEmail(@NotBlank String newEmail, Principal principal) {
+        // todo = check new email existence
+
         return ResponseWrapper.ok();
     }
 
@@ -166,6 +163,8 @@ public class AccountController {
      */
     @Post(value = "/change/username/{newUserName}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public ResponseWrapper<?> changeUserName(@NotBlank String newUserName, Principal principal) {
+        // todo - check user name existence
+
         return ResponseWrapper.ok();
     }
 
@@ -177,11 +176,7 @@ public class AccountController {
      */
     @Post(value = "/change/password")
     public ResponseWrapper<?> changePassword(@Body PasswordUpdate passwordUpdate, Authentication authentication) {
-        accountClient.changePassword(getGamerId(authentication), passwordUpdate);
+        accountClient.changePassword(AuthenticationUtils.getGamerId(authentication), passwordUpdate);
         return ResponseWrapper.ok();
-    }
-
-    private Long getGamerId(Authentication authentication) {
-        return (Long) authentication.getAttributes().get(AuthenticationConstants.ACCOUNT_ID);
     }
 }

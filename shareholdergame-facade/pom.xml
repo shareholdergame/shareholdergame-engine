@@ -29,11 +29,42 @@
             <artifactId>account-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.shareholdergame.engine.chat</groupId>
+            <artifactId>chat-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.game</groupId>
+            <artifactId>game-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.player</groupId>
+            <artifactId>player-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.shareholdergame.engine.account</groupId>
             <artifactId>account-service</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.chat</groupId>
+            <artifactId>chat-service</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.game</groupId>
+            <artifactId>game-service</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.shareholdergame.engine.player</groupId>
+            <artifactId>player-service</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-server-netty</artifactId>
@@ -50,17 +81,17 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.configuration</groupId>
-            <artifactId>micronaut-hibernate-validator</artifactId>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-security</artifactId>
+            <groupId>io.micronaut.security</groupId>
+            <artifactId>micronaut-security-annotations</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut</groupId>
+            <groupId>io.micronaut.security</groupId>
             <artifactId>micronaut-security-jwt</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -68,11 +99,6 @@
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject-java</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -137,14 +163,14 @@
                             <version>${micronaut.version}</version>
                         </path>
                         <path>
-                            <groupId>io.micronaut</groupId>
+                            <groupId>io.micronaut.security</groupId>
                             <artifactId>micronaut-security</artifactId>
-                            <version>${micronaut.version}</version>
+                            <version>${micronaut.security.version}</version>
                         </path>
                         <path>
-                            <groupId>io.micronaut.configuration</groupId>
+                            <groupId>io.micronaut.openapi</groupId>
                             <artifactId>micronaut-openapi</artifactId>
-                            <version>${micronaut.version}</version>
+                            <version>${micronaut.openapi.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

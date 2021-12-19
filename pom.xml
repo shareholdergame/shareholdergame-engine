@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+    <parent>
+        <groupId>io.micronaut</groupId>
+        <artifactId>micronaut-parent</artifactId>
+        <version>3.2.3</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.shareholdergame.engine</groupId>
@@ -15,6 +19,9 @@
         <module>shareholdergame-facade</module>
         <module>shareholdergame-common</module>
         <module>shareholdergame-account</module>
+        <module>shareholdergame-game</module>
+        <module>shareholdergame-player</module>
+        <module>shareholdergame-chat</module>
         <module>shareholdergame-db</module>
     </modules>
 
@@ -24,24 +31,22 @@
 
         <!-- application dependecies -->
         <guava.version>26.0-jre</guava.version>
-        <commons.lang.version>3.7</commons.lang.version>
-        <commons.collections.version>4.2</commons.collections.version>
-        <commons.io.version>1.4</commons.io.version>
+        <commons.lang.version>3.4</commons.lang.version>
+        <commons.collections.version>4.4</commons.collections.version>
+        <commons.io.version>2.11.0</commons.io.version>
         <qos.logback.version>1.2.3</qos.logback.version>
         <mariadb.version>2.3.0</mariadb.version>
         <mybatis.version>3.4.6</mybatis.version>
         <spring.jdbc.version>4.3.22.RELEASE</spring.jdbc.version>
-        <micronaut.version>1.1.0.M1</micronaut.version>
+        <micronaut.version>3.2.3</micronaut.version>
+        <testng.version>6.14.3</testng.version>
+        <fasterxml.version>2.10.1</fasterxml.version>
     </properties>
 
     <repositories>
         <repository>
-            <id>jcenter.bintray.com</id>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
-        <repository>
-            <id>dl.bintray.com</id>
-            <url>https://dl.bintray.com/micronaut/core-releases-local</url>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
 
@@ -50,6 +55,11 @@
             <dependency>
                 <groupId>com.shareholdergame.engine.common</groupId>
                 <artifactId>common-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.common</groupId>
+                <artifactId>common-model-support</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -72,6 +82,36 @@
                 <artifactId>account-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.chat</groupId>
+                <artifactId>chat-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.chat</groupId>
+                <artifactId>chat-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.game</groupId>
+                <artifactId>game-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.game</groupId>
+                <artifactId>game-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.shareholdergame.engine.player</groupId>
+                <artifactId>player-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.micronaut</groupId>
@@ -89,6 +129,23 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${fasterxml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -132,5 +189,16 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>3.1.12.2</version>
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                    <xmlOutputDirectory>target/spotbugs</xmlOutputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
