@@ -8,8 +8,8 @@ import com.shareholdergame.engine.game.core.configuration.GameConfiguration;
 import com.shareholdergame.engine.game.core.exception.ConfigurationReadingException;
 import org.apache.commons.lang3.ArrayUtils;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.util.Map;
 
 @Singleton

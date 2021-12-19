@@ -1,4 +1,26 @@
 {
+  "predefinedOptions": [
+    {
+      "name": "3x5",
+      "cardOption": {
+        "major": 3,
+        "minor": 5
+      },
+      "playerOption": {
+        "playersNumber": 2
+      }
+    },
+    {
+      "name": "4x6",
+      "cardOption": {
+        "major": 4,
+        "minor": 6
+      },
+      "playerOption": {
+        "playersNumber": 2
+      }
+    }
+  ],
   "priceScale": {
     "minPrice": 10,
     "maxPrice": 250,

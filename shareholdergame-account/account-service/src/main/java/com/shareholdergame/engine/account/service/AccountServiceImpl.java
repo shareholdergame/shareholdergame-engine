@@ -17,8 +17,8 @@ import com.shareholdergame.engine.common.util.MD5Helper;
 import com.shareholdergame.engine.common.util.RandomStringGenerator;
 import io.micronaut.context.event.ApplicationEventPublisher;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.time.LocalDateTime;
 
 @Singleton

@@ -17,7 +17,7 @@ create table a_gamer_account (
 create table a_gamer_role (
   gamer_role_id bigint not null auto_increment,
   gamer_id bigint not null,
-  role_name char(16) not null check (role_name in ('ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_REMOVED_USER')),
+  role_name char(16) not null check (role_name in ('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_REMOVED_USER')),
   primary key (gamer_role_id),
   unique key (gamer_id, role_name)
 ) engine=innodb;

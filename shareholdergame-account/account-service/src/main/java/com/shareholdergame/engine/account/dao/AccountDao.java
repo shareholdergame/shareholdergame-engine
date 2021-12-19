@@ -6,7 +6,7 @@ import com.shareholdergame.engine.account.model.GamerAccount;
 import com.shareholdergame.engine.common.sql.BaseDao;
 import org.apache.ibatis.session.SqlSessionManager;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class AccountDao extends BaseDao<AccountMapper> implements AccountMapper {

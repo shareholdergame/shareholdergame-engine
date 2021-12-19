@@ -6,7 +6,7 @@ public enum ArithmeticOperation {
 
     MULT((value, operand) -> value * operand);
 
-    private ArithmeticOperationFunction function;
+    private final ArithmeticOperationFunction function;
 
     ArithmeticOperation(ArithmeticOperationFunction function) {
         this.function = function;

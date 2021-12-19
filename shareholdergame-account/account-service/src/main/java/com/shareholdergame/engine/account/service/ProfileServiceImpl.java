@@ -6,10 +6,9 @@ import com.shareholdergame.engine.account.dao.ProfileDao;
 import com.shareholdergame.engine.account.model.Friend;
 import com.shareholdergame.engine.account.model.Profile;
 import com.shareholdergame.engine.api.profile.ProfileService;
-import io.micronaut.http.annotation.Controller;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 

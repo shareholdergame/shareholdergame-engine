@@ -6,7 +6,7 @@ import com.shareholdergame.engine.game.core.exception.ConfigurationReadingExcept
 import com.shareholdergame.engine.game.core.facade.GameCoreFacade;
 import com.shareholdergame.engine.game.core.turn.Turn;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class GameCoreWrapper {

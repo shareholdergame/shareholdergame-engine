@@ -31,13 +31,12 @@ import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
 import io.micronaut.validation.Validated;
-import io.reactivex.Single;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.reactivestreams.Publisher;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import java.io.File;
 import java.security.Principal;
@@ -94,18 +93,18 @@ public class ProfileController {
         return ResponseWrapper.ok();
     }
 
-    /**
+    /*
      * Uploads avatar.
      * @param file image file (jpg or png).
      * @return response.
      */
-    @Post(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA)
+    /*@Post(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA)
     public Single<ResponseWrapper<?>> upload(StreamingFileUpload file) {
         File tempFile = new File(basePath + file.getFilename());
         Publisher<Boolean> uploadPublisher = file.transferTo(tempFile);
         return Single.fromPublisher(uploadPublisher)
                 .map(success -> success ? ResponseWrapper.ok() : ResponseWrapper.error(ErrorBody.of("Avatar upload failed")));
-    }
+    }*/
 
     /**
      * Returns list of friends.
@@ -124,7 +123,7 @@ public class ProfileController {
 
         int itemsCount = playerAchievements.size();
         int fromIndex = offset < 0 || offset >= itemsCount ? 0 : offset;
-        int toIndex = offset + itemsPerPage >= itemsCount ? itemsCount : offset + itemsPerPage;
+        int toIndex = Math.min(offset + itemsPerPage, itemsCount);
 
         FriendsResponse friendsResponse = new FriendsResponse();
         friendsResponse.setPagination(Pagination.of(itemsCount, offset, itemsPerPage));

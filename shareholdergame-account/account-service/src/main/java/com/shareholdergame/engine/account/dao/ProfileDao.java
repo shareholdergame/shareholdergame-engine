@@ -3,9 +3,8 @@ package com.shareholdergame.engine.account.dao;
 import com.shareholdergame.engine.account.dao.mapper.ProfileMapper;
 import com.shareholdergame.engine.account.model.Profile;
 import com.shareholdergame.engine.common.sql.BaseDao;
+import jakarta.inject.Singleton;
 import org.apache.ibatis.session.SqlSessionManager;
-
-import javax.inject.Singleton;
 
 @Singleton
 public class ProfileDao extends BaseDao<ProfileMapper> implements ProfileMapper {

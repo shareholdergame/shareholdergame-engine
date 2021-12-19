@@ -4,8 +4,8 @@ import io.micronaut.aop.MethodInterceptor;
 import io.micronaut.aop.MethodInvocationContext;
 import org.apache.ibatis.session.SqlSessionManager;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class TransactionInterceptor implements MethodInterceptor<Object, Object> {

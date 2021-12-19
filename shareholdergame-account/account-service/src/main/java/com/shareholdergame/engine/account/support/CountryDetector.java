@@ -6,15 +6,12 @@ import com.google.common.collect.ImmutableMap;
 import com.shareholdergame.engine.account.config.AccountServiceConfiguration;
 import com.shareholdergame.engine.account.model.UserLocation;
 import com.shareholdergame.engine.common.exception.ApplicationException;
-import io.micronaut.http.client.RxHttpClient;
+import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.http.uri.UriBuilder;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.io.IOException;
 
 @Singleton
@@ -37,7 +34,7 @@ public class CountryDetector {
 
     @Client(IPSTACK_URL)
     @Inject
-    private RxHttpClient httpClient;
+    private HttpClient httpClient;
 
     private ObjectMapper mapper = new ObjectMapper();
 

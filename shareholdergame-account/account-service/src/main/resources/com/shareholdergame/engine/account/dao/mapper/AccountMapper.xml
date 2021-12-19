@@ -14,9 +14,8 @@
         <result column="locale" property="language"/>
     </resultMap>
 
-    <resultMap id="AccountWithPasswordResultMap" type="GamerAccount">
+    <resultMap id="AccountWithPasswordResultMap" type="GamerAccount" extends="AccountResultMap">
         <result column="user_password" property="password"/>
-        <association property="gamerAccount" resultMap="AccountResultMap"/>
     </resultMap>
 
     <select id="findByUniqueIds" parameterType="string" resultMap="AccountWithPasswordResultMap">
@@ -66,14 +65,14 @@
           locale
         )
         values (
-          #{gamerAccount.id},
-          #{gamerAccount.email},
-          #{gamerAccount.userName},
+          #{id},
+          #{email},
+          #{userName},
           #{password},
-          #{gamerAccount.status},
-          #{gamerAccount.creationDate},
-          #{gamerAccount.registeredFromIp},
-          #{gamerAccount.language}
+          #{status},
+          #{creationDate},
+          #{registeredFromIp},
+          #{language}
         )
     </insert>
 
